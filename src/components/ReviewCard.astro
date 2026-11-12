@@ -1,0 +1,29 @@
+---
+import Icon from './Icon.astro';
+import type { Review } from '../data/reviews';
+interface Props { r: Review }
+const { r } = Astro.props;
+const initials = r.name.split(' ').map((p) => p[0]).slice(0, 2).join('').toUpperCase();
+---
+<figure class="rv">
+  <div class="top">
+    <span class="stars" aria-label="5 de 5 estrelas">{[1, 2, 3, 4, 5].map(() => <Icon name="star" size={15} />)}</span>
+    <Icon name="google" size={18} />
+  </div>
+  <blockquote><p>“{r.text}”</p></blockquote>
+  <figcaption>
+    <span class="av" aria-hidden="true">{initials}</span>
+    <span class="who"><strong>{r.name}</strong><small>{r.guide ? 'Local Guide · ' : ''}{r.service ?? 'Cliente Over'}</small></span>
+  </figcaption>
+</figure>
+
+<style>
+  .rv { margin: 0; display: flex; flex-direction: column; gap: 1rem; height: 100%; padding: 1.6rem; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(180deg, rgba(31, 47, 71, 0.6), rgba(15, 24, 39, 0.6)); }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  blockquote { margin: 0; flex: 1; }
+  blockquote p { font-family: var(--font-display); font-size: 1.28rem; line-height: 1.45; color: var(--ivory); margin: 0; }
+  figcaption { display: flex; gap: 0.8rem; align-items: center; padding-top: 1rem; border-top: 1px solid var(--line); }
+  .av { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--gold-grad); color: var(--navy-950); font-weight: 800; font-size: 0.8rem; flex: none; }
+  .who { display: grid; line-height: 1.35; }
+  .who small { color: var(--muted); font-size: 0.8rem; }
+</style>

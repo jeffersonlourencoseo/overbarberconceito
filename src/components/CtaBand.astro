@@ -1,0 +1,35 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+interface Props { title?: string; text?: string; msg?: string }
+const {
+  title = 'Seu próximo corte <em>começa aqui.</em>',
+  text = 'Agende online em menos de um minuto ou fale com a gente no WhatsApp. Valet gratuito na porta, café passado na hora.',
+  msg,
+} = Astro.props;
+---
+<section class="cta grain">
+  <div class="container inner reveal">
+    <img src="/brand/emblema-over-barber.svg" width="332" height="312" alt="" class="emb" loading="lazy" decoding="async" />
+    <h2 set:html={title} />
+    <p class="lead">{text}</p>
+    <div class="btn-row">
+      <a class="btn btn-gold" href={site.booking} target="_blank" rel="noopener" data-track="agendar_cta"><Icon name="calendar" /> Agendar online</a>
+      <a class="btn btn-ghost" href={site.whatsappMsg(msg)} target="_blank" rel="noopener" data-track="whatsapp_cta"><Icon name="whatsapp" /> {site.phone}</a>
+    </div>
+    <p class="meta"><Icon name="pin" size={16} /> {site.address.street} · {site.address.neighborhood}, Fortaleza <span>·</span> <Icon name="clock" size={16} /> Seg a sáb, 9h–19h</p>
+  </div>
+</section>
+
+<style>
+  .cta { position: relative; overflow: hidden; text-align: center; padding-block: clamp(5rem, 11vw, 8.5rem); background: radial-gradient(ellipse at 50% 0%, rgba(180, 139, 66, 0.22), transparent 60%), var(--navy-800); border-block: 1px solid var(--line); }
+  .inner { display: grid; justify-items: center; }
+  .emb { width: 64px; color: var(--gold-300); margin-bottom: 1.6rem; }
+  h2 { max-width: 18ch; }
+  h2 :global(em) { font-style: italic; color: var(--gold-300); }
+  .lead { margin-inline: auto; margin-bottom: 2rem; }
+  .btn-row { justify-content: center; }
+  .meta { margin: 2rem 0 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.45rem; color: var(--muted); font-size: 0.88rem; }
+  .meta :global(svg) { color: var(--gold); }
+  .meta span { color: var(--gold); padding-inline: 0.3rem; }
+</style>

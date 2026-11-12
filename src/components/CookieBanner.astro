@@ -1,0 +1,110 @@
+---
+import { site } from '../data/site';
+const { ga4, metaPixel } = site.analytics;
+---
+<div class="cookie" role="dialog" aria-modal="false" aria-labelledby="cookie-title" aria-describedby="cookie-desc" hidden data-cookie>
+  <div class="cookie-main" data-cookie-main>
+    <p id="cookie-title" class="t">Sua privacidade importa</p>
+    <p id="cookie-desc" class="d">
+      Usamos cookies essenciais para o site funcionar e, com a sua permissão, cookies de medição e marketing para entender
+      o uso do site e melhorar nossas campanhas. Saiba mais na <a href="/politica-de-cookies/">Política de Cookies</a>.
+    </p>
+    <div class="b">
+      <button type="button" class="btn btn-gold" data-cookie-accept>Aceitar todos</button>
+      <button type="button" class="btn btn-ghost" data-cookie-reject>Só essenciais</button>
+      <button type="button" class="lnk" data-cookie-custom>Personalizar</button>
+    </div>
+  </div>
+  <form class="cookie-prefs" hidden data-cookie-prefs>
+    <p class="t">Preferências de cookies</p>
+    <label class="opt"><input type="checkbox" checked disabled /> <span><strong>Essenciais</strong><small>Necessários para o funcionamento do site e para lembrar suas escolhas. Sempre ativos.</small></span></label>
+    <label class="opt"><input type="checkbox" name="analytics" /> <span><strong>Medição (analytics)</strong><small>Estatísticas anônimas de visitas, como Google Analytics.</small></span></label>
+    <label class="opt"><input type="checkbox" name="marketing" /> <span><strong>Marketing</strong><small>Mensuração de anúncios, como Meta Pixel e Google Ads.</small></span></label>
+    <div class="b">
+      <button type="submit" class="btn btn-gold">Salvar preferências</button>
+      <button type="button" class="btn btn-ghost" data-cookie-accept>Aceitar todos</button>
+    </div>
+  </form>
+</div>
+
+<script is:inline define:vars={{ ga4, metaPixel }}>
+  (function () {
+    var KEY = 'ovb-consent-v1';
+    var el = document.querySelector('[data-cookie]');
+    var main = el.querySelector('[data-cookie-main]');
+    var prefs = el.querySelector('[data-cookie-prefs]');
+    function read() { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } }
+    function save(c) { c.ts = new Date().toISOString(); try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {} apply(c); hide(); }
+    function show(custom) {
+      el.hidden = false; main.hidden = !!custom; prefs.hidden = !custom;
+      var c = read();
+      if (c) { prefs.analytics.checked = !!c.analytics; prefs.marketing.checked = !!c.marketing; }
+    }
+    function hide() { el.hidden = true; }
+    var loaded = {};
+    function apply(c) {
+      if (window.gtag) {
+        gtag('consent', 'update', {
+          analytics_storage: c.analytics ? 'granted' : 'denied',
+          ad_storage: c.marketing ? 'granted' : 'denied',
+          ad_user_data: c.marketing ? 'granted' : 'denied',
+          ad_personalization: c.marketing ? 'granted' : 'denied'
+        });
+      }
+      if (ga4 && c.analytics && !loaded.ga) {
+        loaded.ga = 1;
+        var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga4; document.head.appendChild(s);
+        gtag('js', new Date()); gtag('config', ga4, { anonymize_ip: true });
+      }
+      if (metaPixel && c.marketing && !loaded.px) {
+        loaded.px = 1;
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', metaPixel); fbq('track', 'PageView');
+      }
+    }
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+
+    var c = read();
+    if (c) apply(c); else setTimeout(function () { show(false); }, 900);
+
+    el.querySelectorAll('[data-cookie-accept]').forEach(function (b) { b.addEventListener('click', function () { save({ necessary: true, analytics: true, marketing: true }); }); });
+    el.querySelector('[data-cookie-reject]').addEventListener('click', function () { save({ necessary: true, analytics: false, marketing: false }); });
+    el.querySelector('[data-cookie-custom]').addEventListener('click', function () { show(true); });
+    prefs.addEventListener('submit', function (e) { e.preventDefault(); save({ necessary: true, analytics: prefs.analytics.checked, marketing: prefs.marketing.checked }); });
+    document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('[data-cookie-open]')) show(true); });
+
+    // Eventos de conversão (só enviados se a medição foi consentida)
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      var h = a.getAttribute('href') || '';
+      var ev = /wa\.me/.test(h) ? 'contato_whatsapp' : /barbsuite/.test(h) ? 'agendamento_online' : /^tel:/.test(h) ? 'ligacao' : /maps/.test(h) ? 'rota_maps' : null;
+      if (ev) { gtag('event', ev, { link_url: h, local: a.dataset.track || '' }); if (window.fbq && ev !== 'rota_maps') fbq('track', 'Contact'); }
+    });
+  })();
+</script>
+
+<style>
+  .cookie {
+    position: fixed; left: 16px; bottom: 16px; z-index: 120; width: min(440px, calc(100% - 32px));
+    background: rgba(15, 24, 39, 0.97); border: 1px solid var(--line-strong); border-radius: 18px;
+    padding: 1.4rem 1.4rem 1.2rem; box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px);
+    animation: up 0.7s var(--ease) both;
+  }
+  .cookie[hidden], .cookie [hidden] { display: none; }
+  .t { font-family: var(--font-display); font-size: 1.45rem; color: var(--ivory); margin: 0 0 0.4rem; line-height: 1.2; }
+  .d { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+  .d a { color: var(--gold-300); }
+  .b { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+  .b .btn { min-height: 44px; padding: 0.55rem 1.1rem; font-size: 0.7rem; }
+  .lnk { background: none; border: 0; color: var(--cream); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; font-size: 0.85rem; padding: 0.5rem; }
+  .opt { display: flex; gap: 0.8rem; align-items: flex-start; padding: 0.8rem 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+  .opt input { margin-top: 0.3rem; accent-color: var(--gold); width: 18px; height: 18px; flex: none; }
+  .opt span { display: grid; font-size: 0.9rem; }
+  .opt small { color: var(--muted); font-size: 0.8rem; line-height: 1.5; }
+  .cookie-prefs .b { margin-top: 1rem; }
+  @keyframes up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 520px) { .cookie { left: 10px; right: 10px; bottom: 10px; width: auto; } }
+</style>

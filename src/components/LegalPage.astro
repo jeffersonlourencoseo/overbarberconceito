@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+interface Props { title: string; description: string; slug: string; updated: string; h1: string }
+const { title, description, slug, updated, h1 } = Astro.props;
+const crumbs = [{ name: 'Início', href: '/' }, { name: h1, href: `/${slug}/` }];
+---
+<Base title={title} description={description} breadcrumbs={crumbs} solidHeader>
+  <section class="lhead">
+    <div class="narrow">
+      <nav class="crumbs" aria-label="Você está em"><a href="/">Início</a> / <span>{h1}</span></nav>
+      <p class="eyebrow">Transparência</p>
+      <h1>{h1}</h1>
+      <p class="muted">Última atualização: {updated}</p>
+    </div>
+  </section>
+  <section class="section section--ivory">
+    <div class="narrow prose">
+      <slot />
+    </div>
+  </section>
+</Base>
+<style>
+  .lhead { padding: calc(var(--header-h) + clamp(3rem, 7vw, 5rem)) 0 clamp(2.5rem, 5vw, 3.5rem); }
+  .lhead h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); }
+  .crumbs { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .crumbs a { color: var(--muted); text-decoration: none; }
+</style>

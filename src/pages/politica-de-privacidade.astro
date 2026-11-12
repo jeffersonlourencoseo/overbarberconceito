@@ -1,0 +1,87 @@
+---
+import LegalPage from '../components/LegalPage.astro';
+import { site } from '../data/site';
+const contact = site.email ? `pelo e-mail ${site.email} ou pelo WhatsApp ${site.phone}` : `pelo WhatsApp ${site.phone}`;
+---
+<LegalPage
+  slug="politica-de-privacidade"
+  h1="Política de Privacidade"
+  title="Política de Privacidade (LGPD) | Over Barber Conceito"
+  description="Saiba como a Over Barber Conceito coleta, usa, armazena e protege seus dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (Lei 13.709/2018)."
+  updated="12 de novembro de 2026"
+>
+  <p>A <strong>{site.legalName}</strong>{site.cnpj && <>, inscrita no CNPJ sob o nº {site.cnpj}</>}, com sede na {site.address.streetSchema}, {site.address.neighborhood}, {site.address.city} – {site.address.state}, CEP {site.address.zip} (“<strong>Over Barber</strong>”, “<strong>nós</strong>”), respeita a sua privacidade. Esta Política explica, de forma clara, como tratamos dados pessoais de clientes e visitantes do site, em conformidade com a <strong>Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 – LGPD)</strong> e o Marco Civil da Internet (Lei nº 12.965/2014).</p>
+
+  <h2>1. Quem é o controlador dos dados</h2>
+  <p>A Over Barber Conceito é a controladora dos dados pessoais tratados por meio deste site e dos nossos canais de atendimento. Dúvidas ou solicitações podem ser enviadas {contact}.</p>
+
+  <h2>2. Quais dados coletamos</h2>
+  <ul>
+    <li><strong>Dados de contato e agendamento:</strong> nome, telefone/WhatsApp, e-mail (quando informado), serviço desejado, data e horário, profissional escolhido e preferências de atendimento.</li>
+    <li><strong>Dados de navegação:</strong> endereço IP, tipo de navegador e dispositivo, páginas visitadas, data e hora de acesso e origem do acesso — coletados por cookies, conforme a nossa <a href="/politica-de-cookies/">Política de Cookies</a>.</li>
+    <li><strong>Comunicações:</strong> mensagens trocadas conosco por WhatsApp, Instagram ou telefone.</li>
+    <li><strong>Imagem:</strong> fotos e vídeos de clientes, <strong>somente mediante autorização expressa</strong>, para divulgação em nossos canais.</li>
+  </ul>
+  <p>Não coletamos intencionalmente dados pessoais sensíveis. Caso você nos informe alguma condição de saúde relevante para o atendimento (por exemplo, alergias a produtos), ela será usada exclusivamente para sua segurança.</p>
+
+  <h2>3. Para que usamos os dados e bases legais</h2>
+  <table>
+    <thead><tr><th>Finalidade</th><th>Base legal (LGPD)</th></tr></thead>
+    <tbody>
+      <tr><td>Agendar, confirmar, remarcar e realizar atendimentos</td><td>Execução de contrato e procedimentos preliminares (art. 7º, V)</td></tr>
+      <tr><td>Responder dúvidas e solicitações</td><td>Execução de contrato / legítimo interesse (art. 7º, V e IX)</td></tr>
+      <tr><td>Enviar lembretes de horário e comunicações sobre o serviço</td><td>Legítimo interesse (art. 7º, IX)</td></tr>
+      <tr><td>Enviar ofertas e novidades</td><td>Consentimento (art. 7º, I), que pode ser revogado a qualquer momento</td></tr>
+      <tr><td>Medir audiência e melhorar o site (cookies não essenciais)</td><td>Consentimento (art. 7º, I)</td></tr>
+      <tr><td>Divulgar imagens de clientes</td><td>Consentimento (art. 7º, I)</td></tr>
+      <tr><td>Cumprir obrigações legais, fiscais e regulatórias</td><td>Cumprimento de obrigação legal (art. 7º, II)</td></tr>
+      <tr><td>Exercer direitos em processos e prevenir fraudes</td><td>Exercício regular de direitos (art. 7º, VI)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. Com quem compartilhamos</h2>
+  <p>Não vendemos dados pessoais. Compartilhamos apenas o necessário com:</p>
+  <ul>
+    <li><strong>Plataforma de agendamento (BarbSuite):</strong> quando você agenda online, seus dados são tratados também pela plataforma, conforme a política de privacidade dela.</li>
+    <li><strong>Meta (WhatsApp e Instagram):</strong> quando você nos contata por esses canais.</li>
+    <li><strong>Google:</strong> mapas, avaliações e, se você consentir, ferramentas de medição (Google Analytics/Ads).</li>
+    <li><strong>Prestadores de serviço</strong> (hospedagem, contabilidade, meios de pagamento), sob dever de confidencialidade.</li>
+    <li><strong>Autoridades públicas</strong>, quando exigido por lei ou ordem judicial.</li>
+  </ul>
+  <p>Alguns desses fornecedores podem armazenar dados fora do Brasil. Nesses casos, a transferência internacional ocorre nas hipóteses permitidas pelo art. 33 da LGPD.</p>
+
+  <h2>5. Por quanto tempo guardamos</h2>
+  <p>Mantemos os dados pelo tempo necessário para cumprir as finalidades acima: dados de clientes enquanto houver relacionamento ativo e, depois, pelo prazo exigido por obrigações legais ou para o exercício de direitos (por exemplo, prazos fiscais e prescricionais). Dados tratados com base em consentimento são eliminados quando ele é revogado, salvo hipóteses legais de guarda.</p>
+
+  <h2>6. Seus direitos como titular</h2>
+  <p>Nos termos do art. 18 da LGPD, você pode, a qualquer momento e gratuitamente:</p>
+  <ul>
+    <li>confirmar a existência de tratamento e acessar seus dados;</li>
+    <li>corrigir dados incompletos, inexatos ou desatualizados;</li>
+    <li>solicitar anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade;</li>
+    <li>solicitar a portabilidade dos dados;</li>
+    <li>eliminar dados tratados com base no consentimento e revogar o consentimento;</li>
+    <li>saber com quem compartilhamos seus dados;</li>
+    <li>opor-se a tratamentos realizados com base em legítimo interesse;</li>
+    <li>apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD).</li>
+  </ul>
+  <p>Para exercer seus direitos, entre em contato {contact}. Poderemos solicitar informações para confirmar sua identidade antes de atender ao pedido.</p>
+
+  <h2>7. Segurança</h2>
+  <p>Adotamos medidas técnicas e administrativas razoáveis para proteger os dados contra acessos não autorizados, perda, alteração ou divulgação indevida, como conexão segura (HTTPS), controle de acesso e uso de fornecedores confiáveis. Nenhum sistema é 100% seguro; em caso de incidente relevante, comunicaremos os titulares e a ANPD conforme a lei.</p>
+
+  <h2>8. Crianças e adolescentes</h2>
+  <p>Atendemos crianças no corte infantil sempre acompanhadas do responsável. Dados de menores são tratados no melhor interesse da criança, com consentimento de pelo menos um dos pais ou responsável legal (art. 14 da LGPD). Imagens de menores só são divulgadas com autorização expressa do responsável.</p>
+
+  <h2>9. Uso de imagem</h2>
+  <p>Fotos e vídeos de clientes publicados no site e nas redes sociais são utilizados somente com autorização. Caso queira retirar a sua autorização, fale conosco e removeremos o conteúdo dos nossos canais próprios em prazo razoável.</p>
+
+  <h2>10. Links para terceiros</h2>
+  <p>O site contém links para serviços de terceiros (agendamento, WhatsApp, Instagram, Google Maps). Esses serviços têm políticas próprias, e recomendamos a leitura delas.</p>
+
+  <h2>11. Alterações desta Política</h2>
+  <p>Podemos atualizar esta Política periodicamente. A versão vigente estará sempre nesta página, com a data da última atualização.</p>
+
+  <h2>12. Contato</h2>
+  <p>{site.legalName} · {site.address.streetSchema}, {site.address.neighborhood}, {site.address.city} – {site.address.state}, {site.address.zip} · WhatsApp/telefone: <a href={`tel:${site.phoneE164}`}>{site.phone}</a>{site.email && <> · E-mail: <a href={`mailto:${site.email}`}>{site.email}</a></>}.</p>
+</LegalPage>

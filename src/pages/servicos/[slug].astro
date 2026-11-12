@@ -1,0 +1,159 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import FaqList from '../../components/FaqList.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import ReviewCard from '../../components/ReviewCard.astro';
+import { services, getService, brl } from '../../data/services';
+import { reviews } from '../../data/reviews';
+import { site } from '../../data/site';
+import { img } from '../../data/images';
+import { faqSchema, serviceSchema } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug } }));
+}
+const s = getService(Astro.params.slug!);
+const og = await getImage({ src: img(s.image), width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+const ogUrl = new URL(og.src, Astro.site).href;
+const crumbs = [
+  { name: 'Início', href: '/' },
+  { name: 'Serviços', href: '/servicos/' },
+  { name: s.short, href: `/servicos/${s.slug}/` },
+];
+const related = s.related.map(getService);
+// Avaliações que citam serviços relacionados (quando houver)
+const kw: Record<string, RegExp> = {
+  'corte-masculino': /corte|tesoura/i,
+  'barba-e-barboterapia': /barba/i,
+  'corte-infantil': /infantil|filho/i,
+  'manicure-e-pedicure': /manicure|unha|pedicure/i,
+  'tratamentos-capilares': /tratamento|couro/i,
+  'camuflagem-de-fios-brancos': /barba|corte/i,
+  'coloracao-e-luzes': /colora|corte/i,
+  'estetica-masculina': /barba|tratamento|detalh/i,
+};
+const rv = reviews.filter((r) => kw[s.slug].test(`${r.service ?? ''} ${r.text}`)).slice(0, 3);
+---
+<Base
+  title={s.seoTitle}
+  description={s.seoDescription}
+  image={ogUrl}
+  imageAlt={s.imageAlt}
+  breadcrumbs={crumbs}
+  schema={[serviceSchema(s, ogUrl), faqSchema(s.faq)]}
+>
+  <PageHero eyebrow="Serviços · Over Barber Conceito" title={s.title} lead={s.excerpt} image={s.image} imageAlt={s.imageAlt} crumbs={crumbs}>
+    <div class="btn-row" style="margin-top:2rem">
+      <a class="btn btn-gold" href={site.booking} target="_blank" rel="noopener" data-track={`agendar_${s.slug}`}><Icon name="calendar" /> Agendar {s.short.toLowerCase()}</a>
+      <a class="btn btn-ghost" href={site.whatsappMsg(`Olá! Gostaria de agendar: ${s.short}.`)} target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container split">
+      <div class="reveal">
+        <p class="eyebrow">Como fazemos</p>
+        <h2>{s.short} com o <em class="accent">padrão Over.</em></h2>
+        {s.intro.map((p) => <p class="lead">{p}</p>)}
+        <ul class="checks">
+          {s.benefits.map((b) => <li><Icon name="check" size={18} /> {b}</li>)}
+        </ul>
+      </div>
+      <aside class="card prices reveal reveal-d1" aria-labelledby="precos">
+        <p class="eyebrow" id="precos">Valores</p>
+        <h3>Tabela de preços</h3>
+        <ul class="price-list">
+          {s.items.map((i) => (
+            <li><span class="name">{i.name}</span>{i.duration && <span class="dur">{i.duration}</span>}<span class="dots" /><span class="price">{brl(i.price)}</span></li>
+          ))}
+        </ul>
+        <p class="note">Primeira vez na Over? <a href="/pacotes/">Corte + barba por R$ 135</a> na Over First Experience.</p>
+        <a class="btn btn-gold" href={site.booking} target="_blank" rel="noopener" style="width:100%"><Icon name="calendar" /> Agendar online</a>
+        <p class="mini"><Icon name="car" size={16} /> Valet gratuito · <Icon name="clock" size={16} /> Seg a sáb, 9h–19h</p>
+      </aside>
+    </div>
+  </section>
+
+  {s.steps && (
+    <section class="section section--ivory">
+      <div class="container">
+        <header class="center reveal">
+          <p class="eyebrow">Passo a passo</p>
+          <h2>Como é o atendimento</h2>
+        </header>
+        <ol class="steps">
+          {s.steps.map((st, i) => (
+            <li class={`reveal reveal-d${i}`}><span class="n">0{i + 1}</span><h3>{st.t}</h3><p>{st.d}</p></li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+
+  {rv.length > 0 && (
+    <section class="section section--navy">
+      <div class="container">
+        <header class="center reveal">
+          <p class="eyebrow">Quem já fez</p>
+          <h2>O que dizem nossos clientes</h2>
+        </header>
+        <div class="grid grid-3" style="margin-top:2.5rem">{rv.map((r) => <div class="reveal"><ReviewCard r={r} /></div>)}</div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="narrow">
+      <header class="center reveal">
+        <p class="eyebrow">Dúvidas</p>
+        <h2>Perguntas sobre {s.short.toLowerCase()}</h2>
+      </header>
+      <div class="reveal"><FaqList items={s.faq} openFirst /></div>
+    </div>
+  </section>
+
+  <section class="section section--tight section--navy">
+    <div class="container">
+      <p class="eyebrow">Combine com</p>
+      <div class="rel">
+        {related.map((r) => (
+          <a href={`/servicos/${r.slug}/`} class="rel-card">
+            <Image src={img(r.image)} alt={r.imageAlt} widths={[240, 400]} sizes="(min-width: 900px) 140px, 30vw" />
+            <span><strong>{r.short}</strong><small>{r.excerpt}</small></span>
+            <Icon name="arrow" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand msg={`Olá! Gostaria de agendar: ${s.short}.`} />
+</Base>
+
+<style>
+  .checks { list-style: none; padding: 0; margin: 1.6rem 0 0; display: grid; gap: 0.7rem; }
+  .checks li { display: flex; gap: 0.7rem; align-items: flex-start; }
+  .checks :global(svg) { color: var(--gold); margin-top: 5px; flex: none; }
+  .prices { position: sticky; top: calc(var(--header-h) + 1.5rem); }
+  .prices h3 { font-size: 2rem; }
+  .note { font-size: 0.9rem; color: var(--muted); margin: 1.2rem 0; }
+  .note a { color: var(--gold-300); }
+  .mini { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; justify-content: center; font-size: 0.8rem; color: var(--muted); margin: 1rem 0 0; }
+  .mini :global(svg) { color: var(--gold); }
+  .steps { list-style: none; padding: 0; margin: 3rem 0 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); counter-reset: s; }
+  .steps li { padding: 2rem 1.6rem; background: #fff; border-radius: var(--radius); border: 1px solid rgba(20, 27, 38, 0.08); }
+  .steps .n { font-family: var(--font-display); font-size: 3rem; color: var(--gold); line-height: 1; }
+  .steps h3 { margin: 0.6rem 0 0.3rem; }
+  .steps p { margin: 0; color: var(--muted-dark); font-size: 0.95rem; }
+  .rel { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+  .rel-card { display: grid; grid-template-columns: 90px 1fr auto; gap: 1rem; align-items: center; padding: 0.8rem; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; transition: border-color 0.3s; }
+  .rel-card:hover { border-color: var(--line-strong); color: inherit; }
+  .rel-card :global(img) { width: 90px; height: 90px; object-fit: cover; border-radius: 10px; }
+  .rel-card span { display: grid; line-height: 1.4; }
+  .rel-card strong { font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; color: var(--ivory); }
+  .rel-card small { color: var(--muted); font-size: 0.85rem; }
+  .rel-card > :global(svg) { color: var(--gold); }
+</style>

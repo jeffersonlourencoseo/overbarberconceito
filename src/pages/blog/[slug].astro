@@ -1,0 +1,99 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { posts } from '../../data/posts';
+import { site } from '../../data/site';
+import { img } from '../../data/images';
+import { abs, BUSINESS_ID } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return posts.map((p) => ({ params: { slug: p.slug } }));
+}
+const p = posts.find((x) => x.slug === Astro.params.slug)!;
+const others = posts.filter((x) => x.slug !== p.slug).slice(0, 3);
+const og = await getImage({ src: img(p.image), width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+const ogUrl = new URL(og.src, Astro.site).href;
+const crumbs = [{ name: 'Início', href: '/' }, { name: 'Blog', href: '/blog/' }, { name: p.title, href: `/blog/${p.slug}/` }];
+const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: p.title,
+  description: p.description,
+  image: ogUrl,
+  datePublished: p.date,
+  dateModified: p.date,
+  inLanguage: 'pt-BR',
+  mainEntityOfPage: abs(`/blog/${p.slug}/`),
+  author: { '@type': 'Organization', name: 'Equipe Over Barber Conceito', url: abs('/quem-somos/') },
+  publisher: { '@id': BUSINESS_ID },
+  keywords: p.tags.join(', '),
+};
+---
+<Base title={p.seoTitle} description={p.description} image={ogUrl} imageAlt={p.imageAlt} type="article" published={p.date} breadcrumbs={crumbs} schema={[article]} solidHeader>
+  <article>
+    <header class="ahead">
+      <div class="narrow">
+        <nav class="crumbs" aria-label="Você está em"><a href="/">Início</a> / <a href="/blog/">Blog</a></nav>
+        <p class="meta"><span class="tag">{p.tags[0]}</span> <time datetime={p.date}>{fmt(p.date)}</time> · {p.readTime} de leitura</p>
+        <h1>{p.title}</h1>
+        <p class="lead">{p.description}</p>
+      </div>
+    </header>
+    <div class="container">
+      <figure class="cover media"><Image src={img(p.image)} alt={p.imageAlt} widths={[640, 1000, 1400]} sizes="(min-width: 1240px) 1100px, 94vw" loading="eager" fetchpriority="high" /></figure>
+    </div>
+    <div class="section section--ivory body">
+      <div class="narrow">
+        <div class="prose" set:html={p.body} />
+        <aside class="box">
+          <p class="t">Agende na Over Barber Conceito</p>
+          <p>Av. Dom Luís, 655 — Meireles, Fortaleza · Valet gratuito · Seg a sáb, 9h–19h</p>
+          <div class="btn-row">
+            <a class="btn btn-gold" href={site.booking} target="_blank" rel="noopener"><Icon name="calendar" /> Agendar online</a>
+            <a class="btn btn-ghost" href={site.whatsappMsg()} target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </article>
+
+  <section class="section section--tight">
+    <div class="container">
+      <p class="eyebrow">Continue lendo</p>
+      <div class="more">
+        {others.map((o) => (
+          <a href={`/blog/${o.slug}/`} class="mo">
+            <Image src={img(o.image)} alt={o.imageAlt} widths={[300, 500]} sizes="(min-width: 900px) 30vw, 92vw" />
+            <strong>{o.title}</strong>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .ahead { padding: calc(var(--header-h) + clamp(3rem, 7vw, 5rem)) 0 2.5rem; }
+  .ahead h1 { font-size: clamp(2.3rem, 5vw, 3.8rem); }
+  .crumbs { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .crumbs a { color: var(--muted); text-decoration: none; }
+  .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; font-size: 0.82rem; color: var(--muted); }
+  .cover { aspect-ratio: 21 / 9; margin: 0 0 -6rem; position: relative; z-index: 2; box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.7); }
+  @media (max-width: 700px) { .cover { aspect-ratio: 4 / 3; margin-bottom: -3rem; } }
+  .body { padding-top: 9rem; }
+  @media (max-width: 700px) { .body { padding-top: 5.5rem; } }
+  .box { margin-top: 3rem; padding: 2rem; border-radius: var(--radius); background: var(--navy-900); color: var(--cream); }
+  .box .t { font-family: var(--font-display); font-size: 1.8rem; color: var(--ivory); margin-bottom: 0.3rem; }
+  .box p { color: var(--muted); }
+  .box .btn-ghost { color: var(--cream); border-color: var(--line-strong); }
+  .more { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+  .mo { display: grid; gap: 0.9rem; text-decoration: none; }
+  .mo :global(img) { aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--radius-sm); width: 100%; }
+  .mo strong { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; line-height: 1.25; color: var(--ivory); }
+  .mo:hover strong { color: var(--gold-300); }
+</style>

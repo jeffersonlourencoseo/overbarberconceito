@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { faq } from '../data/faq';
+import { services } from '../data/services';
+import { faqSchema } from '../lib/schema';
+
+const crumbs = [{ name: 'Início', href: '/' }, { name: 'Perguntas frequentes', href: '/perguntas-frequentes/' }];
+const svcFaq = services.flatMap((s) => s.faq.map((f) => ({ ...f, svc: s })));
+const all = [...faq, ...svcFaq.map(({ q, a }) => ({ q, a }))];
+---
+<Base
+  title="Perguntas Frequentes | Over Barber Conceito"
+  description="Endereço, horário, valet, preços, agendamento, Dia do Noivo, corte infantil, camuflagem, barboterapia e mais: tire suas dúvidas sobre a Over Barber Conceito."
+  breadcrumbs={crumbs}
+  schema={[faqSchema(all)]}
+>
+  <PageHero eyebrow="Ajuda" title="Perguntas <em>frequentes</em>" lead="Tudo o que você precisa saber antes da sua visita. Não achou sua dúvida? Chame a gente no WhatsApp." crumbs={crumbs} image="tesouras-e-pomadas" imageAlt="Tesouras e pomadas na bancada" />
+
+  <section class="section">
+    <div class="narrow">
+      <h2 class="h">Sobre a Over</h2>
+      <FaqList items={faq} openFirst />
+      {services.map((s) => (
+        <>
+          <h2 class="h"><a href={`/servicos/${s.slug}/`}>{s.short}</a></h2>
+          <FaqList items={s.faq} />
+        </>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .h { font-size: clamp(1.7rem, 3vw, 2.2rem); margin: 3rem 0 1.2rem; }
+  .h:first-child { margin-top: 0; }
+  .h a { text-decoration: none; color: inherit; }
+  .h a:hover { color: var(--gold-300); }
+</style>

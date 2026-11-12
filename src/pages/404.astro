@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import { services } from '../data/services';
+---
+<Base title="Página não encontrada" description="A página que você procura não existe ou mudou de endereço." noindex solidHeader>
+  <section class="nf">
+    <div class="narrow center">
+      <img src="/brand/emblema-over-barber.svg" width="332" height="312" alt="" class="emb" loading="lazy" decoding="async" />
+      <p class="eyebrow">Erro 404</p>
+      <h1>Esse corte <em class="accent">não existe.</em></h1>
+      <p class="lead">A página que você procurou não foi encontrada. Que tal voltar ao início ou ver nossos serviços?</p>
+      <div class="btn-row"><a class="btn btn-gold" href="/">Voltar ao início</a><a class="btn btn-ghost" href="/servicos/">Ver serviços</a></div>
+      <ul class="links">{services.slice(0, 6).map((s) => <li><a href={`/servicos/${s.slug}/`}>{s.short}</a></li>)}</ul>
+    </div>
+  </section>
+</Base>
+<style>
+  .nf { min-height: 100svh; display: grid; place-items: center; padding: calc(var(--header-h) + 3rem) 0 4rem; }
+  .emb { width: 70px; color: var(--gold-300); margin: 0 auto 1.5rem; }
+  .links { list-style: none; padding: 0; margin: 2.5rem 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.4rem; font-size: 0.9rem; }
+  .links a { color: var(--muted); }
+</style>

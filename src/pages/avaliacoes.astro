@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { reviews } from '../data/reviews';
+import { site } from '../data/site';
+
+const crumbs = [{ name: 'Início', href: '/' }, { name: 'Avaliações', href: '/avaliacoes/' }];
+const themes = [
+  ['Valet gratuito', reviews.filter((r) => /valet|manobrista|wallet/i.test(r.text)).length],
+  ['Barbeiros citados pelo nome', reviews.filter((r) => /jorge|guilherme|guylherme|avelino|gulherme/i.test(r.text)).length],
+  ['Manicure no mesmo horário', reviews.filter((r) => /manicure|unha/i.test(r.text + (r.service ?? ''))).length],
+];
+---
+<Base
+  title="Avaliações: Nota 5,0 no Google | Over Barber Conceito"
+  description={`Veja o que os clientes dizem da Over Barber Conceito: nota 5,0 em ${site.rating.count} avaliações no Google. Atendimento, valet gratuito, corte e barba elogiados.`}
+  breadcrumbs={crumbs}
+>
+  <PageHero
+    eyebrow="Avaliações reais no Google"
+    title="Nota <em>5,0</em> em cada detalhe."
+    lead={`${site.rating.count} avaliações no Google, todas com cinco estrelas. Leia o que nossos clientes contam sobre a experiência Over.`}
+    image="cliente-satisfeito-over-barber"
+    imageAlt="Cliente sorridente após atendimento na Over Barber Conceito"
+    crumbs={crumbs}
+  >
+    <div class="score">
+      <div class="big"><span class="gold-text">5,0</span><span class="stars">{[1, 2, 3, 4, 5].map(() => <Icon name="star" size={20} />)}</span></div>
+      <div class="bars" aria-label="Distribuição: 100% cinco estrelas">
+        {[5, 4, 3, 2, 1].map((n) => (
+          <div class="bar"><span>{n}</span><i style={`--w:${n === 5 ? 100 : 0}%`}></i></div>
+        ))}
+      </div>
+    </div>
+  </PageHero>
+
+  <section class="section section--tight section--navy">
+    <div class="container themes">
+      {themes.map(([t, n]) => <div><strong>{n}+</strong><span>avaliações citam <em>{t}</em></span></div>)}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="masonry">
+        {reviews.map((r, i) => <div class={`m-item reveal reveal-d${i % 3}`}><ReviewCard r={r} /></div>)}
+      </div>
+      <div class="btn-row" style="justify-content:center;margin-top:3rem">
+        <a class="btn btn-gold" href={site.maps} target="_blank" rel="noopener"><Icon name="google" /> Ver todas no Google</a>
+        <a class="btn btn-ghost" href={site.maps} target="_blank" rel="noopener"><Icon name="star" /> Deixar minha avaliação</a>
+      </div>
+      <p class="center muted note">Trechos de avaliações públicas do Perfil da Empresa no Google, reproduzidos como publicados (com pequenas correções de digitação).</p>
+    </div>
+  </section>
+
+  <CtaBand title="Venha descobrir <em>por quê.</em>" />
+</Base>
+
+<style>
+  .score { display: flex; flex-wrap: wrap; gap: 2rem 3rem; align-items: center; margin-top: 2.2rem; }
+  .big { display: grid; }
+  .big .gold-text { font-family: var(--font-display); font-size: 5.5rem; line-height: 1; }
+  .bars { display: grid; gap: 0.35rem; min-width: 220px; }
+  .bar { display: grid; grid-template-columns: 1rem 1fr; gap: 0.6rem; align-items: center; font-size: 0.8rem; color: var(--muted); }
+  .bar i { height: 6px; border-radius: 3px; background: rgba(244, 230, 210, 0.1); position: relative; overflow: hidden; }
+  .bar i::after { content: ''; position: absolute; inset: 0 auto 0 0; width: var(--w); background: var(--gold-grad); }
+  .themes { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); text-align: center; }
+  .themes div { display: grid; }
+  .themes strong { font-family: var(--font-display); font-size: 3rem; color: var(--gold-300); font-weight: 500; line-height: 1.1; }
+  .themes span { color: var(--muted); }
+  .themes em { color: var(--cream); font-style: normal; }
+  .masonry { columns: 3 320px; column-gap: 1.2rem; }
+  .m-item { break-inside: avoid; margin-bottom: 1.2rem; }
+  .note { font-size: 0.8rem; margin-top: 1.5rem; }
+</style>

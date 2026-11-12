@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import { img } from '../data/images';
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  image?: string;
+  imageAlt?: string;
+  crumbs?: { name: string; href: string }[];
+  position?: string;
+}
+const { eyebrow, title, lead, image, imageAlt = '', crumbs, position = 'center 30%' } = Astro.props;
+---
+<section class="phero grain">
+  {image && (
+    <div class="bg" aria-hidden="true">
+      <Image src={img(image)} alt={imageAlt} widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" style={`object-position:${position}`} />
+    </div>
+  )}
+  <div class="container inner">
+    {crumbs && (
+      <nav class="crumbs" aria-label="Você está em">
+        <ol>
+          {crumbs.map((c, i) => (
+            <li>{i < crumbs.length - 1 ? <a href={c.href}>{c.name}</a> : <span aria-current="page">{c.name}</span>}</li>
+          ))}
+        </ol>
+      </nav>
+    )}
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1 set:html={title} />
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .phero { position: relative; padding: calc(var(--header-h) + clamp(3.5rem, 9vw, 7rem)) 0 clamp(3.5rem, 8vw, 6rem); overflow: hidden; isolation: isolate; background: var(--navy-900); }
+  .bg { position: absolute; inset: 0; z-index: -1; }
+  .bg :global(img) { width: 100%; height: 100%; object-fit: cover; opacity: 0.42; transform: scale(1.05); animation: zoom 18s var(--ease) both; }
+  .bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10, 16, 25, 0.96) 0%, rgba(10, 16, 25, 0.7) 55%, rgba(10, 16, 25, 0.45) 100%), linear-gradient(0deg, var(--navy-950) 0%, transparent 40%); }
+  .inner { max-width: var(--container); }
+  h1 { max-width: 16ch; }
+  h1 :global(em) { font-style: italic; color: var(--gold-300); }
+  .lead { margin-top: 0.5rem; }
+  .crumbs ol { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0 0 1.8rem; padding: 0; font-size: 0.8rem; color: var(--muted); }
+  .crumbs li + li::before { content: '/'; margin-right: 0.4rem; color: var(--gold); }
+  .crumbs a { color: var(--muted); text-decoration: none; }
+  .crumbs a:hover { color: var(--gold-300); }
+  .crumbs [aria-current] { color: var(--cream); }
+  @keyframes zoom { from { transform: scale(1.14); } to { transform: scale(1.03); } }
+</style>

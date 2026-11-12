@@ -1,0 +1,99 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FaqList from '../components/FaqList.astro';
+import { packages, groomPackages, brl } from '../data/services';
+import { site } from '../data/site';
+import { img } from '../data/images';
+import { faqSchema, BUSINESS_ID } from '../lib/schema';
+
+const crumbs = [{ name: 'Início', href: '/' }, { name: 'Pacotes', href: '/pacotes/' }];
+const pkFaq = [
+  { q: 'Quem pode usar a Over First Experience?', a: 'É exclusiva para quem vai à Over Barber Conceito pela primeira vez: corte + barba por R$ 135. Basta informar no agendamento ou pelo WhatsApp.' },
+  { q: 'O que é a ozonioterapia do Over Essence?', a: 'É a hidratação capilar com ozônio, que higieniza o couro cabeludo, ajuda no controle da oleosidade e fortalece os fios. No Over Essence ela vem junto com corte e barba.' },
+  { q: 'Posso montar um pacote personalizado?', a: 'Sim. O Open Barber é a nossa experiência mais completa e pode ser montada com a equipe. Fale com a gente pelo WhatsApp.' },
+];
+const offers = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'Pacotes Over Barber Conceito',
+  provider: { '@id': BUSINESS_ID },
+  itemListElement: [...packages, ...groomPackages].map((p) => ({ '@type': 'Offer', name: p.name, price: p.price.toFixed(2), priceCurrency: 'BRL', description: p.description, url: site.booking })),
+};
+---
+<Base
+  title="Pacotes de Barbearia em Fortaleza | Over Barber Conceito"
+  description="Pacotes Over: First (corte + barba R$ 135), Essence com ozonioterapia (R$ 197), Select com unhas (R$ 267) e Privilege (R$ 297). Meireles, Fortaleza."
+  breadcrumbs={crumbs}
+  schema={[offers, faqSchema(pkFaq)]}
+>
+  <PageHero
+    eyebrow="Pacotes Over"
+    title="Experiências <em>completas</em>, num só horário."
+    lead="Combos criados para quem quer sair pronto: cabelo, barba, tratamento capilar e unhas, com a hospitalidade Over e valet gratuito."
+    image="barba-e-cuidados-masculinos"
+    imageAlt="Composição com barba sendo feita, ferramentas de barbeiro e cliente relaxando"
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="pk-grid">
+        {packages.map((p, i) => (
+          <article class:list={['pk reveal', `reveal-d${i % 3}`, { hl: p.highlight }]} id={p.slug}>
+            {p.badge ? <span class="tag">{p.badge}</span> : <span class="tag ghost">Pacote</span>}
+            <h2>{p.name}</h2>
+            <p class="inc">{p.includes}</p>
+            <p class="price"><span>R$</span>{p.price}</p>
+            <p class="desc">{p.description}</p>
+            <a class:list={['btn', p.highlight ? 'btn-gold' : 'btn-ghost']} href={site.whatsappMsg(`Olá! Quero agendar o pacote ${p.name} (${brl(p.price)}).`)} target="_blank" rel="noopener"><Icon name="whatsapp" /> Reservar</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="container split">
+      <div class="media media--frame reveal noivo-img" style="aspect-ratio:1/1.05">
+        <Image src={img('dia-do-noivo-select')} alt="Noivo sorridente de camisa branca no pacote Noivo Select" widths={[400, 700]} sizes="(min-width: 900px) 40vw, 92vw" />
+      </div>
+      <div class="reveal reveal-d1">
+        <p class="eyebrow">Para o casamento</p>
+        <h2>Pacotes <span class="script" style="font-size:1.2em">Dia do Noivo</span></h2>
+        <ul class="price-list">
+          {groomPackages.map((g) => (
+            <li><span class="name"><strong>{g.name}</strong> — noivo + {g.guests} convidados</span><span class="dots" /><span class="price">{brl(g.price)}</span></li>
+          ))}
+        </ul>
+        <a class="btn btn-gold" href="/dia-do-noivo/" style="margin-top:1.6rem">Conhecer o Dia do Noivo</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="narrow">
+      <header class="center reveal"><p class="eyebrow">Dúvidas</p><h2>Sobre os pacotes</h2></header>
+      <FaqList items={pkFaq} openFirst />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .pk-grid { display: grid; gap: 1.3rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); }
+  .pk { display: flex; flex-direction: column; align-items: flex-start; padding: 2.2rem 2rem; border: 1px solid var(--line); border-radius: calc(var(--radius) + 4px); background: linear-gradient(180deg, rgba(31, 47, 71, 0.55), rgba(15, 24, 39, 0.55)); transition: transform 0.5s var(--ease), border-color 0.4s; }
+  .pk:hover { transform: translateY(-6px); border-color: var(--line-strong); }
+  .pk.hl { border-color: var(--line-strong); background: radial-gradient(ellipse at 100% 0%, rgba(180, 139, 66, 0.3), transparent 60%), linear-gradient(160deg, var(--navy-700), var(--navy-900)); }
+  .tag.ghost { opacity: 0.7; }
+  .pk h2 { font-size: 2.3rem; margin: 1rem 0 0.2rem; }
+  .inc { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-300); margin: 0; }
+  .price { font-family: var(--font-display); font-size: 4rem; line-height: 1; color: var(--ivory); margin: 1.2rem 0 0.8rem; }
+  .price span { font-size: 0.4em; vertical-align: super; color: var(--gold-300); margin-right: 0.15em; }
+  .desc { color: var(--muted); flex: 1; }
+  .noivo-img :global(img) { object-position: center 0%; }
+</style>

@@ -1,0 +1,52 @@
+---
+import LegalPage from '../components/LegalPage.astro';
+import { site } from '../data/site';
+---
+<LegalPage
+  slug="termos-de-uso"
+  h1="Termos de Uso"
+  title="Termos de Uso | Over Barber Conceito"
+  description="Termos e condições de uso do site da Over Barber Conceito: agendamentos, preços, promoções, propriedade intelectual e responsabilidades."
+  updated="12 de novembro de 2026"
+>
+  <p>Ao acessar e usar este site, você concorda com estes Termos de Uso. Se não concordar, recomendamos não utilizar o site. Estes Termos se aplicam ao site da <strong>{site.legalName}</strong>{site.cnpj && <> (CNPJ {site.cnpj})</>}.</p>
+
+  <h2>1. Sobre o site</h2>
+  <p>Este site tem caráter informativo: apresenta a barbearia, seus serviços, preços de referência, pacotes e canais de contato e agendamento. Os agendamentos são realizados por plataforma de terceiros (BarbSuite) ou pelo WhatsApp.</p>
+
+  <h2>2. Preços e disponibilidade</h2>
+  <p>Os preços exibidos são de referência e podem ser alterados sem aviso prévio. O valor válido é o informado no momento do agendamento ou no atendimento. A disponibilidade de horários e profissionais depende da agenda.</p>
+
+  <h2>3. Promoções e pacotes</h2>
+  <p>A <strong>Over First Experience</strong> (corte + barba por R$ 135) é exclusiva para clientes em sua primeira visita à Over Barber Conceito e não é cumulativa com outras promoções, salvo indicação em contrário. Pacotes e condições especiais podem ter regras próprias, informadas no momento da contratação.</p>
+
+  <h2>4. Agendamentos, atrasos e cancelamentos</h2>
+  <p>Pedimos que você chegue com alguns minutos de antecedência. Em caso de imprevisto, avise o quanto antes pelo WhatsApp para remarcar. Atrasos podem reduzir o tempo de atendimento ou exigir remarcação para não prejudicar os próximos clientes. Regras específicas de cancelamento, quando houver, são informadas no agendamento.</p>
+
+  <h2>5. Valet</h2>
+  <p>O serviço de valet é uma cortesia oferecida aos clientes durante o atendimento, sujeito à disponibilidade e às orientações da equipe no local.</p>
+
+  <h2>6. Propriedade intelectual</h2>
+  <p>A marca Over Barber Conceito, logotipos, textos, fotos, vídeos e o layout deste site são protegidos por direitos de propriedade intelectual. É proibida a reprodução, total ou parcial, sem autorização prévia e por escrito.</p>
+
+  <h2>7. Uso de imagem</h2>
+  <p>As imagens de clientes exibidas foram utilizadas com autorização. Para solicitar a remoção de uma imagem sua, entre em contato conosco.</p>
+
+  <h2>8. Avaliações</h2>
+  <p>As avaliações exibidas são trechos de avaliações públicas feitas por clientes no Perfil da Empresa no Google. Elas refletem a opinião de seus autores.</p>
+
+  <h2>9. Links de terceiros</h2>
+  <p>O site contém links para serviços de terceiros. Não nos responsabilizamos pelo conteúdo, disponibilidade ou práticas de privacidade desses serviços.</p>
+
+  <h2>10. Limitação de responsabilidade</h2>
+  <p>Empregamos esforços para manter as informações atualizadas e o site disponível, mas não garantimos que ele estará livre de erros ou interrupções. Informações sobre serviços têm caráter geral e não substituem a avaliação do profissional no atendimento.</p>
+
+  <h2>11. Privacidade</h2>
+  <p>O tratamento de dados pessoais segue a nossa <a href="/politica-de-privacidade/">Política de Privacidade</a> e a <a href="/politica-de-cookies/">Política de Cookies</a>.</p>
+
+  <h2>12. Legislação e foro</h2>
+  <p>Estes Termos são regidos pelas leis brasileiras, incluindo o Código de Defesa do Consumidor. Fica eleito o foro da Comarca de Fortaleza/CE, ressalvado o direito do consumidor de ajuizar ação no foro do seu domicílio.</p>
+
+  <h2>13. Contato</h2>
+  <p>{site.legalName} · {site.address.streetSchema}, {site.address.neighborhood}, {site.address.city} – {site.address.state} · WhatsApp <a href={site.whatsapp}>{site.phone}</a>.</p>
+</LegalPage>

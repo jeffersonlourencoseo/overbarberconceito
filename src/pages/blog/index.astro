@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { posts } from '../../data/posts';
+import { img } from '../../data/images';
+import { abs, BUSINESS_ID } from '../../lib/schema';
+
+const crumbs = [{ name: 'Início', href: '/' }, { name: 'Blog', href: '/blog/' }];
+const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date));
+const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+const blog = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Blog Over Barber Conceito',
+  url: abs('/blog/'),
+  publisher: { '@id': BUSINESS_ID },
+  blogPost: sorted.map((p) => ({ '@type': 'BlogPosting', headline: p.title, url: abs(`/blog/${p.slug}/`), datePublished: p.date })),
+};
+---
+<Base
+  title="Blog: Dicas de Corte, Barba e Estilo | Over Barber"
+  description="Dicas de corte masculino, barba, barboterapia, camuflagem de fios brancos e Dia do Noivo, escritas pela equipe da Over Barber Conceito, em Fortaleza."
+  breadcrumbs={crumbs}
+  schema={[blog]}
+>
+  <PageHero eyebrow="Blog Over" title="Estilo, cuidado <em>e bons hábitos.</em>" lead="Guias práticos da nossa equipe para você manter o visual em dia entre uma visita e outra." crumbs={crumbs} image="ferramentas-barbeiro" imageAlt="Ferramentas de barbeiro organizadas" />
+
+  <section class="section">
+    <div class="container posts">
+      {sorted.map((p, i) => (
+        <article class:list={['post reveal', { feat: i === 0 }]}>
+          <a href={`/blog/${p.slug}/`} class="pimg" tabindex="-1" aria-hidden="true">
+            <Image src={img(p.image)} alt={p.imageAlt} widths={[400, 700]} sizes={i === 0 ? '(min-width: 900px) 55vw, 92vw' : '(min-width: 900px) 30vw, 92vw'} />
+          </a>
+          <div class="pbody">
+            <p class="meta"><span class="tag">{p.tags[0]}</span> <time datetime={p.date}>{fmt(p.date)}</time> · {p.readTime}</p>
+            <h2><a href={`/blog/${p.slug}/`}>{p.title}</a></h2>
+            <p class="muted">{p.description}</p>
+            <a class="link-arrow" href={`/blog/${p.slug}/`}>Ler artigo</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .posts { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+  .post { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--navy-900); }
+  @media (min-width: 900px) { .post.feat { grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 1fr; } }
+  .pimg { aspect-ratio: 16 / 10; overflow: hidden; display: block; }
+  .post.feat .pimg { aspect-ratio: auto; min-height: 340px; }
+  .pimg :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+  .post:hover .pimg :global(img) { transform: scale(1.05); }
+  .pbody { padding: 1.6rem 1.7rem 1.8rem; display: flex; flex-direction: column; justify-content: center; }
+  .meta { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; font-size: 0.8rem; color: var(--muted); }
+  .post h2 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); }
+  .post.feat h2 { font-size: clamp(1.9rem, 3.4vw, 2.7rem); }
+  .post h2 a { text-decoration: none; color: inherit; }
+  .post h2 a:hover { color: var(--gold-300); }
+</style>

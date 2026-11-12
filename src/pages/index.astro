@@ -1,0 +1,481 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+import { services, packages, groomPackages, brl } from '../data/services';
+import { reviews } from '../data/reviews';
+import { faq } from '../data/faq';
+import { img } from '../data/images';
+import { faqSchema } from '../lib/schema';
+
+const poster = await getImage({ src: img('fachada-over-barber-conceito'), width: 720, format: 'webp', quality: 70 });
+const homeFaq = faq.slice(0, 7);
+const marquee = ['Valet gratuito', 'Café & cappuccino', 'Cerveja gelada', 'Visagismo', 'Barba na navalha', 'Manicure no mesmo horário', 'Agendamento online', 'Dia do Noivo'];
+const experience = [
+  { icon: 'car', t: 'Valet gratuito', d: 'Você chega, entrega a chave e esquece o estacionamento na Av. Dom Luís.' },
+  { icon: 'coffee', t: 'Café na hora', d: 'Café passado e cappuccino de cortesia enquanto você é atendido.' },
+  { icon: 'beer', t: 'Cerveja gelada', d: 'Para quem prefere brindar o visual novo ainda na cadeira.' },
+  { icon: 'sparkle', t: 'Visagismo', d: 'O corte é definido pelo formato do rosto, tipo de fio e estilo de vida.' },
+  { icon: 'hand', t: 'Tudo num horário', d: 'Cabelo, barba, unhas e pele resolvidos numa visita só.' },
+  { icon: 'calendar', t: 'Sem fila', d: 'Agende online, escolha o barbeiro e chegue só para ser atendido.' },
+  { icon: 'child', t: 'Família', d: 'Corte infantil com paciência — e os pais aproveitam no mesmo horário.' },
+  { icon: 'heart', t: 'Para todos', d: 'Espaço acolhedor para a comunidade LGBTQ+ e para todas as pessoas.' },
+];
+const gallery = [
+  ['barba-na-navalha-detalhes', 'Barba na navalha com acabamento preciso'],
+  ['salao-over-barber-meireles', 'Salão da Over Barber Conceito com cadeiras e espelhos iluminados'],
+  ['cliente-satisfeito-over-barber', 'Cliente satisfeito após corte e barba'],
+  ['tesouras-e-pomadas', 'Tesouras, pentes e pomadas profissionais na bancada'],
+  ['lavagem-capilar', 'Lavagem capilar no lavatório'],
+  ['cliente-corte-masculino-perfil', 'Corte masculino clássico visto de perfil'],
+];
+---
+<Base
+  title="Barbearia Premium no Meireles, Fortaleza | Over Barber"
+  description="Barbearia premium no Meireles, Fortaleza: corte masculino, barba na navalha, barboterapia, manicure e Dia do Noivo. Valet gratuito e nota 5,0 no Google."
+  schema={[faqSchema(homeFaq)]}
+  preloadVideoPoster={poster.src}
+>
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-media" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="metadata" poster={poster.src} data-hero-video>
+        <source src="/video/hero-over-barber.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="container hero-inner">
+      <p class="eyebrow hero-in" style="--d:.1s">Barbearia · Experiência · Exclusividade</p>
+      <h1 id="hero-title" class="hero-in" style="--d:.2s">
+        A barbearia premium <span class="nowrap">do Meireles</span>
+        <span class="script hero-script">Conceito</span>
+      </h1>
+      <p class="lead hero-in" style="--d:.35s">
+        Corte, barba e cuidado masculino de alto padrão na Av. Dom Luís, em Fortaleza. Barbeiros visagistas, café passado na hora e <strong>valet gratuito</strong> na porta.
+      </p>
+      <div class="btn-row hero-in" style="--d:.5s">
+        <a class="btn btn-gold" href={site.booking} target="_blank" rel="noopener" data-track="agendar_hero"><Icon name="calendar" /> Agendar horário</a>
+        <a class="btn btn-ghost" href="/servicos/">Ver serviços e preços</a>
+      </div>
+      <a class="hero-rating hero-in" style="--d:.65s" href="/avaliacoes/">
+        <Icon name="google" size={22} />
+        <span class="stars" aria-hidden="true">{[1, 2, 3, 4, 5].map(() => <Icon name="star" size={14} />)}</span>
+        <span><strong>5,0</strong> · {site.rating.count} avaliações no Google</span>
+      </a>
+    </div>
+    <a href="#manifesto" class="scroll-cue" aria-label="Rolar para o conteúdo"><span></span></a>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      {[...marquee, ...marquee].map((m) => <span>{m}<img src="/brand/emblema-over-barber.svg" width="332" height="312" alt="" class="m-emb" decoding="async" /></span>)}
+    </div>
+  </div>
+
+  <!-- MANIFESTO -->
+  <section class="section" id="manifesto">
+    <div class="container split">
+      <div class="collage reveal">
+        <div class="media media--frame c1">
+          <Image src={img('cliente-corte-masculino-perfil')} alt="Cliente da Over Barber Conceito com corte masculino e barba alinhados" widths={[400, 700, 900]} sizes="(min-width: 900px) 34vw, 80vw" />
+        </div>
+        <div class="media c2">
+          <Image src={img('barbeiro-atendendo-cliente')} alt="Barbeiro atendendo cliente no salão da Over Barber Conceito, no Meireles" widths={[300, 500]} sizes="(min-width: 900px) 20vw, 45vw" />
+        </div>
+        <div class="badge-est"><span>Desde</span><strong>2022</strong></div>
+      </div>
+      <div class="reveal reveal-d1">
+        <p class="eyebrow">Quem somos</p>
+        <h2>Seu corte comunica <em class="accent">antes mesmo de você falar.</em></h2>
+        <p class="lead">
+          A Over Barber Conceito nasceu para elevar o padrão das barbearias em Fortaleza. Aqui, cada atendimento começa
+          com uma conversa: entendemos seu rosto, seu cabelo e o que você quer transmitir — e só então pegamos na tesoura.
+        </p>
+        <p class="muted">
+          Do valet na porta ao cappuccino, do desenho da barba na navalha à manicure no mesmo horário, tudo foi pensado
+          para o homem que valoriza estilo, tempo e bem-estar.
+        </p>
+        <dl class="stats">
+          <div><dt>Nota no Google</dt><dd>5,0<small>★</small></dd></div>
+          <div><dt>Avaliações reais</dt><dd>{site.rating.count}</dd></div>
+          <div><dt>Valet</dt><dd>R$&nbsp;0</dd></div>
+        </dl>
+        <a class="link-arrow" href="/quem-somos/">Conheça a Over</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVER FIRST -->
+  <section class="section--tight first-wrap">
+    <div class="container">
+      <div class="first reveal">
+        <div class="first-copy">
+          <span class="tag">Exclusivo para novos clientes</span>
+          <h2>Over First <span class="script">Experience</span></h2>
+          <p>Sua primeira visita merece um cuidado especial: <strong>corte + barba</strong> com barbeiros experientes, café de cortesia e valet gratuito.</p>
+        </div>
+        <div class="first-price">
+          <small>Corte + barba</small>
+          <strong><span>R$</span>135</strong>
+          <small>na primeira visita</small>
+        </div>
+        <a class="btn btn-gold" href={site.whatsappMsg('Olá! Quero agendar minha Over First Experience (corte + barba por R$ 135).')} target="_blank" rel="noopener" data-track="over_first">Quero minha primeira vez</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="section" id="servicos">
+    <div class="container">
+      <header class="sec-head reveal">
+        <div>
+          <p class="eyebrow">Serviços</p>
+          <h2>Cuidado completo, <em class="accent">da cabeça aos pés.</em></h2>
+        </div>
+        <p class="lead">Do corte na tesoura à barboterapia, da camuflagem de fios brancos à manicure — tudo no mesmo endereço, no mesmo horário.</p>
+      </header>
+      <div class="svc-grid">
+        {services.map((s, i) => (
+          <a class={`svc reveal reveal-d${i % 4}`} href={`/servicos/${s.slug}/`}>
+            <div class="svc-img">
+              <Image src={img(s.image)} alt={s.imageAlt} widths={[360, 560]} sizes="(min-width: 1100px) 22vw, (min-width: 640px) 45vw, 90vw" />
+            </div>
+            <div class="svc-body">
+              <h3>{s.short}</h3>
+              <p>{s.excerpt}</p>
+              <span class="svc-foot"><span>{s.items[0].name} · <strong>{brl(s.items[0].price)}</strong></span><Icon name="arrow" size={18} /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="center" style="margin-top:2.5rem"><a class="btn btn-ghost" href="/servicos/">Tabela completa de preços</a></div>
+    </div>
+  </section>
+
+  <!-- EXPERIÊNCIA -->
+  <section class="section section--ivory" id="experiencia">
+    <div class="container">
+      <header class="center reveal">
+        <p class="eyebrow">A experiência Over</p>
+        <h2>Do valet na porta <em class="accent">ao cappuccino.</em></h2>
+        <p class="lead">“Barbearia estilo conceito mesmo, com atendimento exclusivo e diferenciado.” — Roberto Melo, cliente</p>
+      </header>
+      <div class="exp-grid">
+        {experience.map((e, i) => (
+          <div class={`exp reveal reveal-d${i % 4}`}>
+            <span class="exp-ic"><Icon name={e.icon} size={26} /></span>
+            <h3>{e.t}</h3>
+            <p>{e.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PACOTES -->
+  <section class="section" id="pacotes">
+    <div class="container">
+      <header class="sec-head reveal">
+        <div>
+          <p class="eyebrow">Pacotes Over</p>
+          <h2>Experiências <em class="accent">completas.</em></h2>
+        </div>
+        <p class="lead">Combos pensados para quem quer sair pronto — com tratamento capilar, unhas e o acabamento que só a Over entrega.</p>
+      </header>
+      <div class="pk-grid">
+        {packages.slice(0, 4).map((p, i) => (
+          <article class:list={['pk card reveal', `reveal-d${i}`, { 'pk--hl': p.highlight }]}>
+            {p.badge && <span class="tag">{p.badge}</span>}
+            <h3>{p.name}</h3>
+            <p class="pk-inc">{p.includes}</p>
+            <p class="pk-price">{brl(p.price)}</p>
+            <p class="muted">{p.description}</p>
+            <a class="link-arrow" href={site.whatsappMsg(`Olá! Quero agendar o pacote ${p.name}.`)} target="_blank" rel="noopener">Reservar</a>
+          </article>
+        ))}
+      </div>
+      <div class="center" style="margin-top:2.5rem"><a class="btn btn-ghost" href="/pacotes/">Todos os pacotes</a></div>
+    </div>
+  </section>
+
+  <!-- DIA DO NOIVO -->
+  <section class="section noivo grain" id="dia-do-noivo">
+    <div class="container split">
+      <div class="reveal">
+        <p class="eyebrow">Casamento</p>
+        <h2>Dia do <span class="script big">Noivo</span></h2>
+        <p class="lead">Chegue ao altar impecável — e viva a preparação com quem mais importa. Ambiente exclusivo para o noivo e seus convidados, com corte, barba e todo o ritual Over.</p>
+        <ul class="tiers">
+          {groomPackages.map((g) => (
+            <li class:list={{ feat: g.featured }}>
+              <span class="t-name">{g.name}</span>
+              <span class="t-g">Noivo + {g.guests} convidados</span>
+              <span class="t-p">{brl(g.price)}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn-gold" href="/dia-do-noivo/">Conhecer os pacotes</a>
+          <a class="btn btn-ghost" href={site.whatsappMsg('Olá! Gostaria de reservar uma data para o Dia do Noivo.')} target="_blank" rel="noopener"><Icon name="whatsapp" /> Reservar data</a>
+        </div>
+      </div>
+      <div class="noivo-media reveal reveal-d1">
+        <div class="media media--frame n1"><Image src={img('dia-do-noivo-privilege')} alt="Noivo de terno azul ajustando a abotoadura no Dia do Noivo da Over Barber" widths={[360, 600]} sizes="(min-width: 900px) 24vw, 60vw" /></div>
+        <div class="media n2"><Image src={img('dia-do-noivo')} alt="Sapatos, perfume e convite de casamento preparados para o Dia do Noivo" widths={[300, 500]} sizes="(min-width: 900px) 18vw, 45vw" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANTES E DEPOIS -->
+  <section class="section section--tight">
+    <div class="container split split--reverse">
+      <div class="reveal">
+        <p class="eyebrow">Resultado</p>
+        <h2>Sua melhor versão <em class="accent">começa aqui.</em></h2>
+        <p class="lead">“Nos meus 33 anos de vida, ninguém tinha acertado cortar o meu cabelo. Finalmente deu certo, achei a Over Barber!”</p>
+        <p class="muted">— Breno Marcks, cliente (avaliação no Google)</p>
+        <a class="link-arrow" href="/galeria/">Ver galeria</a>
+      </div>
+      <div class="media media--frame reveal reveal-d1 ba">
+        <Image src={img('antes-depois-cliente')} alt="Antes e depois: cliente com cabelo volumoso e, depois, com corte alinhado e óculos" widths={[600, 900, 1300]} sizes="(min-width: 900px) 46vw, 92vw" />
+        <span class="ba-l">Antes</span><span class="ba-r">Depois</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section class="section section--navy" id="avaliacoes">
+    <div class="container">
+      <header class="sec-head reveal">
+        <div>
+          <p class="eyebrow">Avaliações no Google</p>
+          <h2><span class="gold-text">5,0</span> em {site.rating.count} avaliações.</h2>
+        </div>
+        <div class="rv-nav">
+          <button type="button" class="rv-btn" aria-label="Avaliações anteriores" data-rv-prev><Icon name="arrow" size={20} class="flip" /></button>
+          <button type="button" class="rv-btn" aria-label="Próximas avaliações" data-rv-next><Icon name="arrow" size={20} /></button>
+        </div>
+      </header>
+      <div class="rv-track" data-rv-track tabindex="0" aria-label="Avaliações de clientes">
+        {reviews.slice(0, 12).map((r) => <div class="rv-item"><ReviewCard r={r} /></div>)}
+      </div>
+      <div class="btn-row" style="margin-top:2.2rem">
+        <a class="btn btn-ghost" href="/avaliacoes/">Ler todas as avaliações</a>
+        <a class="btn btn-ghost" href={site.maps} target="_blank" rel="noopener"><Icon name="google" /> Ver no Google</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section class="section">
+    <div class="container">
+      <header class="center reveal">
+        <p class="eyebrow">Galeria</p>
+        <h2>Cuidado e atenção <em class="accent">nos detalhes.</em></h2>
+      </header>
+      <div class="gal">
+        {gallery.map(([n, alt], i) => (
+          <figure class={`g g${i} reveal reveal-d${i % 3}`}>
+            <Image src={img(n)} alt={alt} widths={[360, 600]} sizes="(min-width: 900px) 30vw, 46vw" />
+          </figure>
+        ))}
+      </div>
+      <div class="btn-row" style="justify-content:center;margin-top:2.5rem">
+        <a class="btn btn-ghost" href={site.instagram} target="_blank" rel="noopener"><Icon name="instagram" /> {site.instagramHandle}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCALIZAÇÃO -->
+  <section class="section section--navy" id="localizacao">
+    <div class="container split">
+      <div class="reveal">
+        <p class="eyebrow">Onde estamos</p>
+        <h2>No coração <em class="accent">do Meireles.</em></h2>
+        <p class="lead">Na Av. Dom Luís, entre a Aldeota e a Varjota, a poucos minutos da Beira-Mar. Chegue de carro: o valet é por nossa conta.</p>
+        <ul class="info">
+          <li><Icon name="pin" /><span><strong>{site.address.street}</strong><br />{site.address.neighborhood}, Fortaleza – CE, {site.address.zip}</span></li>
+          <li><Icon name="clock" /><span><strong>Segunda a sábado, 9h às 19h</strong><br />Domingo fechado · agendamento online 24h</span></li>
+          <li><Icon name="car" /><span><strong>Valet gratuito</strong><br />Para todos os clientes</span></li>
+          <li><Icon name="phone" /><span><strong><a href={`tel:${site.phoneE164}`}>{site.phone}</a></strong><br />Ligação e WhatsApp</span></li>
+        </ul>
+        <p class="near">Atendemos clientes de <a href="/barbearia-aldeota/">Aldeota</a>, <a href="/barbearia-varjota/">Varjota</a>, Meireles, Mucuripe, Praia de Iracema, Dionísio Torres, Cocó e toda Fortaleza.</p>
+      </div>
+      <div class="reveal reveal-d1 map-col"><MapEmbed /></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="narrow">
+      <header class="center reveal">
+        <p class="eyebrow">Dúvidas</p>
+        <h2>Perguntas frequentes</h2>
+      </header>
+      <div class="reveal"><FaqList items={homeFaq} openFirst /></div>
+      <p class="center" style="margin-top:2rem"><a class="link-arrow" href="/perguntas-frequentes/">Mais perguntas</a></p>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .nowrap { white-space: nowrap; }
+  /* HERO */
+  .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; isolation: isolate; padding: calc(var(--header-h) + 3rem) 0 clamp(4rem, 9vh, 7rem); }
+  .hero-media { position: absolute; inset: 0; z-index: -1; background: var(--navy-950); }
+  .hero-media video { width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
+  .hero-media::after { content: ''; position: absolute; inset: 0; background:
+      linear-gradient(90deg, rgba(10, 16, 25, 0.92) 0%, rgba(10, 16, 25, 0.55) 55%, rgba(10, 16, 25, 0.25) 100%),
+      linear-gradient(0deg, var(--navy-950) 0%, rgba(10, 16, 25, 0) 45%),
+      radial-gradient(ellipse at 15% 100%, rgba(180, 139, 66, 0.25), transparent 55%); }
+  .hero h1 { font-size: clamp(2.7rem, 6.2vw, 5.8rem); max-width: 15ch; margin-bottom: 0.3em; }
+  .hero-script { display: block; font-size: 0.9em; margin-top: -0.12em; margin-left: 1.6em; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding: 0.05em 0.1em 0.15em; }
+  .hero .lead { color: rgba(244, 230, 210, 0.85); margin-bottom: 2rem; }
+  .hero .lead strong { color: var(--gold-300); font-weight: 600; }
+  .hero-rating { display: inline-flex; align-items: center; gap: 0.65rem; margin-top: 2.2rem; padding: 0.6rem 1rem; border-radius: 999px; border: 1px solid var(--line); background: rgba(10, 16, 25, 0.5); backdrop-filter: blur(8px); text-decoration: none; font-size: 0.88rem; color: var(--cream); }
+  .hero-rating strong { color: var(--ivory); }
+  .hero-in { opacity: 0; transform: translateY(26px); animation: heroIn 1.2s var(--ease) forwards; animation-delay: var(--d); }
+  @keyframes heroIn { to { opacity: 1; transform: none; } }
+  .scroll-cue { position: absolute; left: 50%; bottom: 1.6rem; width: 26px; height: 42px; border: 1px solid var(--line-strong); border-radius: 20px; transform: translateX(-50%); display: none; }
+  .scroll-cue span { position: absolute; left: 50%; top: 8px; width: 3px; height: 8px; border-radius: 2px; background: var(--gold-300); transform: translateX(-50%); animation: cue 2s infinite; }
+  @media (min-width: 900px) { .scroll-cue { display: block; } }
+  @keyframes cue { 0% { opacity: 0; transform: translate(-50%, 0); } 40% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, 14px); } }
+
+  /* MARQUEE */
+  .marquee { overflow: hidden; border-block: 1px solid var(--line); background: var(--navy-900); padding: 1.15rem 0; }
+  .track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
+  .track span { display: inline-flex; align-items: center; gap: 2.2rem; padding-right: 2.2rem; font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.6rem); font-style: italic; color: var(--cream); white-space: nowrap; }
+  .m-emb { width: 22px; height: auto; opacity: .8; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* MANIFESTO */
+  .collage { position: relative; padding: 0 12% 14% 0; }
+  .c1 { aspect-ratio: 4 / 5; }
+  .c2 { position: absolute; right: 0; bottom: 0; width: 46%; aspect-ratio: 9 / 13; border: 6px solid var(--navy-950); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6); }
+  .badge-est { position: absolute; left: -12px; top: 8%; width: 110px; height: 110px; border-radius: 50%; display: grid; place-content: center; text-align: center; background: var(--gold-grad); color: var(--navy-950); box-shadow: 0 20px 40px -14px rgba(180, 139, 66, 0.6); line-height: 1; }
+  .badge-est span { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; }
+  .badge-est strong { font-family: var(--font-display); font-size: 2.2rem; font-weight: 600; }
+  @media (max-width: 600px) { .badge-est { left: 6px; width: 86px; height: 86px; } .badge-est strong { font-size: 1.7rem; } }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; padding: 1.4rem 0; border-block: 1px solid var(--line); }
+  .stats div { display: grid; }
+  .stats dt { order: 2; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .stats dd { margin: 0; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.8rem); color: var(--gold-300); line-height: 1.1; }
+  .stats small { font-size: 0.55em; vertical-align: super; }
+
+  /* OVER FIRST */
+  .first { display: grid; gap: 1.8rem; align-items: center; padding: clamp(1.8rem, 4vw, 3rem); border-radius: calc(var(--radius) + 6px); border: 1px solid var(--line-strong);
+    background: radial-gradient(ellipse at 100% 0%, rgba(180, 139, 66, 0.28), transparent 60%), linear-gradient(135deg, var(--navy-700), var(--navy-900)); }
+  @media (min-width: 960px) { .first { grid-template-columns: 1.6fr auto auto; } }
+  .first h2 { font-size: clamp(2rem, 4vw, 3rem); margin: 0.9rem 0 0.4rem; }
+  .first h2 .script { font-size: 1.1em; }
+  .first p { margin: 0; color: rgba(244, 230, 210, 0.85); max-width: 52ch; }
+  .first-price { display: grid; text-align: center; line-height: 1.1; padding-inline: 1.5rem; }
+  @media (min-width: 960px) { .first-price { border-inline: 1px solid var(--line); } }
+  .first-price small { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+  .first-price strong { font-family: var(--font-display); font-size: clamp(3.6rem, 7vw, 5rem); font-weight: 500; color: var(--gold-300); }
+  .first-price strong span { font-size: 0.4em; vertical-align: super; margin-right: 0.2em; }
+
+  /* SECTION HEAD */
+  .sec-head { display: grid; gap: 1rem 3rem; align-items: end; margin-bottom: clamp(2.2rem, 5vw, 3.5rem); }
+  @media (min-width: 900px) { .sec-head { grid-template-columns: 1.1fr 1fr; } }
+  .sec-head h2 { margin: 0; }
+  .sec-head .lead { margin: 0; }
+
+  /* SERVIÇOS */
+  .svc-grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 265px), 1fr)); }
+  .svc { display: flex; flex-direction: column; text-decoration: none; color: inherit; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--navy-900); transition: border-color 0.4s, transform 0.6s var(--ease); }
+  .svc:hover { border-color: var(--line-strong); transform: translateY(-6px); color: inherit; }
+  .svc-img { aspect-ratio: 4 / 3.4; overflow: hidden; }
+  .svc-img :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); filter: saturate(0.9); }
+  .svc:hover .svc-img :global(img) { transform: scale(1.07); }
+  .svc-body { padding: 1.3rem 1.4rem 1.4rem; display: flex; flex-direction: column; flex: 1; }
+  .svc h3 { font-size: 1.55rem; margin-bottom: 0.35rem; }
+  .svc p { font-size: 0.93rem; color: var(--muted); flex: 1; }
+  .svc-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 0.9rem; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--muted); }
+  .svc-foot strong { color: var(--gold-300); font-size: 1rem; }
+  .svc-foot :global(svg) { color: var(--gold); transition: transform 0.4s var(--ease); }
+  .svc:hover .svc-foot :global(svg) { transform: translateX(5px); }
+
+  /* EXPERIÊNCIA */
+  .exp-grid { display: grid; gap: 1px; margin-top: clamp(2.5rem, 5vw, 3.5rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); background: rgba(20, 27, 38, 0.1); border: 1px solid rgba(20, 27, 38, 0.1); border-radius: var(--radius); overflow: hidden; }
+  .exp { background: var(--ivory); padding: 2rem 1.7rem; transition: background 0.4s; }
+  .exp:hover { background: #fff; }
+  .exp-ic { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: var(--navy-900); color: var(--gold-300); margin-bottom: 1.2rem; }
+  .exp h3 { font-size: 1.5rem; margin-bottom: 0.3rem; }
+  .exp p { color: var(--muted-dark); font-size: 0.95rem; margin: 0; }
+
+  /* PACOTES */
+  .pk-grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+  .pk { display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+  .pk h3 { margin: 0.8rem 0 0.1rem; font-size: 1.8rem; }
+  .pk-inc { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-300); margin: 0; }
+  .pk-price { font-family: var(--font-display); font-size: 2.6rem; color: var(--ivory); margin: 0.6rem 0 0.4rem; line-height: 1; }
+  .pk .muted { font-size: 0.92rem; flex: 1; }
+  .pk--hl { border-color: var(--line-strong); background: radial-gradient(ellipse at 100% 0%, rgba(180, 139, 66, 0.2), transparent 60%), linear-gradient(180deg, rgba(31, 47, 71, 0.75), rgba(15, 24, 39, 0.75)); }
+  .pk:not(:has(.tag)) h3 { margin-top: 0; }
+
+  /* NOIVO */
+  .noivo { background: radial-gradient(ellipse at 0% 50%, rgba(43, 63, 94, 0.6), transparent 60%), var(--navy-900); border-block: 1px solid var(--line); }
+  .script.big { font-size: 1.35em; color: var(--gold-300); }
+  .tiers { list-style: none; padding: 0; margin: 1.8rem 0 2.2rem; display: grid; gap: 0.6rem; }
+  .tiers li { display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'n p' 'g p'; align-items: center; padding: 1rem 1.2rem; border: 1px solid var(--line); border-radius: 12px; background: rgba(10, 16, 25, 0.4); }
+  .tiers li.feat { border-color: var(--line-strong); }
+  .t-name { grid-area: n; font-family: var(--font-display); font-size: 1.4rem; color: var(--ivory); }
+  .t-g { grid-area: g; font-size: 0.82rem; color: var(--muted); }
+  .t-p { grid-area: p; font-family: var(--font-display); font-size: 1.7rem; color: var(--gold-300); }
+  .noivo-media { position: relative; padding: 0 0 18% 18%; }
+  .n1 { aspect-ratio: 1 / 1.08; }
+  .n1 :global(img) { object-position: center 0%; }
+  .n2 { position: absolute; left: 0; bottom: 0; width: 46%; aspect-ratio: 1 / 1.1; border: 6px solid var(--navy-900); }
+  .n2 :global(img) { object-position: center 75%; }
+
+  /* ANTES/DEPOIS */
+  .ba { aspect-ratio: 3 / 2; }
+  .ba-l, .ba-r { position: absolute; top: 1.4rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; background: rgba(10, 16, 25, 0.7); padding: 0.35rem 0.8rem; border-radius: 999px; border: 1px solid var(--line-strong); }
+  .ba-l { left: 1.4rem; } .ba-r { right: 1.4rem; }
+
+  /* REVIEWS */
+  .rv-nav { display: flex; gap: 0.6rem; justify-content: flex-end; }
+  .rv-btn { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--line-strong); background: transparent; color: var(--gold-300); display: grid; place-items: center; cursor: pointer; transition: background 0.3s, color 0.3s; }
+  .rv-btn:hover { background: var(--gold); color: var(--navy-950); }
+  :global(.flip) { transform: scaleX(-1); }
+  .rv-track { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(min(86%, 380px), 1fr); gap: 1.2rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding-bottom: 1rem; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
+  @media (min-width: 1100px) { .rv-track { grid-auto-columns: calc((100% - 2.4rem) / 3); } }
+  .rv-item { scroll-snap-align: start; }
+
+  /* GALERIA */
+  .gal { display: grid; gap: 1rem; margin-top: 2.5rem; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+  @media (min-width: 900px) { .gal { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 230px; } .g0 { grid-row: span 2; } .g3 { grid-column: span 2; } .g5 { grid-row: span 2; } }
+  @media (max-width: 899px) { .g0, .g5 { grid-row: span 2; } }
+  .g { margin: 0; border-radius: var(--radius-sm); overflow: hidden; }
+  .g :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .g:hover :global(img) { transform: scale(1.06); }
+
+  /* LOCAL */
+  .info { list-style: none; padding: 0; margin: 2rem 0; display: grid; gap: 1.2rem; }
+  .info li { display: flex; gap: 1rem; align-items: flex-start; }
+  .info :global(svg) { color: var(--gold); flex: none; margin-top: 4px; }
+  .info strong { color: var(--ivory); font-weight: 600; }
+  .info a { text-decoration: none; }
+  .near { font-size: 0.92rem; color: var(--muted); }
+  .near a { color: var(--gold-300); }
+  .map-col { height: 100%; min-height: 420px; }
+</style>
+
+<script>
+  const track = document.querySelector('[data-rv-track]') as HTMLElement | null;
+  const step = () => (track?.querySelector('.rv-item') as HTMLElement)?.offsetWidth + 19 || 300;
+  document.querySelector('[data-rv-prev]')?.addEventListener('click', () => track?.scrollBy({ left: -step() }));
+  document.querySelector('[data-rv-next]')?.addEventListener('click', () => track?.scrollBy({ left: step() }));
+  // Pausa o vídeo para quem prefere menos movimento ou economia de dados
+  const v = document.querySelector('[data-hero-video]') as HTMLVideoElement | null;
+  const conn = (navigator as any).connection;
+  if (v && (matchMedia('(prefers-reduced-motion: reduce)').matches || conn?.saveData)) { v.removeAttribute('autoplay'); v.pause(); }
+</script>

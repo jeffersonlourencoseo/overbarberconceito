@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import FaqList from '../components/FaqList.astro';
+import { site } from '../data/site';
+import { faq } from '../data/faq';
+import { BUSINESS_ID } from '../lib/schema';
+
+const crumbs = [{ name: 'Início', href: '/' }, { name: 'Contato', href: '/contato/' }];
+const contactFaq = faq.filter((f) => /Onde|horário|estacionamento|agendar|pagamento/i.test(f.q));
+const contactPage = { '@context': 'https://schema.org', '@type': 'ContactPage', name: 'Contato — Over Barber Conceito', mainEntity: { '@id': BUSINESS_ID } };
+const channels = [
+  { icon: 'calendar', t: 'Agendamento online', d: 'Escolha serviço, barbeiro e horário — 24h por dia.', href: site.booking, cta: 'Agendar agora', primary: true },
+  { icon: 'whatsapp', t: 'WhatsApp', d: site.phone, href: site.whatsappMsg(), cta: 'Chamar no WhatsApp' },
+  { icon: 'phone', t: 'Telefone', d: site.phone, href: `tel:${site.phoneE164}`, cta: 'Ligar' },
+  { icon: 'instagram', t: 'Instagram', d: site.instagramHandle, href: site.instagram, cta: 'Seguir' },
+];
+---
+<Base
+  title="Contato e Endereço | Over Barber Conceito, Meireles"
+  description="Fale com a Over Barber Conceito: Av. Dom Luís, 655, Loja 1, Meireles, Fortaleza. WhatsApp (85) 98163-1677. Seg a sáb, 9h às 19h. Valet gratuito."
+  breadcrumbs={crumbs}
+  schema={[contactPage]}
+>
+  <PageHero eyebrow="Contato" title="Vamos marcar <em>seu horário?</em>" lead="Agende online, chame no WhatsApp ou venha nos visitar na Av. Dom Luís. O valet está esperando por você." image="valet-gratuito-barbearia" imageAlt="Valet gratuito na porta da Over Barber Conceito, na Av. Dom Luís" crumbs={crumbs} />
+
+  <section class="section">
+    <div class="container">
+      <div class="ch">
+        {channels.map((c, i) => (
+          <a href={c.href} target={c.href.startsWith('tel') ? undefined : '_blank'} rel="noopener" class:list={['card chc reveal', `reveal-d${i}`, { primary: c.primary }]}>
+            <span class="ic"><Icon name={c.icon} size={24} /></span>
+            <strong>{c.t}</strong>
+            <span class="muted">{c.d}</span>
+            <span class="link-arrow">{c.cta}</span>
+          </a>
+        ))}
+      </div>
+
+      <div class="split visit">
+        <div class="reveal">
+          <p class="eyebrow">Visite a Over</p>
+          <h2>Endereço e <em class="accent">horários</em></h2>
+          <dl class="nap">
+            <div><dt><Icon name="pin" /> Endereço</dt><dd>{site.address.street}<br />{site.address.neighborhood} — {site.address.city}/{site.address.state}<br />CEP {site.address.zip}<br /><small>Plus Code: {site.address.plusCode}</small></dd></div>
+            <div><dt><Icon name="clock" /> Horário</dt><dd>{site.hours.map((h) => <>{h.days}: <strong>{h.time}</strong><br /></>)}<small>Agendamento online disponível 24h.</small></dd></div>
+            <div><dt><Icon name="car" /> Estacionamento</dt><dd>Valet gratuito para clientes, na porta.</dd></div>
+            <div><dt><Icon name="phone" /> Telefone / WhatsApp</dt><dd><a href={`tel:${site.phoneE164}`}>{site.phone}</a></dd></div>
+          </dl>
+          <div class="btn-row">
+            <a class="btn btn-gold" href={site.mapsDirections} target="_blank" rel="noopener"><Icon name="pin" /> Como chegar</a>
+            <a class="btn btn-ghost" href={site.maps} target="_blank" rel="noopener"><Icon name="google" /> Abrir no Google Maps</a>
+          </div>
+          <p class="muted ref">Referência: Av. Dom Luís, entre a Aldeota e a Varjota, a poucos minutos da Av. Beira-Mar e do Shopping Aldeota.</p>
+        </div>
+        <div class="reveal reveal-d1 mapc"><MapEmbed /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="narrow">
+      <header class="center reveal"><p class="eyebrow">Antes de vir</p><h2>Dúvidas rápidas</h2></header>
+      <FaqList items={contactFaq} openFirst />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ch { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); margin-bottom: clamp(4rem, 8vw, 6rem); }
+  .chc { display: grid; gap: 0.35rem; text-decoration: none; color: inherit; }
+  .chc:hover { transform: translateY(-4px); color: inherit; }
+  .chc.primary { border-color: var(--line-strong); background: radial-gradient(ellipse at 100% 0%, rgba(180, 139, 66, 0.25), transparent 60%), linear-gradient(160deg, var(--navy-700), var(--navy-900)); }
+  .chc .ic { width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; background: rgba(180, 139, 66, 0.15); color: var(--gold-300); margin-bottom: 0.8rem; }
+  .chc strong { font-family: var(--font-display); font-size: 1.6rem; font-weight: 500; color: var(--ivory); }
+  .chc .link-arrow { margin-top: 0.8rem; }
+  .nap { display: grid; gap: 1.4rem; margin: 2rem 0; }
+  .nap dt { display: flex; gap: 0.5rem; align-items: center; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-300); margin-bottom: 0.3rem; }
+  .nap dd { margin: 0; color: var(--cream); }
+  .nap small { color: var(--muted); }
+  .nap a { text-decoration: none; }
+  .ref { font-size: 0.88rem; margin-top: 1.5rem; }
+  .mapc { min-height: 460px; height: 100%; }
+</style>

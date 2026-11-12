@@ -1,0 +1,115 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import { site, SITE_URL } from '../data/site';
+import { businessSchema, websiteSchema, breadcrumbSchema, abs } from '../lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;          // URL absoluta ou caminho em /public
+  imageAlt?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  breadcrumbs?: { name: string; href: string }[];
+  schema?: Record<string, unknown>[];
+  solidHeader?: boolean;
+  published?: string;
+  preloadVideoPoster?: string;
+}
+const {
+  title, description, image = '/og-over-barber-conceito.jpg', imageAlt = 'Over Barber Conceito — barbearia premium no Meireles, Fortaleza',
+  type = 'website', noindex = false, breadcrumbs, schema = [], solidHeader = false, published, preloadVideoPoster,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+const ogImage = image.startsWith('http') ? image : abs(image);
+const fullTitle = title.includes('Over Barber') || title.length > 37 ? title : `${title} | Over Barber Conceito`;
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': type === 'article' ? 'WebPage' : 'WebPage',
+  '@id': `${canonical}#webpage`,
+  url: canonical,
+  name: fullTitle,
+  description,
+  inLanguage: 'pt-BR',
+  isPartOf: { '@id': `${SITE_URL}/#website` },
+  about: { '@id': `${SITE_URL}/#barbearia` },
+  primaryImageOfPage: { '@type': 'ImageObject', url: ogImage },
+};
+// Entidade completa (avaliações, catálogo) só nas páginas-chave; nas demais, versão enxuta com o mesmo @id.
+const full = ['/', '/contato/', '/avaliacoes/', '/quem-somos/'].includes(Astro.url.pathname);
+const b = businessSchema();
+const lean = { '@context': b['@context'], '@type': b['@type'], '@id': b['@id'], name: b.name, url: b.url, telephone: b.telephone, image: b.image, priceRange: b.priceRange, address: b.address, geo: b.geo, openingHoursSpecification: b.openingHoursSpecification, aggregateRating: b.aggregateRating };
+const ld = [full ? b : lean, websiteSchema(), pageSchema, ...(breadcrumbs ? [breadcrumbSchema(breadcrumbs)] : []), ...schema];
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+    <link rel="alternate" hreflang="pt-BR" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <meta name="theme-color" content="#0a1019" />
+    <meta name="author" content={site.name} />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Geo / SEO local -->
+    <meta name="geo.region" content="BR-CE" />
+    <meta name="geo.placename" content="Fortaleza" />
+    <meta name="geo.position" content={`${site.geo.lat};${site.geo.lng}`} />
+    <meta name="ICBM" content={`${site.geo.lat}, ${site.geo.lng}`} />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content={type} />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={imageAlt} />
+    {published && <meta property="article:published_time" content={published} />}
+    <meta property="business:contact_data:street_address" content={site.address.streetSchema} />
+    <meta property="business:contact_data:locality" content={site.address.city} />
+    <meta property="business:contact_data:region" content={site.address.state} />
+    <meta property="business:contact_data:postal_code" content={site.address.zip} />
+    <meta property="business:contact_data:country_name" content="Brasil" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {preloadVideoPoster && <link rel="preload" as="image" href={preloadVideoPoster} fetchpriority="high" />}
+
+    {ld.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+  </head>
+  <body>
+    <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
+    <Header solid={solidHeader} />
+    <main id="conteudo">
+      <slot />
+    </main>
+    <Footer />
+    <CookieBanner />
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }),
+        { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FaqList from '../components/FaqList.astro';
+import { groomPackages, brl } from '../data/services';
+import { site } from '../data/site';
+import { img } from '../data/images';
+import { faqSchema, BUSINESS_ID, abs } from '../lib/schema';
+
+const crumbs = [{ name: 'Início', href: '/' }, { name: 'Dia do Noivo', href: '/dia-do-noivo/' }];
+const og = await getImage({ src: img('dia-do-noivo-privilege'), width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+const ritual = [
+  { icon: 'scissors', t: 'Corte sob medida', d: 'Estilo definido com antecedência, pensado para o traje e para as fotos.' },
+  { icon: 'sparkle', t: 'Barba na navalha', d: 'Desenho preciso, toalha quente e hidratação para a pele chegar perfeita.' },
+  { icon: 'leaf', t: 'Pele e detalhes', d: 'Limpeza facial, sobrancelha natural e mãos impecáveis para a foto das alianças.' },
+  { icon: 'beer', t: 'Brinde com os amigos', d: 'Ambiente exclusivo, bebidas e o clima certo para começar o grande dia.' },
+  { icon: 'car', t: 'Valet gratuito', d: 'Chegada sem estresse para você e seus convidados.' },
+  { icon: 'ring', t: 'Acompanhamento', d: 'A equipe organiza horários e ordem de atendimento do grupo.' },
+];
+const noivoFaq = [
+  { q: 'Com quanto tempo de antecedência devo reservar?', a: 'O quanto antes — principalmente para sábados. O ideal é reservar assim que a data do casamento estiver definida e agendar um corte de teste de 4 a 6 semanas antes.' },
+  { q: 'O que está incluso para os convidados?', a: 'Cada pacote inclui o atendimento do noivo e do número de convidados indicado. Fale com a equipe pelo WhatsApp para conhecer os serviços de cada pacote e personalizar a experiência.' },
+  { q: 'Posso fazer na véspera do casamento?', a: 'Pode. Muitos noivos preferem a véspera para chegar mais tranquilos ao grande dia. A equipe ajuda a escolher o melhor momento.' },
+  { q: 'Quantos convidados posso levar?', a: 'Noivo Essence: até 4 convidados. Noivo Select: até 6. Noivo Privilege: até 8. Para grupos maiores, fale com a gente.' },
+];
+const offers = groomPackages.map((g) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `Dia do Noivo — ${g.name}`,
+  serviceType: 'Dia do Noivo em barbearia',
+  description: `${g.description} Noivo + ${g.guests} convidados.`,
+  provider: { '@id': BUSINESS_ID },
+  areaServed: { '@type': 'City', name: 'Fortaleza' },
+  offers: { '@type': 'Offer', price: g.price.toFixed(2), priceCurrency: 'BRL', url: abs('/dia-do-noivo/') },
+}));
+---
+<Base
+  title="Dia do Noivo em Barbearia em Fortaleza | Over Barber"
+  description="Dia do Noivo na Over Barber Conceito, no Meireles: corte, barba e experiência exclusiva para o noivo e até 8 convidados. Pacotes a partir de R$ 1.999."
+  image={new URL(og.src, Astro.site).href}
+  imageAlt="Noivo de terno azul ajustando a abotoadura no Dia do Noivo"
+  breadcrumbs={crumbs}
+  schema={[...offers, faqSchema(noivoFaq)]}
+>
+  <PageHero
+    eyebrow="Casamento · Fortaleza"
+    title="Dia do Noivo: <em>chegue ao altar impecável.</em>"
+    lead="Uma manhã exclusiva na Over Barber Conceito para o noivo e quem ele escolher — corte, barba, cuidados e um brinde antes do grande momento."
+    image="dia-do-noivo"
+    imageAlt="Sapatos, perfume, relógio e convite de casamento preparados para o Dia do Noivo"
+    crumbs={crumbs}
+    position="center 60%"
+  >
+    <div class="btn-row" style="margin-top:2rem">
+      <a class="btn btn-gold" href={site.whatsappMsg('Olá! Gostaria de reservar uma data para o Dia do Noivo.')} target="_blank" rel="noopener" data-track="noivo_hero"><Icon name="whatsapp" /> Reservar minha data</a>
+      <a class="btn btn-ghost" href="#pacotes">Ver pacotes</a>
+    </div>
+  </PageHero>
+
+  <section class="section" id="pacotes">
+    <div class="container">
+      <header class="center reveal">
+        <p class="eyebrow">Pacotes</p>
+        <h2>Escolha a sua <em class="accent">experiência.</em></h2>
+      </header>
+      <div class="tiers">
+        {groomPackages.map((g, i) => (
+          <article class:list={['tier reveal', `reveal-d${i}`, { feat: g.featured }]} id={g.slug}>
+            <div class="tier-img"><Image src={img(g.image)} alt={`Pacote ${g.name} — Dia do Noivo na Over Barber Conceito`} widths={[400, 640]} sizes="(min-width: 900px) 30vw, 92vw" /></div>
+            <div class="tier-body">
+              {g.featured && <span class="tag">Mais escolhido</span>}
+              <h3>{g.name}</h3>
+              <p class="guests"><Icon name="heart" size={16} /> Noivo + {g.guests} convidados</p>
+              <p class="price">{brl(g.price)}</p>
+              <p class="muted">{g.description}</p>
+              <a class:list={['btn', g.featured ? 'btn-gold' : 'btn-ghost']} href={site.whatsappMsg(`Olá! Tenho interesse no Dia do Noivo — ${g.name} (${brl(g.price)}).`)} target="_blank" rel="noopener">Reservar {g.name}</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ivory">
+    <div class="container">
+      <header class="center reveal">
+        <p class="eyebrow">O ritual</p>
+        <h2>Cada detalhe <em class="accent">do grande dia.</em></h2>
+      </header>
+      <div class="rit">
+        {ritual.map((r, i) => (
+          <div class={`reveal reveal-d${i % 3}`}><span class="ic"><Icon name={r.icon} size={24} /></span><h3>{r.t}</h3><p>{r.d}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div class="reveal">
+        <p class="eyebrow">Planejamento</p>
+        <h2>Checklist do <em class="accent">noivo.</em></h2>
+        <ol class="check">
+          <li><strong>4 a 6 semanas antes</strong> — corte de teste para definir o estilo.</li>
+          <li><strong>Assim que tiver a data</strong> — reserve o pacote (sábados esgotam rápido).</li>
+          <li><strong>1 semana antes</strong> — confirme a lista de convidados com a equipe.</li>
+          <li><strong>No grande dia</strong> — traje pronto, alianças separadas e só aproveitar.</li>
+        </ol>
+        <a class="link-arrow" href="/blog/dia-do-noivo-na-barbearia-guia-completo/">Leia o guia completo do Dia do Noivo</a>
+      </div>
+      <div class="media media--frame reveal reveal-d1 ess" style="aspect-ratio:1/1.05">
+        <Image src={img('dia-do-noivo-essence')} alt="Noivo amarrando o sapato social na preparação para o casamento" widths={[400, 700]} sizes="(min-width: 900px) 40vw, 92vw" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="narrow">
+      <header class="center reveal"><p class="eyebrow">Dúvidas</p><h2>Perguntas sobre o Dia do Noivo</h2></header>
+      <FaqList items={noivoFaq} openFirst />
+    </div>
+  </section>
+
+  <CtaBand title="Reserve a data do <em>seu grande dia.</em>" text="Sábados são disputados. Fale com a equipe pelo WhatsApp e garanta a manhã exclusiva para você e seus convidados." msg="Olá! Gostaria de reservar uma data para o Dia do Noivo." />
+</Base>
+
+<style>
+  .tiers { display: grid; gap: 1.3rem; margin-top: 3rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); align-items: start; }
+  .tier { border: 1px solid var(--line); border-radius: calc(var(--radius) + 4px); overflow: hidden; background: var(--navy-900); transition: transform 0.5s var(--ease), border-color 0.4s; }
+  .tier:hover { transform: translateY(-6px); border-color: var(--line-strong); }
+  .tier.feat { border-color: var(--line-strong); box-shadow: 0 30px 70px -30px rgba(180, 139, 66, 0.45); }
+  .tier-img { aspect-ratio: 1 / 1.05; overflow: hidden; }
+  .tier-img :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: center 0%; }
+  .tier-body { padding: 1.8rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+  .tier h3 { font-size: 2.1rem; margin: 0.6rem 0 0; }
+  .guests { display: flex; gap: 0.5rem; align-items: center; color: var(--gold-300); font-size: 0.9rem; margin: 0; }
+  .price { font-family: var(--font-display); font-size: 3rem; color: var(--ivory); margin: 0.8rem 0 0.4rem; line-height: 1; }
+  .tier .btn { margin-top: 0.8rem; }
+  .rit { display: grid; gap: 2.5rem 2rem; margin-top: 3rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+  .rit .ic { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: var(--navy-900); color: var(--gold-300); margin-bottom: 1rem; }
+  .rit h3 { margin-bottom: 0.3rem; }
+  .rit p { color: var(--muted-dark); margin: 0; }
+  .check { padding-left: 1.2rem; display: grid; gap: 0.9rem; margin: 1.5rem 0 2rem; color: var(--muted); }
+  .check strong { color: var(--ivory); }
+  .ess :global(img) { object-position: center 0%; }
+  .check li::marker { color: var(--gold); font-weight: 700; }
+</style>

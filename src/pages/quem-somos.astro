@@ -1,0 +1,120 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+import { img } from '../data/images';
+import { BUSINESS_ID } from '../lib/schema';
+
+const crumbs = [{ name: 'Início', href: '/' }, { name: 'Quem somos', href: '/quem-somos/' }];
+const values = [
+  { t: 'Escuta antes da tesoura', d: 'Todo atendimento começa com uma conversa. Visagismo não é moda: é entender quem senta na cadeira.' },
+  { t: 'Tempo de verdade', d: 'Sem linha de produção. O corte leva o tempo que precisa para ficar certo — e para durar.' },
+  { t: 'Hospitalidade', d: 'Valet na porta, café passado na hora, cerveja gelada. Detalhes que transformam um serviço em experiência.' },
+  { t: 'Padrão em tudo', d: 'Produtos profissionais, materiais esterilizados e acabamento na navalha. Premium em todos os sentidos.' },
+];
+const about = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'Quem somos — Over Barber Conceito',
+  mainEntity: { '@id': BUSINESS_ID },
+};
+---
+<Base
+  title="Quem Somos | Over Barber Conceito, Barbearia Premium"
+  description="Conheça a Over Barber Conceito: barbearia premium fundada em 2022 no Meireles, Fortaleza, com visagismo, atendimento sem pressa, valet gratuito e o padrão Over."
+  breadcrumbs={crumbs}
+  schema={[about]}
+>
+  <PageHero
+    eyebrow="Quem somos"
+    title="Um novo <em>conceito</em> de barbearia em Fortaleza."
+    lead="Onde o cuidado masculino encontra o alto padrão. Desde 2022, elevando o nível de cada corte, cada barba e cada detalhe."
+    image="fachada-over-barber-conceito"
+    imageAlt="Fachada da Over Barber Conceito com letreiro dourado na Av. Dom Luís, Meireles"
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="container split">
+      <div class="reveal">
+        <p class="eyebrow">Nossa história</p>
+        <h2>Nascemos para <em class="accent">elevar o padrão.</em></h2>
+        <p class="lead">A Over Barber Conceito é a unidade conceito da marca Over Barber em Fortaleza: um endereço de rua, na Av. Dom Luís, criado para quem quer mais do que um corte rápido.</p>
+        <p class="muted">Aqui, a barbearia volta a ser um lugar de encontro. Você é recebido pelo valet, toma um café ou uma cerveja gelada, conversa com o barbeiro sobre o que quer transmitir — e sai com o visual alinhado, a barba desenhada e a confiança lá em cima.</p>
+        <p class="muted">Reunimos no mesmo espaço tudo o que o homem moderno precisa: corte e barba, tratamentos capilares com ozônio, camuflagem de fios brancos, coloração, estética facial, manicure e pedicure. E, para os grandes momentos, o Dia do Noivo.</p>
+      </div>
+      <div class="media media--frame reveal reveal-d1" style="aspect-ratio:4/5">
+        <Image src={img('salao-over-barber-meireles')} alt="Salão da Over Barber Conceito com espelhos iluminados e cadeiras de barbeiro" widths={[400, 700]} sizes="(min-width: 900px) 40vw, 92vw" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ivory">
+    <div class="container">
+      <header class="center reveal">
+        <p class="eyebrow">O que nos move</p>
+        <h2>Nossos <em class="accent">valores.</em></h2>
+      </header>
+      <div class="vals">
+        {values.map((v, i) => (
+          <div class={`val reveal reveal-d${i}`}><span class="n">0{i + 1}</span><h3>{v.t}</h3><p>{v.d}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split split--reverse">
+      <div class="reveal">
+        <p class="eyebrow">Equipe</p>
+        <h2>Barbeiros que <em class="accent">conhecem você.</em></h2>
+        <p class="lead">Nossa equipe é formada por barbeiros experientes e visagistas, além de manicures e profissionais de estética. Muitos clientes acompanham o mesmo barbeiro há anos — e isso diz tudo.</p>
+        <blockquote class="quote">
+          <p>“O barbeiro Guilherme já corta meu cabelo há mais de seis anos; em qualquer canto eu sempre vou pra ele.”</p>
+          <cite>Samuel Mota, cliente — avaliação no Google</cite>
+        </blockquote>
+        <p class="muted">Jorge, Guilherme e Avelino estão entre os nomes mais citados nas avaliações dos nossos clientes no Google.</p>
+      </div>
+      <div class="media media--frame reveal reveal-d1" style="aspect-ratio:4/5">
+        <Image src={img('barbeiro-atendendo-cliente')} alt="Barbeiro da Over Barber Conceito atendendo cliente na cadeira" widths={[400, 700]} sizes="(min-width: 900px) 40vw, 92vw" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="container center reveal">
+      <img src="/brand/emblema-over-barber.svg" width="332" height="312" alt="" class="emb" loading="lazy" decoding="async" />
+      <p class="eyebrow">Em números</p>
+      <dl class="nums">
+        <div><dd>2022</dd><dt>Fundação</dt></div>
+        <div><dd>5,0★</dd><dt>Nota no Google</dt></div>
+        <div><dd>{site.rating.count}</dd><dt>Avaliações reais</dt></div>
+        <div><dd>35+</dd><dt>Serviços no catálogo</dt></div>
+      </dl>
+      <p class="muted inclusive"><Icon name="heart" size={18} /> Empresa que acolhe a comunidade LGBTQ+. Aqui, todo mundo é bem-vindo.</p>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .vals { display: grid; gap: 1.2rem; margin-top: 3rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+  .val { background: #fff; border-radius: var(--radius); padding: 2rem 1.7rem; border: 1px solid rgba(20, 27, 38, 0.08); }
+  .val .n { font-family: var(--font-display); font-size: 2.8rem; color: var(--gold); line-height: 1; }
+  .val h3 { margin: 0.8rem 0 0.4rem; }
+  .val p { color: var(--muted-dark); margin: 0; font-size: 0.96rem; }
+  .quote { margin: 2rem 0; padding: 1.4rem 1.6rem; border-left: 2px solid var(--gold); background: rgba(31, 47, 71, 0.4); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+  .quote p { font-family: var(--font-display); font-size: 1.45rem; font-style: italic; color: var(--ivory); margin: 0 0 0.6rem; line-height: 1.4; }
+  .quote cite { font-style: normal; font-size: 0.85rem; color: var(--muted); }
+  .emb { width: 60px; color: var(--gold-300); margin: 0 auto 1.5rem; }
+  .nums { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin: 2rem 0; }
+  .nums div { display: grid; }
+  .nums dd { margin: 0; font-family: var(--font-display); font-size: clamp(2.8rem, 5vw, 4rem); color: var(--gold-300); line-height: 1; }
+  .nums dt { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem; }
+  .inclusive { display: inline-flex; gap: 0.5rem; align-items: center; }
+  .inclusive :global(svg) { color: var(--gold); }
+</style>

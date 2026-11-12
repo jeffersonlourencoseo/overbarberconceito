@@ -1,0 +1,43 @@
+---
+import LegalPage from '../components/LegalPage.astro';
+import { site } from '../data/site';
+---
+<LegalPage
+  slug="politica-de-cookies"
+  h1="Política de Cookies"
+  title="Política de Cookies | Over Barber Conceito"
+  description="Entenda quais cookies o site da Over Barber Conceito utiliza, para que servem e como gerenciar suas preferências a qualquer momento."
+  updated="12 de novembro de 2026"
+>
+  <p>Esta Política explica como o site da <strong>{site.name}</strong> utiliza cookies e tecnologias semelhantes, e como você pode controlá-los. Ela complementa a nossa <a href="/politica-de-privacidade/">Política de Privacidade</a>.</p>
+
+  <h2>1. O que são cookies</h2>
+  <p>Cookies são pequenos arquivos armazenados no seu navegador quando você visita um site. Eles permitem lembrar suas preferências, entender como o site é usado e, quando autorizado, medir o resultado de campanhas. Também usamos o armazenamento local do navegador (<em>localStorage</em>) para guardar a sua escolha de consentimento.</p>
+
+  <h2>2. Categorias que utilizamos</h2>
+  <table>
+    <thead><tr><th>Categoria</th><th>Para que serve</th><th>Exemplos</th><th>Necessita consentimento?</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Essenciais</strong></td><td>Funcionamento do site e registro das suas preferências de cookies.</td><td><code>ovb-consent-v1</code> (localStorage, 12 meses)</td><td>Não</td></tr>
+      <tr><td><strong>Medição (analytics)</strong></td><td>Estatísticas de visitas e uso das páginas, para melhorar o site.</td><td>Google Analytics (<code>_ga</code>, <code>_ga_*</code> — até 2 anos)</td><td>Sim</td></tr>
+      <tr><td><strong>Marketing</strong></td><td>Mensuração de anúncios e públicos em plataformas parceiras.</td><td>Meta Pixel (<code>_fbp</code> — 3 meses), Google Ads</td><td>Sim</td></tr>
+      <tr><td><strong>Conteúdo de terceiros</strong></td><td>Exibição do mapa do Google, carregado só quando você clica em “Carregar mapa”.</td><td>Google Maps</td><td>Sim (ao clicar)</td></tr>
+    </tbody>
+  </table>
+  <p>Cookies de medição e marketing <strong>só são ativados depois do seu consentimento</strong>. Até lá, utilizamos o modo de consentimento do Google com todas as permissões negadas.</p>
+
+  <h2>3. Como gerenciar suas preferências</h2>
+  <p>Você pode alterar ou retirar o seu consentimento a qualquer momento clicando em <button type="button" data-cookie-open class="inline-btn">Preferências de cookies</button> (também disponível no rodapé de todas as páginas).</p>
+  <p>Também é possível bloquear ou apagar cookies nas configurações do seu navegador. Bloquear cookies essenciais pode afetar o funcionamento do site.</p>
+
+  <h2>4. Links externos</h2>
+  <p>Ao clicar em links para agendamento online, WhatsApp, Instagram ou Google Maps, você é direcionado a serviços de terceiros, que possuem políticas de cookies próprias.</p>
+
+  <h2>5. Contato</h2>
+  <p>Dúvidas sobre esta Política? Fale com a gente pelo WhatsApp <a href={site.whatsapp}>{site.phone}</a>.</p>
+</LegalPage>
+
+<style>
+  .inline-btn { background: none; border: 0; padding: 0; color: var(--gold); font-weight: 700; text-decoration: underline; cursor: pointer; font-size: inherit; }
+  code { font-size: 0.85em; background: rgba(20, 27, 38, 0.06); padding: 0.1em 0.35em; border-radius: 4px; }
+</style>
