@@ -1,5 +1,6 @@
 ---
 import { Image, getImage } from 'astro:assets';
+import BrandPanel from '../components/BrandPanel.astro';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
@@ -7,7 +8,7 @@ import CtaBand from '../components/CtaBand.astro';
 import FaqList from '../components/FaqList.astro';
 import { groomPackages, brl } from '../data/services';
 import { site } from '../data/site';
-import { img, photo } from '../data/images';
+import { img } from '../data/images';
 import { faqSchema, BUSINESS_ID, abs } from '../lib/schema';
 
 const crumbs = [{ name: 'Início', href: '/' }, { name: 'Dia do Noivo', href: '/dia-do-noivo/' }];
@@ -38,7 +39,7 @@ const offers = groomPackages.map((g) => ({
 }));
 ---
 <Base
-  title="Dia do Noivo em Barbearia em Fortaleza | Over Barber"
+  title="Dia do Noivo na Barbearia no Meireles | Over Barber"
   description="Dia do Noivo na Over Barber Conceito, no Meireles: corte, barba e experiência exclusiva para o noivo e até 8 convidados. Pacotes a partir de R$ 1.999."
   image={new URL(og.src, Astro.site).href}
   imageAlt="Noivo de terno azul ajustando a abotoadura no Dia do Noivo"
@@ -47,7 +48,7 @@ const offers = groomPackages.map((g) => ({
 >
   <PageHero
     eyebrow="Casamento · Fortaleza"
-    title="Dia do Noivo: <em>chegue ao altar impecável.</em>"
+    title="Dia do Noivo <em>na barbearia no Meireles.</em>"
     lead="Uma manhã exclusiva na Over Barber Conceito para o noivo e quem ele escolher — corte, barba, cuidados e um brinde antes do grande momento."
     image="dia-do-noivo"
     imageAlt="Sapatos, perfume, relógio e convite de casamento preparados para o Dia do Noivo"
@@ -68,8 +69,7 @@ const offers = groomPackages.map((g) => ({
       </header>
       <div class="tiers">
         {groomPackages.map((g, i) => (
-          <article class:list={['tier reveal', `reveal-d${i}`, { feat: g.featured, 'no-img': !photo('dia-do-noivo', g.slug) }]} id={g.slug}>
-            {photo('dia-do-noivo', g.slug) && <div class="tier-img"><Image src={photo('dia-do-noivo', g.slug)!} alt={`Pacote ${g.name} — Dia do Noivo na Over Barber Conceito`} widths={[400, 640]} sizes="(min-width: 900px) 30vw, 92vw" /></div>}
+          <article class:list={['tier reveal', `reveal-d${i}`, { feat: g.featured, 'no-img': true }]} id={g.slug}>
             <div class="tier-body">
               {g.featured && <span class="tag">Mais escolhido</span>}
               <h3>{g.name}</h3>
@@ -111,9 +111,7 @@ const offers = groomPackages.map((g) => ({
         </ol>
         <a class="link-arrow" href="/blog/dia-do-noivo-na-barbearia-guia-completo/">Leia o guia completo do Dia do Noivo</a>
       </div>
-      <div class="media media--frame reveal reveal-d1 ess" style="aspect-ratio:1/1.05">
-        <Image src={img('dia-do-noivo-essence')} alt="Noivo amarrando o sapato social na preparação para o casamento" widths={[400, 700]} sizes="(min-width: 900px) 40vw, 92vw" />
-      </div>
+      <BrandPanel kicker="Dia do Noivo" title="O seu <em>grande dia</em>" lines={["Noivo + até 8 convidados", "Na Over, barbearia no Meireles"]} facts={[{ t: "Essence", v: "R$ 1.999" }, { t: "Select", v: "R$ 2.499" }, { t: "Privilege", v: "R$ 2.999" }]} />
     </div>
   </section>
 

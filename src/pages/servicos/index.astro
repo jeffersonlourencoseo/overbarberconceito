@@ -6,7 +6,6 @@ import Icon from '../../components/Icon.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { services, packages, brl } from '../../data/services';
 import { site } from '../../data/site';
-import { photo } from '../../data/images';
 import { abs } from '../../lib/schema';
 
 const crumbs = [{ name: 'Início', href: '/' }, { name: 'Serviços', href: '/servicos/' }];
@@ -18,14 +17,14 @@ const itemList = {
 };
 ---
 <Base
-  title="Serviços e Preços | Barbearia Over Barber Conceito"
+  title="Serviços e Preços da Barbearia no Meireles | Over Barber"
   description="Tabela de serviços e preços da Over Barber Conceito: corte masculino R$ 80, barba R$ 80, cabelo e barba R$ 150, barboterapia, camuflagem, manicure e mais."
   breadcrumbs={crumbs}
   schema={[itemList]}
 >
   <PageHero
     eyebrow="Serviços & preços"
-    title="Tudo o que você precisa <em>em um só lugar.</em>"
+    title="Serviços da barbearia <em>no Meireles.</em>"
     lead="Cabelo, barba, pele, unhas e tratamentos — com preços transparentes e agendamento online. Combine serviços e resolva tudo no mesmo horário."
     image="tesouras-e-pomadas"
     imageAlt="Tesouras, pentes e pomadas profissionais na bancada da Over Barber Conceito"
@@ -39,12 +38,7 @@ const itemList = {
   <section class="section">
     <div class="container list">
       {services.map((s, i) => (
-        <article id={s.slug} class:list={['row reveal', { alt: i % 2, 'no-img': !photo('servicos', s.slug) }]}>
-          {photo('servicos', s.slug) && (
-            <a href={`/servicos/${s.slug}/`} class="media media--frame row-img" tabindex="-1" aria-hidden="true">
-              <Image src={photo('servicos', s.slug)!} alt="" widths={[360, 560, 760]} sizes="(min-width: 900px) 34vw, 92vw" />
-            </a>
-          )}
+        <article id={s.slug} class:list={['row reveal', { alt: i % 2, 'no-img': true }]}>
           <div class="row-body">
             <h2><a href={`/servicos/${s.slug}/`}>{s.short}</a></h2>
             <p class="muted">{s.excerpt}</p>

@@ -74,6 +74,7 @@ export const nav = [
   { href: '/pacotes/', label: 'Pacotes' },
   { href: '/dia-do-noivo/', label: 'Dia do Noivo' },
   { href: '/avaliacoes/', label: 'Avaliações' },
+  { href: '/galeria-de-fotos/', label: 'Galeria' },
   { href: '/blog/', label: 'Blog' },
   { href: '/contato/', label: 'Contato' },
 ];

@@ -1,9 +1,0 @@
-FOTOS DOS ARTIGOS DO BLOG
-Nome exato do arquivo (.jpg, .jpeg, .png ou .webp). A foto vira a capa do artigo,
-o card na página /blog/ e a imagem de compartilhamento. Sem foto, aparece só o texto.
-Ideal: foto horizontal, pelo menos 1600 px de largura.
-
-dia-do-noivo-na-barbearia-guia-completo.jpg
-camuflagem-de-fios-brancos-como-funciona.jpg
-barboterapia-o-que-e-beneficios.jpg
-de-quanto-em-quanto-tempo-cortar-cabelo-masculino.jpg

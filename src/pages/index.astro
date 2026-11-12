@@ -1,5 +1,5 @@
 ---
-import { Image, getImage } from 'astro:assets';
+import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ReviewCard from '../components/ReviewCard.astro';
@@ -10,7 +10,7 @@ import { site } from '../data/site';
 import { services, packages, groomPackages, brl } from '../data/services';
 import { reviews } from '../data/reviews';
 import { faq } from '../data/faq';
-import { img, photo } from '../data/images';
+import { img } from '../data/images';
 import { faqSchema } from '../lib/schema';
 
 const poster = await getImage({ src: img('fachada-over-barber-conceito'), width: 600, format: 'webp', quality: 65 });
@@ -26,18 +26,10 @@ const experience = [
   { icon: 'child', t: 'Família', d: 'Corte infantil com paciência — e os pais aproveitam no mesmo horário.' },
   { icon: 'heart', t: 'Para todos', d: 'Espaço acolhedor para a comunidade LGBTQ+ e para todas as pessoas.' },
 ];
-const gallery = [
-  ['barba-na-navalha-detalhes', 'Barba na navalha com acabamento preciso'],
-  ['salao-over-barber-meireles', 'Salão da Over Barber Conceito com cadeiras e espelhos iluminados'],
-  ['cliente-satisfeito-over-barber', 'Cliente satisfeito após corte e barba'],
-  ['tesouras-e-pomadas', 'Tesouras, pentes e pomadas profissionais na bancada'],
-  ['lavagem-capilar', 'Lavagem capilar no lavatório'],
-  ['cliente-corte-masculino-perfil', 'Corte masculino clássico visto de perfil'],
-];
 ---
 <Base
-  title="Barbearia Premium no Meireles, Fortaleza | Over Barber"
-  description="Barbearia premium no Meireles, Fortaleza: corte masculino, barba na navalha, barboterapia, manicure e Dia do Noivo. Valet gratuito e nota 5,0 no Google."
+  title="Barbearia no Meireles, Fortaleza | Over Barber Conceito"
+  description="Barbearia no Meireles, em Fortaleza: corte masculino, barba na navalha, barboterapia, manicure e Dia do Noivo. Valet gratuito e nota 5,0 no Google."
   schema={[faqSchema(homeFaq)]}
   preloadVideoPoster={poster.src}
 >
@@ -47,13 +39,13 @@ const gallery = [
       <video muted loop playsinline preload="none" poster={poster.src} data-hero-video data-src="/video/hero-over-barber.mp4" aria-hidden="true"></video>
     </div>
     <div class="container hero-inner">
-      <p class="eyebrow hero-in" style="--d:.1s">Barbearia · Experiência · Exclusividade</p>
+      <p class="eyebrow hero-in" style="--d:.1s">Over Barber Conceito · Fortaleza</p>
       <h1 id="hero-title" class="hero-in" style="--d:.2s">
-        A barbearia premium <span class="nowrap">do Meireles</span>
-        <span class="script hero-script">Conceito</span>
+        Barbearia <span class="nowrap">no Meireles</span>
       </h1>
+      <p class="script hero-script hero-in" style="--d:.28s" aria-hidden="true">Over Barber Conceito</p>
       <p class="lead hero-in" style="--d:.35s">
-        Corte, barba e cuidado masculino de alto padrão na Av. Dom Luís, em Fortaleza. Barbeiros visagistas, café passado na hora e <strong>valet gratuito</strong> na porta.
+        A Over Barber Conceito é a barbearia premium no Meireles, na Av. Dom Luís, em Fortaleza: corte, barba e cuidado masculino com barbeiros visagistas, café passado na hora e <strong>valet gratuito</strong> na porta.
       </p>
       <div class="btn-row hero-in" style="--d:.5s">
         <a class="btn btn-gold" href={site.booking} target="_blank" rel="noopener" data-track="agendar_hero"><Icon name="calendar" /> Agendar horário</a>
@@ -78,20 +70,21 @@ const gallery = [
   <!-- MANIFESTO -->
   <section class="section" id="manifesto">
     <div class="container split">
-      <div class="collage reveal">
-        <div class="media media--frame c1">
-          <Image src={img('cliente-corte-masculino-perfil')} alt="Cliente da Over Barber Conceito com corte masculino e barba alinhados" widths={[340, 500, 700, 900]} sizes="(min-width: 900px) 34vw, 80vw" />
-        </div>
-        <div class="media c2">
-          <Image src={img('barbeiro-atendendo-cliente')} alt="Barbeiro atendendo cliente no salão da Over Barber Conceito, no Meireles" widths={[180, 300, 500]} sizes="(min-width: 900px) 20vw, 45vw" />
-        </div>
-        <div class="badge-est"><span>Desde</span><strong>2022</strong></div>
+      <div class="place reveal">
+        <img src="/brand/emblema-over-barber.svg" width="332" height="312" alt="" class="place-emb" loading="lazy" decoding="async" />
+        <p class="place-k">Barbearia no Meireles</p>
+        <p class="place-a">{site.address.street}<br />Meireles · Fortaleza – CE</p>
+        <dl class="place-f">
+          <div><dt>Desde</dt><dd>2022</dd></div>
+          <div><dt>Google</dt><dd>5,0★</dd></div>
+          <div><dt>Valet</dt><dd>Grátis</dd></div>
+        </dl>
       </div>
       <div class="reveal reveal-d1">
         <p class="eyebrow">Quem somos</p>
         <h2>Seu corte comunica <em class="accent">antes mesmo de você falar.</em></h2>
         <p class="lead">
-          A Over Barber Conceito nasceu para elevar o padrão das barbearias em Fortaleza. Aqui, cada atendimento começa
+          A Over Barber Conceito nasceu em 2022 para elevar o padrão das barbearias em Fortaleza, e escolheu o Meireles como casa. Aqui, cada atendimento começa
           com uma conversa: entendemos seu rosto, seu cabelo e o que você quer transmitir — e só então pegamos na tesoura.
         </p>
         <p class="muted">
@@ -133,20 +126,14 @@ const gallery = [
       <header class="sec-head reveal">
         <div>
           <p class="eyebrow">Serviços</p>
-          <h2>Cuidado completo, <em class="accent">da cabeça aos pés.</em></h2>
+          <h2>Serviços da barbearia <em class="accent">no Meireles.</em></h2>
         </div>
         <p class="lead">Do corte na tesoura à barboterapia, da camuflagem de fios brancos à manicure — tudo no mesmo endereço, no mesmo horário.</p>
       </header>
       <div class="svc-grid">
         {services.map((s, i) => (
-          <a class:list={['svc reveal', `reveal-d${i % 4}`, { 'no-img': !photo('servicos', s.slug) }]} href={`/servicos/${s.slug}/`}>
-            {photo('servicos', s.slug) ? (
-              <div class="svc-img">
-                <Image src={photo('servicos', s.slug)!} alt={`${s.short} na Over Barber Conceito`} widths={[320, 480, 640]} sizes="(min-width: 1100px) 22vw, (min-width: 640px) 45vw, 90vw" />
-              </div>
-            ) : (
-              <span class="svc-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-            )}
+          <a class:list={['svc reveal', `reveal-d${i % 4}`, 'no-img']} href={`/servicos/${s.slug}/`}>
+            <span class="svc-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             <div class="svc-body">
               <h3>{s.short}</h3>
               <p>{s.excerpt}</p>
@@ -212,7 +199,12 @@ const gallery = [
         <p class="eyebrow">Casamento</p>
         <h2>Dia do <span class="script big">Noivo</span></h2>
         <p class="lead">Chegue ao altar impecável — e viva a preparação com quem mais importa. Ambiente exclusivo para o noivo e seus convidados, com corte, barba e todo o ritual Over.</p>
-        <ul class="tiers">
+        <div class="btn-row">
+          <a class="btn btn-gold" href="/dia-do-noivo/">Conhecer os pacotes</a>
+          <a class="btn btn-ghost" href={site.whatsappMsg('Olá! Gostaria de reservar uma data para o Dia do Noivo.')} target="_blank" rel="noopener"><Icon name="whatsapp" /> Reservar data</a>
+        </div>
+      </div>
+      <ul class="tiers reveal reveal-d1">
           {groomPackages.map((g) => (
             <li class:list={{ feat: g.featured }}>
               <span class="t-name">{g.name}</span>
@@ -221,34 +213,18 @@ const gallery = [
               <span class="t-d">{g.description}</span>
             </li>
           ))}
-        </ul>
-        <div class="btn-row">
-          <a class="btn btn-gold" href="/dia-do-noivo/">Conhecer os pacotes</a>
-          <a class="btn btn-ghost" href={site.whatsappMsg('Olá! Gostaria de reservar uma data para o Dia do Noivo.')} target="_blank" rel="noopener"><Icon name="whatsapp" /> Reservar data</a>
-        </div>
-      </div>
-      <div class="noivo-media reveal reveal-d1">
-        <div class="media media--frame n1"><Image src={img('dia-do-noivo-privilege')} alt="Noivo de terno azul ajustando a abotoadura no Dia do Noivo da Over Barber" widths={[360, 600]} sizes="(min-width: 900px) 24vw, 60vw" /></div>
-        <div class="media n2"><Image src={img('dia-do-noivo')} alt="Sapatos, perfume e convite de casamento preparados para o Dia do Noivo" widths={[300, 500]} sizes="(min-width: 900px) 18vw, 45vw" /></div>
-      </div>
+      </ul>
     </div>
   </section>
 
-  <!-- ANTES E DEPOIS -->
+  <!-- RESULTADO -->
   <section class="section section--tight">
-    <div class="container split split--reverse">
-      <div class="reveal">
-        <p class="eyebrow">Resultado</p>
-        <h2>Sua melhor versão <em class="accent">começa aqui.</em></h2>
-        <p class="lead">“Nos meus 33 anos de vida, ninguém tinha acertado cortar o meu cabelo. Finalmente deu certo, achei a Over Barber!”</p>
-        <p class="muted">— Breno Marcks, cliente (avaliação no Google)</p>
-        <a class="link-arrow" href="/galeria/">Ver galeria</a>
-      </div>
-      <div class="media media--frame reveal reveal-d1 ba">
-        <Image src={img('antes-depois-cliente')} alt="Antes e depois: cliente com cabelo volumoso e, depois, com corte alinhado e óculos" widths={[600, 900, 1300]} sizes="(min-width: 900px) 46vw, 92vw" />
-        <span class="ba-l">Antes</span><span class="ba-r">Depois</span>
-      </div>
-    </div>
+    <figure class="narrow center quote reveal">
+      <p class="eyebrow">Resultado</p>
+      <blockquote>“Nos meus 33 anos de vida, ninguém tinha acertado cortar o meu cabelo. Finalmente deu certo, achei a Over Barber!”</blockquote>
+      <figcaption>Breno Marcks, cliente · avaliação no Google</figcaption>
+      <a class="link-arrow" href="/galeria-de-fotos/">Ver fotos e vídeos de antes e depois</a>
+    </figure>
   </section>
 
   <!-- DEPOIMENTOS -->
@@ -275,20 +251,13 @@ const gallery = [
   </section>
 
   <!-- GALERIA -->
-  <section class="section">
-    <div class="container">
-      <header class="center reveal">
-        <p class="eyebrow">Galeria</p>
-        <h2>Cuidado e atenção <em class="accent">nos detalhes.</em></h2>
-      </header>
-      <div class="gal">
-        {gallery.map(([n, alt], i) => (
-          <figure class={`g g${i} reveal reveal-d${i % 3}`}>
-            <Image src={img(n)} alt={alt} widths={[240, 360, 600]} sizes="(min-width: 900px) 30vw, 46vw" />
-          </figure>
-        ))}
-      </div>
-      <div class="btn-row" style="justify-content:center;margin-top:2.5rem">
+  <section class="section gal-cta">
+    <div class="narrow center reveal">
+      <p class="eyebrow">Galeria de fotos</p>
+      <h2>Veja a Over <em class="accent">por dentro.</em></h2>
+      <p class="lead">Cortes, barbas, antes e depois, o salão e o valet: fotos e vídeos reais da nossa barbearia no Meireles, com clientes que autorizaram o uso de imagem.</p>
+      <div class="btn-row" style="justify-content:center">
+        <a class="btn btn-gold" href="/galeria-de-fotos/">Abrir a galeria</a>
         <a class="btn btn-ghost" href={site.instagram} target="_blank" rel="noopener"><Icon name="instagram" /> {site.instagramHandle}</a>
       </div>
     </div>
@@ -300,7 +269,7 @@ const gallery = [
       <div class="reveal">
         <p class="eyebrow">Onde estamos</p>
         <h2>No coração <em class="accent">do Meireles.</em></h2>
-        <p class="lead">Na Av. Dom Luís, entre a Aldeota e a Varjota, a poucos minutos da Beira-Mar. Chegue de carro: o valet é por nossa conta.</p>
+        <p class="lead">A Over Barber Conceito fica no Meireles, na Av. Dom Luís, 655, entre a Aldeota e a Varjota e a poucos minutos da Beira-Mar. Chegue de carro: o valet é por nossa conta.</p>
         <ul class="info">
           <li><Icon name="pin" /><span><strong>{site.address.street}</strong><br />{site.address.neighborhood}, Fortaleza – CE, {site.address.zip}</span></li>
           <li><Icon name="clock" /><span><strong>Segunda a sábado, 9h às 19h</strong><br />Domingo fechado · agendamento online 24h</span></li>
@@ -329,6 +298,17 @@ const gallery = [
 </Base>
 
 <style>
+  .place { position: relative; display: grid; justify-items: center; text-align: center; padding: clamp(2.5rem, 6vw, 4rem) 2rem; border: 1px solid var(--line-strong); border-radius: calc(var(--radius) + 6px); background: radial-gradient(ellipse at 50% 0%, rgba(180, 139, 66, 0.18), transparent 65%), var(--navy-900); }
+  .place::before { content: ''; position: absolute; inset: 10px; border: 1px solid var(--line); border-radius: var(--radius); pointer-events: none; }
+  .place-emb { width: 64px; margin-bottom: 1.4rem; }
+  .place-k { font-family: var(--font-display); font-size: clamp(2.2rem, 4.4vw, 3.4rem); line-height: 1.05; color: var(--ivory); margin: 0 0 0.8rem; }
+  .place-a { color: var(--muted); margin: 0; }
+  .place-f { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; width: 100%; margin: 2rem 0 0; padding-top: 1.6rem; border-top: 1px solid var(--line); }
+  .place-f dt { font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .place-f dd { margin: 0.3rem 0 0; font-family: var(--font-display); font-size: 1.7rem; color: var(--gold-300); }
+  .quote blockquote { margin: 0.6rem auto 1rem; max-width: 30ch; font-family: var(--font-display); font-style: italic; font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1.3; color: var(--ivory); }
+  .quote figcaption { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.4rem; }
+  .gal-cta { background: radial-gradient(ellipse at 50% 100%, rgba(180, 139, 66, 0.14), transparent 60%); }
   .nowrap { white-space: nowrap; }
   /* HERO */
   .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; isolation: isolate; padding: calc(var(--header-h) + 3rem) 0 clamp(4rem, 9vh, 7rem); }
@@ -339,7 +319,7 @@ const gallery = [
       linear-gradient(0deg, var(--navy-950) 0%, rgba(10, 16, 25, 0) 45%),
       radial-gradient(ellipse at 15% 100%, rgba(180, 139, 66, 0.25), transparent 55%); }
   .hero h1 { font-size: clamp(2.7rem, 6.2vw, 5.8rem); max-width: 15ch; margin-bottom: 0.3em; }
-  .hero-script { display: block; font-size: 0.9em; margin-top: -0.12em; margin-left: 1.6em; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding: 0.05em 0.1em 0.15em; }
+  .hero-script { display: block; font-size: clamp(2rem, 4.6vw, 3.6rem); line-height: 1.1; margin: -0.2em 0 0.6rem 0.8em; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding: 0.05em 0.1em 0.15em; }
   .hero .lead { color: rgba(244, 230, 210, 0.85); margin-bottom: 2rem; }
   .hero .lead strong { color: var(--gold-300); font-weight: 600; }
   .hero-rating { display: inline-flex; align-items: center; gap: 0.65rem; margin-top: 2.2rem; padding: 0.6rem 1rem; border-radius: 999px; border: 1px solid var(--line); background: rgba(10, 16, 25, 0.5); backdrop-filter: blur(8px); text-decoration: none; font-size: 0.88rem; color: var(--cream); }

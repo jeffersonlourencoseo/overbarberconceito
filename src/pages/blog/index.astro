@@ -4,7 +4,6 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { posts } from '../../data/posts';
-import { photo } from '../../data/images';
 import { abs, BUSINESS_ID } from '../../lib/schema';
 
 const crumbs = [{ name: 'Início', href: '/' }, { name: 'Blog', href: '/blog/' }];
@@ -20,7 +19,7 @@ const blog = {
 };
 ---
 <Base
-  title="Blog: Dicas de Corte, Barba e Estilo | Over Barber"
+  title="Blog da Barbearia no Meireles: Corte e Barba | Over Barber"
   description="Dicas de corte masculino, barba, barboterapia, camuflagem de fios brancos e Dia do Noivo, escritas pela equipe da Over Barber Conceito, em Fortaleza."
   breadcrumbs={crumbs}
   schema={[blog]}
@@ -30,12 +29,7 @@ const blog = {
   <section class="section">
     <div class="container posts">
       {sorted.map((p, i) => (
-        <article class:list={['post reveal', { feat: i === 0 && photo('blog', p.slug), 'no-img': !photo('blog', p.slug) }]}>
-          {photo('blog', p.slug) && (
-            <a href={`/blog/${p.slug}/`} class="pimg" tabindex="-1" aria-hidden="true">
-              <Image src={photo('blog', p.slug)!} alt="" widths={[400, 700]} sizes={i === 0 ? '(min-width: 900px) 55vw, 92vw' : '(min-width: 900px) 30vw, 92vw'} />
-            </a>
-          )}
+        <article class:list={['post reveal', 'no-img']}>
           <div class="pbody">
             <p class="meta"><span class="tag">{p.tags[0]}</span> <time datetime={p.date}>{fmt(p.date)}</time> · {p.readTime}</p>
             <h2><a href={`/blog/${p.slug}/`}>{p.title}</a></h2>

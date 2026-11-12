@@ -62,9 +62,9 @@ export const services: Service[] = [
   },
   {
     slug: 'barba-e-barboterapia',
-    title: 'Barba e barboterapia',
+    title: 'Barba e barboterapia no Meireles',
     short: 'Barba & barboterapia',
-    seoTitle: 'Barba na Navalha e Barboterapia em Fortaleza | Over Barber',
+    seoTitle: 'Barba na Navalha e Barboterapia no Meireles | Over Barber',
     seoDescription:
       'Barba desenhada na navalha com toalha quente e barboterapia completa no Meireles, Fortaleza. Barba R$ 80, barboterapia R$ 100. Agende online.',
     keyword: 'barboterapia fortaleza',
@@ -99,9 +99,9 @@ export const services: Service[] = [
   },
   {
     slug: 'camuflagem-de-fios-brancos',
-    title: 'Camuflagem de fios brancos',
+    title: 'Camuflagem de fios brancos no Meireles',
     short: 'Camuflagem de fios',
-    seoTitle: 'Camuflagem de Fios Brancos em Fortaleza | Over Barber',
+    seoTitle: 'Camuflagem de Fios Brancos no Meireles | Over Barber',
     seoDescription:
       'Camuflagem de fios brancos no cabelo, barba e sobrancelha com aspecto natural, sem "cara de tinta". No Meireles, Fortaleza, a partir de R$ 40.',
     keyword: 'camuflagem de barba fortaleza',
@@ -129,7 +129,7 @@ export const services: Service[] = [
   },
   {
     slug: 'corte-infantil',
-    title: 'Corte infantil em Fortaleza',
+    title: 'Corte infantil no Meireles',
     short: 'Corte infantil',
     seoTitle: 'Corte Infantil no Meireles, Fortaleza | Over Barber',
     seoDescription:
@@ -158,9 +158,9 @@ export const services: Service[] = [
   },
   {
     slug: 'manicure-e-pedicure',
-    title: 'Manicure e pedicure masculina',
+    title: 'Manicure e pedicure masculina no Meireles',
     short: 'Manicure & pedicure',
-    seoTitle: 'Barbearia com Manicure e Pedicure | Over Barber Fortaleza',
+    seoTitle: 'Barbearia com Manicure no Meireles, Fortaleza | Over Barber',
     seoDescription:
       'Manicure e pedicure masculina na barbearia, no mesmo horário do corte. Mão R$ 39, pé R$ 45, pé e mão R$ 80. Meireles, Fortaleza.',
     keyword: 'barbearia com manicure fortaleza',
@@ -190,9 +190,9 @@ export const services: Service[] = [
   },
   {
     slug: 'tratamentos-capilares',
-    title: 'Tratamentos capilares e ozonioterapia',
+    title: 'Tratamentos capilares no Meireles',
     short: 'Tratamentos capilares',
-    seoTitle: 'Hidratação com Ozônio e Tratamento Capilar | Over Barber',
+    seoTitle: 'Hidratação com Ozônio no Meireles, Fortaleza | Over Barber',
     seoDescription:
       'Hidratação capilar com ozônio, lavagem anticaspa e spa capilar para homens no Meireles, Fortaleza. A partir de R$ 50. Agende online.',
     keyword: 'tratamento capilar masculino fortaleza',
@@ -220,9 +220,9 @@ export const services: Service[] = [
   },
   {
     slug: 'coloracao-e-luzes',
-    title: 'Coloração, luzes e platinado',
+    title: 'Coloração, luzes e platinado no Meireles',
     short: 'Coloração & luzes',
-    seoTitle: 'Luzes, Platinado e Coloração Masculina | Over Barber',
+    seoTitle: 'Luzes e Coloração Masculina no Meireles | Over Barber',
     seoDescription:
       'Coloração masculina, luzes e platinado com técnica profissional no Meireles, Fortaleza. Coloração R$ 130, luzes R$ 300, platinado R$ 350.',
     keyword: 'platinado masculino fortaleza',
@@ -253,9 +253,9 @@ export const services: Service[] = [
   },
   {
     slug: 'estetica-masculina',
-    title: 'Limpeza facial, sobrancelha e estética masculina',
+    title: 'Estética masculina no Meireles',
     short: 'Estética masculina',
-    seoTitle: 'Limpeza Facial e Sobrancelha Masculina | Over Barber',
+    seoTitle: 'Limpeza Facial e Sobrancelha no Meireles | Over Barber',
     seoDescription:
       'Limpeza de pele masculina (R$ 50), sobrancelha na navalha (R$ 30) e depilação de nariz e orelha na cera. Barbearia premium no Meireles, Fortaleza.',
     keyword: 'sobrancelha masculina fortaleza',

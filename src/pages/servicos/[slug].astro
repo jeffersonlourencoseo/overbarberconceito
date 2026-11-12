@@ -9,17 +9,14 @@ import ReviewCard from '../../components/ReviewCard.astro';
 import { services, getService, brl } from '../../data/services';
 import { reviews } from '../../data/reviews';
 import { site } from '../../data/site';
-import { photo } from '../../data/images';
 import { faqSchema, serviceSchema } from '../../lib/schema';
 
 export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug } }));
 }
 const s = getService(Astro.params.slug!);
-const ph = photo('servicos', s.slug);
 const alt = `${s.short} na Over Barber Conceito, barbearia no Meireles`;
-const og = ph ? await getImage({ src: ph, width: 1200, height: 630, fit: 'cover', format: 'jpg' }) : undefined;
-const ogUrl = new URL(og ? og.src : '/og-over-barber-conceito.jpg', Astro.site).href;
+const ogUrl = new URL('/og-over-barber-conceito.jpg', Astro.site).href;
 const crumbs = [
   { name: 'Início', href: '/' },
   { name: 'Serviços', href: '/servicos/' },
@@ -47,7 +44,7 @@ const rv = reviews.filter((r) => kw[s.slug].test(`${r.service ?? ''} ${r.text}`)
   breadcrumbs={crumbs}
   schema={[serviceSchema(s, ogUrl), faqSchema(s.faq)]}
 >
-  <PageHero eyebrow="Serviços · Over Barber Conceito" title={s.title} lead={s.excerpt} image={ph} imageAlt={alt} crumbs={crumbs}>
+  <PageHero eyebrow="Serviços · Over Barber Conceito" title={s.title} lead={s.excerpt} crumbs={crumbs}>
     <div class="btn-row" style="margin-top:2rem">
       <a class="btn btn-gold" href={site.booking} target="_blank" rel="noopener" data-track={`agendar_${s.slug}`}><Icon name="calendar" /> Agendar {s.short.toLowerCase()}</a>
       <a class="btn btn-ghost" href={site.whatsappMsg(`Olá! Gostaria de agendar: ${s.short}.`)} target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp</a>
@@ -122,8 +119,7 @@ const rv = reviews.filter((r) => kw[s.slug].test(`${r.service ?? ''} ${r.text}`)
       <p class="eyebrow">Combine com</p>
       <div class="rel">
         {related.map((r) => (
-          <a href={`/servicos/${r.slug}/`} class:list={['rel-card', { 'no-img': !photo('servicos', r.slug) }]}>
-            {photo('servicos', r.slug) && <Image src={photo('servicos', r.slug)!} alt="" widths={[120, 200]} sizes="90px" />}
+          <a href={`/servicos/${r.slug}/`} class="rel-card no-img">
             <span><strong>{r.short}</strong><small>{r.excerpt}</small></span>
             <Icon name="arrow" />
           </a>

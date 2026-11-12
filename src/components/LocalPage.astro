@@ -10,7 +10,6 @@ import CtaBand from './CtaBand.astro';
 import { site } from '../data/site';
 import { services, brl } from '../data/services';
 import { reviews } from '../data/reviews';
-import { photo } from '../data/images';
 import { faqSchema } from '../lib/schema';
 
 interface Props {
@@ -57,7 +56,6 @@ const rv = reviews.filter((r) => p.reviewNames.includes(r.name));
       <div class="svc">
         {services.map((s) => (
           <a href={`/servicos/${s.slug}/`} class="s reveal">
-            {photo('servicos', s.slug) && <Image src={photo('servicos', s.slug)!} alt="" widths={[100, 160]} sizes="72px" />}
             <span><strong>{s.short}</strong><small>{s.items[0].name} · {brl(s.items[0].price)}</small></span>
           </a>
         ))}

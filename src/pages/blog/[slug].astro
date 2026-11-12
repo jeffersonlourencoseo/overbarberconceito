@@ -5,7 +5,6 @@ import Icon from '../../components/Icon.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { posts } from '../../data/posts';
 import { site } from '../../data/site';
-import { photo } from '../../data/images';
 import { abs, BUSINESS_ID } from '../../lib/schema';
 
 export function getStaticPaths() {
@@ -13,9 +12,7 @@ export function getStaticPaths() {
 }
 const p = posts.find((x) => x.slug === Astro.params.slug)!;
 const others = posts.filter((x) => x.slug !== p.slug).slice(0, 3);
-const ph = photo('blog', p.slug);
-const og = ph ? await getImage({ src: ph, width: 1200, height: 630, fit: 'cover', format: 'jpg' }) : undefined;
-const ogUrl = new URL(og ? og.src : '/og-over-barber-conceito.jpg', Astro.site).href;
+const ogUrl = new URL('/og-over-barber-conceito.jpg', Astro.site).href;
 const crumbs = [{ name: 'Início', href: '/' }, { name: 'Blog', href: '/blog/' }, { name: p.title, href: `/blog/${p.slug}/` }];
 const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
 const article = {
@@ -43,10 +40,7 @@ const article = {
         <p class="lead">{p.description}</p>
       </div>
     </header>
-    {ph && <div class="container">
-      <figure class="cover media"><Image src={ph} alt="" widths={[640, 1000, 1400]} sizes="(min-width: 1240px) 1100px, 94vw" loading="eager" fetchpriority="high" /></figure>
-    </div>}
-    <div class:list={['section section--ivory body', { 'no-cover': !ph }]}>
+    <div class="section section--ivory body no-cover">
       <div class="narrow">
         <div class="prose" set:html={p.body} />
         <aside class="box">
@@ -66,8 +60,7 @@ const article = {
       <p class="eyebrow">Continue lendo</p>
       <div class="more">
         {others.map((o) => (
-          <a href={`/blog/${o.slug}/`} class:list={['mo', { 'no-img': !photo('blog', o.slug) }]}>
-            {photo('blog', o.slug) && <Image src={photo('blog', o.slug)!} alt="" widths={[300, 500]} sizes="(min-width: 900px) 30vw, 92vw" />}
+          <a href={`/blog/${o.slug}/`} class="mo no-img">
             <strong>{o.title}</strong>
           </a>
         ))}

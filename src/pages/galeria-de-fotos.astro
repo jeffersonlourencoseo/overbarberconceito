@@ -1,0 +1,157 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+import { galleryPhotos, galleryVideos } from '../data/gallery';
+import { abs, BUSINESS_ID } from '../lib/schema';
+
+const crumbs = [{ name: 'Início', href: '/' }, { name: 'Galeria de fotos', href: '/galeria-de-fotos/' }];
+const photos = await Promise.all(
+  galleryPhotos.map(async (p) => ({ ...p, big: (await getImage({ src: p.image, width: 1600, format: 'webp', quality: 80 })).src })),
+);
+const published = '2026-11-12';
+const gallerySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageGallery',
+  '@id': abs('/galeria-de-fotos/#galeria'),
+  name: 'Galeria de fotos e vídeos da Over Barber Conceito, barbearia no Meireles',
+  about: { '@id': BUSINESS_ID },
+  image: photos.map((p) => ({ '@type': 'ImageObject', contentUrl: abs(p.big), caption: p.alt })),
+};
+const videoSchema = galleryVideos.map((v) => ({
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: `${v.title} | Over Barber Conceito`,
+  description: v.description,
+  thumbnailUrl: abs(`/galeria/${v.slug}.webp`),
+  contentUrl: abs(`/galeria/${v.slug}.mp4`),
+  uploadDate: published,
+  publisher: { '@id': BUSINESS_ID },
+}));
+---
+<Base
+  title="Galeria de Fotos da Barbearia no Meireles | Over Barber"
+  description="Fotos e vídeos da Over Barber Conceito, barbearia no Meireles, em Fortaleza: cortes, barbas na navalha, antes e depois, Dia do Noivo e o ambiente."
+  breadcrumbs={crumbs}
+  schema={[gallerySchema, ...videoSchema]}
+>
+  <PageHero
+    eyebrow="Galeria de fotos"
+    title="A barbearia no Meireles <em>em fotos e vídeos.</em>"
+    lead="Cortes, barbas, antes e depois, Dia do Noivo e o dia a dia da Over Barber Conceito, na Av. Dom Luís. Todas as imagens são de clientes que autorizaram o uso."
+    crumbs={crumbs}
+  >
+    <nav class="jump" aria-label="Ir para">
+      <a href="#fotos"><Icon name="sparkle" size={16} /> {photos.length} fotos</a>
+      <a href="#videos"><Icon name="play" size={16} /> {galleryVideos.length} vídeos</a>
+    </nav>
+  </PageHero>
+
+  <section class="section" id="fotos" aria-labelledby="t-fotos">
+    <div class="container">
+      <header class="sec reveal">
+        <p class="eyebrow">Fotos</p>
+        <h2 id="t-fotos">Cortes, barbas e <em class="accent">antes e depois.</em></h2>
+      </header>
+      <div class="masonry">
+        {photos.map((p, i) => (
+          <figure class={`ph reveal reveal-d${i % 3}`}>
+            <a href={p.big} data-lb aria-label={`Ampliar foto: ${p.alt}`}>
+              <Image src={p.image} alt={p.alt} widths={[300, 460, 640]} sizes="(min-width: 1000px) 30vw, (min-width: 600px) 45vw, 92vw" />
+            </a>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy" id="videos" aria-labelledby="t-videos">
+    <div class="container">
+      <header class="sec reveal">
+        <p class="eyebrow">Vídeos</p>
+        <h2 id="t-videos">A Over <em class="accent">em movimento.</em></h2>
+        <p class="lead">Toque para assistir. Os vídeos só carregam quando você dá o play, para a página continuar leve.</p>
+      </header>
+      <div class="vids">
+        {galleryVideos.map((v, i) => (
+          <article class:list={['vid reveal', `reveal-d${i % 4}`, { wide: v.landscape }]}>
+            <button type="button" class="vid-btn" data-video={`/galeria/${v.slug}.mp4`} data-title={v.title} aria-label={`Assistir: ${v.title}`}>
+              <img src={`/galeria/${v.slug}.webp`} alt="" loading="lazy" decoding="async" width={v.landscape ? 640 : 400} height={v.landscape ? 360 : 711} />
+              <span class="play" aria-hidden="true"><Icon name="play" size={22} /></span>
+            </button>
+            <h3>{v.title}</h3>
+            <p>{v.description}</p>
+          </article>
+        ))}
+      </div>
+      <div class="btn-row" style="justify-content:center;margin-top:3rem">
+        <a class="btn btn-gold" href={site.instagram} target="_blank" rel="noopener"><Icon name="instagram" /> Mais no Instagram {site.instagramHandle}</a>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="lb" data-lb-dialog aria-label="Mídia ampliada">
+    <button type="button" class="lb-x" aria-label="Fechar" data-lb-close><Icon name="close" size={26} /></button>
+    <img alt="" data-lb-img hidden />
+    <video controls playsinline preload="none" data-lb-video hidden></video>
+  </dialog>
+
+  <CtaBand title="Gostou do que viu? <em>Agende o seu.</em>" />
+</Base>
+
+<script>
+  const dlg = document.querySelector('[data-lb-dialog]') as HTMLDialogElement;
+  const im = document.querySelector('[data-lb-img]') as HTMLImageElement;
+  const vid = document.querySelector('[data-lb-video]') as HTMLVideoElement;
+  const open = () => { dlg.showModal(); };
+  const close = () => { vid.pause(); vid.removeAttribute('src'); vid.load(); dlg.close(); };
+  document.querySelectorAll<HTMLAnchorElement>('[data-lb]').forEach((a) =>
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      vid.hidden = true; im.hidden = false;
+      im.src = a.href; im.alt = a.querySelector('img')!.alt;
+      open();
+    }),
+  );
+  document.querySelectorAll<HTMLButtonElement>('[data-video]').forEach((b) =>
+    b.addEventListener('click', () => {
+      im.hidden = true; vid.hidden = false;
+      vid.src = b.dataset.video!; vid.setAttribute('aria-label', b.dataset.title || 'Vídeo');
+      open();
+      vid.play().catch(() => {});
+    }),
+  );
+  dlg.addEventListener('click', (e) => { if (e.target === dlg || (e.target as HTMLElement).closest('[data-lb-close]')) close(); });
+  dlg.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
+</script>
+
+<style>
+  .jump { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.8rem; }
+  .jump a { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1rem; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 0.85rem; text-decoration: none; color: var(--cream); }
+  .jump a:hover { border-color: var(--gold); color: var(--gold-300); }
+  .jump :global(svg) { color: var(--gold); }
+  .sec { margin-bottom: 2.5rem; }
+  .masonry { columns: 3 280px; column-gap: 1rem; }
+  .ph { margin: 0 0 1rem; break-inside: avoid; border-radius: var(--radius-sm); overflow: hidden; }
+  .ph a { display: block; cursor: zoom-in; }
+  .ph :global(img) { width: 100%; height: auto; transition: transform 1s var(--ease); }
+  .ph:hover :global(img) { transform: scale(1.04); }
+  .vids { display: grid; gap: 1.6rem 1.2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); }
+  .vid.wide { grid-column: span 2; }
+  @media (max-width: 480px) { .vid.wide { grid-column: auto; } }
+  .vid-btn { position: relative; display: block; width: 100%; padding: 0; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; background: var(--navy-950); cursor: pointer; aspect-ratio: 9 / 16; }
+  .vid.wide .vid-btn { aspect-ratio: 16 / 9; }
+  .vid-btn img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease), opacity 0.4s; opacity: 0.85; }
+  .vid-btn:hover img { transform: scale(1.04); opacity: 1; }
+  .play { position: absolute; inset: 0; margin: auto; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: rgba(10, 16, 25, 0.6); border: 1px solid var(--gold); color: var(--gold-300); backdrop-filter: blur(4px); }
+  .vid h3 { font-size: 1.35rem; margin: 0.8rem 0 0.2rem; }
+  .vid p { font-size: 0.88rem; color: var(--muted); margin: 0; }
+  .lb { padding: 0; border: 0; background: transparent; max-width: 94vw; max-height: 92vh; overflow: visible; }
+  .lb::backdrop { background: rgba(5, 8, 13, 0.92); backdrop-filter: blur(6px); }
+  .lb img, .lb video { display: block; max-width: 94vw; max-height: 88vh; width: auto; height: auto; border-radius: 12px; background: #000; }
+  .lb [hidden] { display: none; }
+  .lb-x { position: fixed; top: 16px; right: 16px; z-index: 2; width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--navy-900); color: var(--cream); display: grid; place-items: center; cursor: pointer; }
+</style>

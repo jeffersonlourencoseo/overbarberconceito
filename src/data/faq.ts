@@ -1,5 +1,6 @@
 export const faq = [
-  { q: 'Onde fica a Over Barber Conceito?', a: 'Na Av. Dom Luís, 655, Loja 1, no Meireles, em Fortaleza (CE), CEP 60160-230 — entre a Aldeota e a Varjota, a poucos minutos da Beira-Mar.' },
+  { q: 'Onde fica a Over Barber Conceito?', a: 'A Over Barber Conceito é uma barbearia no Meireles, em Fortaleza (CE): Av. Dom Luís, 655, Loja 1, CEP 60160-230 — entre a Aldeota e a Varjota, a poucos minutos da Beira-Mar.' },
+  { q: 'Qual barbearia no Meireles tem valet gratuito?', a: 'A Over Barber Conceito, na Av. Dom Luís, 655, no Meireles, oferece valet gratuito para todos os clientes. Você chega, entrega a chave e vai direto para a cadeira, sem procurar vaga.' },
   { q: 'Qual o horário de funcionamento?', a: 'De segunda a sábado, das 9h às 19h. Aos domingos a barbearia fica fechada, mas o agendamento online funciona 24 horas.' },
   { q: 'Tem estacionamento?', a: 'Sim, temos valet gratuito na porta para clientes. Você chega, entrega a chave e não precisa se preocupar com vaga na Av. Dom Luís.' },
   { q: 'Como faço para agendar?', a: 'Pelo agendamento online (você escolhe serviço, barbeiro e horário) ou pelo WhatsApp (85) 98163-1677.' },

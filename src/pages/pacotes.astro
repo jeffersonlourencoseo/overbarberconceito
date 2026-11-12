@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import BrandPanel from '../components/BrandPanel.astro';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
@@ -25,14 +26,14 @@ const offers = {
 };
 ---
 <Base
-  title="Pacotes de Barbearia em Fortaleza | Over Barber Conceito"
+  title="Pacotes da Barbearia no Meireles | Over Barber Conceito"
   description="Pacotes Over: First (corte + barba R$ 135), Essence com ozonioterapia (R$ 197), Select com unhas (R$ 267) e Privilege (R$ 297). Meireles, Fortaleza."
   breadcrumbs={crumbs}
   schema={[offers, faqSchema(pkFaq)]}
 >
   <PageHero
     eyebrow="Pacotes Over"
-    title="Experiências <em>completas</em>, num só horário."
+    title="Pacotes da barbearia <em>no Meireles.</em>"
     lead="Combos criados para quem quer sair pronto: cabelo, barba, tratamento capilar e unhas, com a hospitalidade Over e valet gratuito."
     image="barba-e-cuidados-masculinos"
     imageAlt="Composição com barba sendo feita, ferramentas de barbeiro e cliente relaxando"
@@ -58,9 +59,7 @@ const offers = {
 
   <section class="section section--navy">
     <div class="container split">
-      <div class="media media--frame reveal noivo-img" style="aspect-ratio:1/1.05">
-        <Image src={img('dia-do-noivo-select')} alt="Noivo sorridente de camisa branca no pacote Noivo Select" widths={[400, 700]} sizes="(min-width: 900px) 40vw, 92vw" />
-      </div>
+      <BrandPanel kicker="Casamento" title="Dia do <em>Noivo</em>" lines={["Noivo + 4, 6 ou 8 convidados", "Ambiente exclusivo no Meireles"]} facts={[{ t: "A partir de", v: "R$ 1.999" }]} />
       <div class="reveal reveal-d1">
         <p class="eyebrow">Para o casamento</p>
         <h2>Pacotes <span class="script" style="font-size:1.2em">Dia do Noivo</span></h2>

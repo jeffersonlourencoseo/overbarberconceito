@@ -80,8 +80,8 @@ const { ga4, metaPixel } = site.analytics;
       var a = e.target.closest && e.target.closest('a[href]');
       if (!a) return;
       var h = a.getAttribute('href') || '';
-      var ev = /wa\.me/.test(h) ? 'contato_whatsapp' : /barbsuite/.test(h) ? 'agendamento_online' : /^tel:/.test(h) ? 'ligacao' : /maps/.test(h) ? 'rota_maps' : null;
-      if (ev) { gtag('event', ev, { link_url: h, local: a.dataset.track || '' }); if (window.fbq && ev !== 'rota_maps') fbq('track', 'Contact'); }
+      var ev = /wa\.me/.test(h) ? 'clique_whatsapp' : /barbsuite/.test(h) ? 'clique_agendamento' : /^tel:/.test(h) ? 'clique_telefone' : /maps/.test(h) ? 'clique_rota' : null;
+      if (ev) { gtag('event', ev, { link_url: h, local_botao: a.dataset.track || a.closest('header,footer,section,aside')?.id || location.pathname }); if (window.fbq && ev !== 'clique_rota') fbq('track', 'Contact'); }
     });
   })();
 </script>

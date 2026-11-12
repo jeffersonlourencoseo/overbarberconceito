@@ -30,8 +30,14 @@ npm run build    # gera /dist (pronto para Netlify, Vercel, Cloudflare Pages, Ho
 | Avaliações (Google) | `src/data/reviews.ts` |
 | Perguntas frequentes | `src/data/faq.ts` |
 | Artigos do blog | `src/data/posts.ts` |
-| Fotos | `src/assets/img/` (o Astro converte para WebP e redimensiona) |
+| Fotos dos fundos de página | `src/assets/img/` (o Astro converte para WebP e redimensiona) |
+| Galeria de fotos | `src/assets/img/galeria/NN-nome.jpg` + legenda em `src/data/gallery.ts` |
+| Galeria de vídeos | `public/galeria/<nome>.mp4` + capa `<nome>.webp`, lista em `src/data/gallery.ts` |
 | Vídeo do topo | `public/video/hero-over-barber.mp4` |
+
+## Palavra-chave mestre
+
+"Barbearia no Meireles" (no Semrush: "barbearia meireles", 140 buscas/mês). Ela está no title e no H1 da home e nos titles das páginas principais. A pesquisa completa está em `../planejamento/palavras-chave.md`.
 
 ## SEO incluído
 

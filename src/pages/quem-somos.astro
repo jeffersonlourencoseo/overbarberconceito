@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import BrandPanel from '../components/BrandPanel.astro';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
@@ -23,14 +24,14 @@ const about = {
 };
 ---
 <Base
-  title="Quem Somos | Over Barber Conceito, Barbearia Premium"
+  title="Quem Somos | Over Barber Conceito, Barbearia no Meireles"
   description="Conheça a Over Barber Conceito: barbearia premium fundada em 2022 no Meireles, Fortaleza, com visagismo, atendimento sem pressa, valet gratuito e o padrão Over."
   breadcrumbs={crumbs}
   schema={[about]}
 >
   <PageHero
     eyebrow="Quem somos"
-    title="Um novo <em>conceito</em> de barbearia em Fortaleza."
+    title="Um novo <em>conceito</em> de barbearia no Meireles."
     lead="Onde o cuidado masculino encontra o alto padrão. Desde 2022, elevando o nível de cada corte, cada barba e cada detalhe."
     image="fachada-over-barber-conceito"
     imageAlt="Fachada da Over Barber Conceito com letreiro dourado na Av. Dom Luís, Meireles"
@@ -46,9 +47,7 @@ const about = {
         <p class="muted">Aqui, a barbearia volta a ser um lugar de encontro. Você é recebido pelo valet, toma um café ou uma cerveja gelada, conversa com o barbeiro sobre o que quer transmitir — e sai com o visual alinhado, a barba desenhada e a confiança lá em cima.</p>
         <p class="muted">Reunimos no mesmo espaço tudo o que o homem moderno precisa: corte e barba, tratamentos capilares com ozônio, camuflagem de fios brancos, coloração, estética facial, manicure e pedicure. E, para os grandes momentos, o Dia do Noivo.</p>
       </div>
-      <div class="media media--frame reveal reveal-d1" style="aspect-ratio:4/5">
-        <Image src={img('salao-over-barber-meireles')} alt="Salão da Over Barber Conceito com espelhos iluminados e cadeiras de barbeiro" widths={[400, 700]} sizes="(min-width: 900px) 40vw, 92vw" />
-      </div>
+      <BrandPanel kicker="Over Barber Conceito" title="Barbearia <em>no Meireles</em>" lines={["Av. Dom Luís, 655 · Loja 1", "Meireles · Fortaleza – CE"]} facts={[{ t: "Desde", v: "2022" }, { t: "Google", v: "5,0★" }, { t: "Valet", v: "Grátis" }]} />
     </div>
   </section>
 
@@ -78,9 +77,7 @@ const about = {
         </blockquote>
         <p class="muted">Jorge, Guilherme e Avelino estão entre os nomes mais citados nas avaliações dos nossos clientes no Google.</p>
       </div>
-      <div class="media media--frame reveal reveal-d1" style="aspect-ratio:4/5">
-        <Image src={img('barbeiro-atendendo-cliente')} alt="Barbeiro da Over Barber Conceito atendendo cliente na cadeira" widths={[400, 700]} sizes="(min-width: 900px) 40vw, 92vw" />
-      </div>
+      <BrandPanel kicker="Equipe" title="Barbeiros <em>visagistas</em>" lines={["Jorge · Guilherme · Avelino", "e toda a equipe Over"]} facts={[{ t: "Avaliações", v: "55" }, { t: "Nota", v: "5,0★" }]} />
     </div>
   </section>
 
