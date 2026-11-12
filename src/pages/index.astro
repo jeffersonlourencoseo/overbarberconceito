@@ -72,7 +72,7 @@ const experience = [
     <div class="container split">
       <div class="place reveal">
         <img src="/brand/emblema-over-barber.svg" width="332" height="312" alt="" class="place-emb" loading="lazy" decoding="async" />
-        <p class="place-k">Barbearia no Meireles</p>
+        <p class="place-k">Over Barber Conceito</p>
         <p class="place-a">{site.address.street}<br />Meireles · Fortaleza – CE</p>
         <dl class="place-f">
           <div><dt>Desde</dt><dd>2022</dd></div>
@@ -126,7 +126,7 @@ const experience = [
       <header class="sec-head reveal">
         <div>
           <p class="eyebrow">Serviços</p>
-          <h2>Serviços da barbearia <em class="accent">no Meireles.</em></h2>
+          <h2>Cuidado completo, <em class="accent">da cabeça aos pés.</em></h2>
         </div>
         <p class="lead">Do corte na tesoura à barboterapia, da camuflagem de fios brancos à manicure — tudo no mesmo endereço, no mesmo horário.</p>
       </header>
@@ -184,6 +184,7 @@ const experience = [
             <p class="pk-inc">{p.includes}</p>
             <p class="pk-price">{brl(p.price)}</p>
             <p class="muted">{p.description}</p>
+            <ul class="incl">{p.items.map((x) => <li>{x}</li>)}</ul>
             <a class="link-arrow" href={site.whatsappMsg(`Olá! Quero agendar o pacote ${p.name}.`)} target="_blank" rel="noopener">Reservar</a>
           </article>
         ))}
@@ -210,7 +211,7 @@ const experience = [
               <span class="t-name">{g.name}</span>
               <span class="t-g">Noivo + {g.guests} convidados</span>
               <span class="t-p">{brl(g.price)}</span>
-              <span class="t-d">{g.description}</span>
+              <span class="t-d">{g.description} Inclui {g.items.map((x) => x.toLowerCase()).join(', ').replace(/, ([^,]*)$/, ' e $1')}.</span>
             </li>
           ))}
       </ul>
@@ -255,7 +256,7 @@ const experience = [
     <div class="narrow center reveal">
       <p class="eyebrow">Galeria de fotos</p>
       <h2>Veja a Over <em class="accent">por dentro.</em></h2>
-      <p class="lead">Cortes, barbas, antes e depois, o salão e o valet: fotos e vídeos reais da nossa barbearia no Meireles, com clientes que autorizaram o uso de imagem.</p>
+      <p class="lead">Cortes, barbas, antes e depois, o salão e o valet: fotos e vídeos reais da Over, com clientes que autorizaram o uso de imagem.</p>
       <div class="btn-row" style="justify-content:center">
         <a class="btn btn-gold" href="/galeria-de-fotos/">Abrir a galeria</a>
         <a class="btn btn-ghost" href={site.instagram} target="_blank" rel="noopener"><Icon name="instagram" /> {site.instagramHandle}</a>
@@ -269,14 +270,13 @@ const experience = [
       <div class="reveal">
         <p class="eyebrow">Onde estamos</p>
         <h2>No coração <em class="accent">do Meireles.</em></h2>
-        <p class="lead">A Over Barber Conceito fica no Meireles, na Av. Dom Luís, 655, entre a Aldeota e a Varjota e a poucos minutos da Beira-Mar. Chegue de carro: o valet é por nossa conta.</p>
+        <p class="lead">A Over Barber Conceito fica no Meireles, na Av. Dom Luís, 655, a poucos minutos da Beira-Mar. Chegue de carro: o valet é por nossa conta.</p>
         <ul class="info">
           <li><Icon name="pin" /><span><strong>{site.address.street}</strong><br />{site.address.neighborhood}, Fortaleza – CE, {site.address.zip}</span></li>
           <li><Icon name="clock" /><span><strong>Segunda a sábado, 9h às 19h</strong><br />Domingo fechado · agendamento online 24h</span></li>
           <li><Icon name="car" /><span><strong>Valet gratuito</strong><br />Para todos os clientes</span></li>
           <li><Icon name="phone" /><span><strong><a href={`tel:${site.phoneE164}`}>{site.phone}</a></strong><br />Ligação e WhatsApp</span></li>
         </ul>
-        <p class="near">Atendemos clientes de <a href="/barbearia-aldeota/">Aldeota</a>, <a href="/barbearia-varjota/">Varjota</a>, Meireles, Mucuripe, Praia de Iracema, Dionísio Torres, Cocó e toda Fortaleza.</p>
       </div>
       <div class="reveal reveal-d1 map-col"><MapEmbed /></div>
     </div>
@@ -304,10 +304,10 @@ const experience = [
   .place-k { font-family: var(--font-display); font-size: clamp(2.2rem, 4.4vw, 3.4rem); line-height: 1.05; color: var(--ivory); margin: 0 0 0.8rem; }
   .place-a { color: var(--muted); margin: 0; }
   .place-f { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; width: 100%; margin: 2rem 0 0; padding-top: 1.6rem; border-top: 1px solid var(--line); }
-  .place-f dt { font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+  .place-f dt { font-size: var(--fs-label); letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
   .place-f dd { margin: 0.3rem 0 0; font-family: var(--font-display); font-size: 1.7rem; color: var(--gold-300); }
-  .quote blockquote { margin: 0.6rem auto 1rem; max-width: 30ch; font-family: var(--font-display); font-style: italic; font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1.3; color: var(--ivory); }
-  .quote figcaption { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.4rem; }
+  .quote blockquote { margin: 0.6rem auto 1rem; max-width: 46ch; font-size: clamp(1.15rem, 1.8vw, 1.3rem); line-height: 1.7; color: var(--ivory); }
+  .quote figcaption { color: var(--muted); font-size: var(--fs-sm); margin-bottom: 1.4rem; }
   .gal-cta { background: radial-gradient(ellipse at 50% 100%, rgba(180, 139, 66, 0.14), transparent 60%); }
   .nowrap { white-space: nowrap; }
   /* HERO */
@@ -322,7 +322,7 @@ const experience = [
   .hero-script { display: block; font-size: clamp(2rem, 4.6vw, 3.6rem); line-height: 1.1; margin: -0.2em 0 0.6rem 0.8em; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding: 0.05em 0.1em 0.15em; }
   .hero .lead { color: rgba(244, 230, 210, 0.85); margin-bottom: 2rem; }
   .hero .lead strong { color: var(--gold-300); font-weight: 600; }
-  .hero-rating { display: inline-flex; align-items: center; gap: 0.65rem; margin-top: 2.2rem; padding: 0.6rem 1rem; border-radius: 999px; border: 1px solid var(--line); background: rgba(10, 16, 25, 0.5); backdrop-filter: blur(8px); text-decoration: none; font-size: 0.88rem; color: var(--cream); }
+  .hero-rating { display: inline-flex; align-items: center; gap: 0.65rem; margin-top: 2.2rem; padding: 0.6rem 1rem; border-radius: 999px; border: 1px solid var(--line); background: rgba(10, 16, 25, 0.5); backdrop-filter: blur(8px); text-decoration: none; font-size: var(--fs-sm); color: var(--cream); }
   .hero-rating strong { color: var(--ivory); }
   .hero-in { opacity: 0; transform: translateY(26px); animation: heroIn 1.2s var(--ease) forwards; animation-delay: var(--d); }
   @keyframes heroIn { to { opacity: 1; transform: none; } }
@@ -334,7 +334,7 @@ const experience = [
   /* MARQUEE */
   .marquee { overflow: hidden; border-block: 1px solid var(--line); background: var(--navy-900); padding: 1.15rem 0; }
   .track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
-  .track span { display: inline-flex; align-items: center; gap: 2.2rem; padding-right: 2.2rem; font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.6rem); font-style: italic; color: var(--cream); white-space: nowrap; }
+  .track span { display: inline-flex; align-items: center; gap: 2.2rem; padding-right: 2.2rem; font-size: var(--fs-sm); font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); white-space: nowrap; }
   .m-emb { width: 22px; height: auto; opacity: .8; }
   @keyframes marquee { to { transform: translateX(-50%); } }
 
@@ -343,12 +343,12 @@ const experience = [
   .c1 { aspect-ratio: 4 / 5; }
   .c2 { position: absolute; right: 0; bottom: 0; width: 46%; aspect-ratio: 9 / 13; border: 6px solid var(--navy-950); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6); }
   .badge-est { position: absolute; left: -12px; top: 8%; width: 110px; height: 110px; border-radius: 50%; display: grid; place-content: center; text-align: center; background: var(--gold-grad); color: var(--navy-950); box-shadow: 0 20px 40px -14px rgba(180, 139, 66, 0.6); line-height: 1; }
-  .badge-est span { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; }
+  .badge-est span { font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; }
   .badge-est strong { font-family: var(--font-display); font-size: 2.2rem; font-weight: 600; }
   @media (max-width: 600px) { .badge-est { left: 6px; width: 86px; height: 86px; } .badge-est strong { font-size: 1.7rem; } }
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; padding: 1.4rem 0; border-block: 1px solid var(--line); }
   .stats div { display: grid; }
-  .stats dt { order: 2; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .stats dt { order: 2; font-size: var(--fs-label); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
   .stats dd { margin: 0; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.8rem); color: var(--gold-300); line-height: 1.1; }
   .stats small { font-size: 0.55em; vertical-align: super; }
 
@@ -361,7 +361,7 @@ const experience = [
   .first p { margin: 0; color: rgba(244, 230, 210, 0.85); max-width: 52ch; }
   .first-price { display: grid; text-align: center; line-height: 1.1; padding-inline: 1.5rem; }
   @media (min-width: 960px) { .first-price { border-inline: 1px solid var(--line); } }
-  .first-price small { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+  .first-price small { font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
   .first-price strong { font-family: var(--font-display); font-size: clamp(3.6rem, 7vw, 5rem); font-weight: 500; color: var(--gold-300); }
   .first-price strong span { font-size: 0.4em; vertical-align: super; margin-right: 0.2em; }
 
@@ -380,13 +380,13 @@ const experience = [
   .svc:hover .svc-img :global(img) { transform: scale(1.07); }
   .svc.no-img { background: linear-gradient(160deg, var(--navy-800), var(--navy-900) 60%); position: relative; }
   .svc.no-img::before { content: ''; position: absolute; inset: 0 auto auto 1.4rem; width: 42px; height: 2px; background: var(--gold); }
-  .svc-num { display: block; padding: 1.8rem 1.4rem 0; font-family: var(--font-display); font-style: italic; font-size: 2.6rem; line-height: 1; color: var(--gold-300); opacity: 0.85; }
+  .svc-num { display: block; padding: 1.8rem 1.4rem 0; font-family: var(--font-display); font-size: 2.6rem; line-height: 1; color: var(--gold-300); opacity: 0.85; }
   .svc.no-img .svc-body { padding-top: 0.9rem; }
   .svc-body { padding: 1.3rem 1.4rem 1.4rem; display: flex; flex-direction: column; flex: 1; }
   .svc h3 { font-size: 1.55rem; margin-bottom: 0.35rem; }
-  .svc p { font-size: 0.93rem; color: var(--muted); flex: 1; }
-  .svc-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 0.9rem; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--muted); }
-  .svc-foot strong { color: var(--gold-300); font-size: 1rem; }
+  .svc p { font-size: var(--fs-sm); color: var(--muted); flex: 1; }
+  .svc-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 0.9rem; border-top: 1px solid var(--line); font-size: var(--fs-sm); color: var(--muted); }
+  .svc-foot strong { color: var(--gold-300); font-size: var(--fs-sm); }
   .svc-foot :global(svg) { color: var(--gold); transition: transform 0.4s var(--ease); }
   .svc:hover .svc-foot :global(svg) { transform: translateX(5px); }
 
@@ -396,15 +396,15 @@ const experience = [
   .exp:hover { background: #fff; }
   .exp-ic { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: var(--navy-900); color: var(--gold-300); margin-bottom: 1.2rem; }
   .exp h3 { font-size: 1.5rem; margin-bottom: 0.3rem; }
-  .exp p { color: var(--muted-dark); font-size: 0.95rem; margin: 0; }
+  .exp p { color: var(--muted-dark); font-size: var(--fs-sm); margin: 0; }
 
   /* PACOTES */
   .pk-grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
   .pk { display: flex; flex-direction: column; align-items: flex-start; gap: 0.2rem; }
   .pk h3 { margin: 0.8rem 0 0.1rem; font-size: 1.8rem; }
-  .pk-inc { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-300); margin: 0; }
+  .pk-inc { font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-300); margin: 0; }
   .pk-price { font-family: var(--font-display); font-size: 2.6rem; color: var(--ivory); margin: 0.6rem 0 0.4rem; line-height: 1; }
-  .pk .muted { font-size: 0.92rem; flex: 1; }
+  .pk .muted { font-size: var(--fs-sm); flex: 1; }
   .pk--hl { border-color: var(--line-strong); background: radial-gradient(ellipse at 100% 0%, rgba(180, 139, 66, 0.2), transparent 60%), linear-gradient(180deg, rgba(31, 47, 71, 0.75), rgba(15, 24, 39, 0.75)); }
   .pk:not(:has(.tag)) h3 { margin-top: 0; }
 
@@ -415,8 +415,8 @@ const experience = [
   .tiers li { display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'n p' 'g p' 'd d'; column-gap: 1rem; align-items: center; padding: 1rem 1.2rem; border: 1px solid var(--line); border-radius: 12px; background: rgba(10, 16, 25, 0.4); }
   .tiers li.feat { border-color: var(--line-strong); }
   .t-name { grid-area: n; font-family: var(--font-display); font-size: 1.4rem; color: var(--ivory); }
-  .t-g { grid-area: g; font-size: 0.82rem; color: var(--muted); }
-  .t-d { grid-area: d; margin-top: 0.55rem; padding-top: 0.55rem; border-top: 1px solid var(--line); font-size: 0.9rem; line-height: 1.55; color: var(--muted); }
+  .t-g { grid-area: g; font-size: var(--fs-xs); color: var(--muted); }
+  .t-d { grid-area: d; margin-top: 0.55rem; padding-top: 0.55rem; border-top: 1px solid var(--line); font-size: var(--fs-sm); line-height: 1.55; color: var(--muted); }
   .t-p { grid-area: p; font-family: var(--font-display); font-size: 1.7rem; color: var(--gold-300); }
   .noivo-media { position: relative; padding: 0 0 18% 18%; }
   .n1 { aspect-ratio: 1 / 1.08; }
@@ -426,7 +426,7 @@ const experience = [
 
   /* ANTES/DEPOIS */
   .ba { aspect-ratio: 3 / 2; }
-  .ba-l, .ba-r { position: absolute; top: 1.4rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; background: rgba(10, 16, 25, 0.7); padding: 0.35rem 0.8rem; border-radius: 999px; border: 1px solid var(--line-strong); }
+  .ba-l, .ba-r { position: absolute; top: 1.4rem; font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; background: rgba(10, 16, 25, 0.7); padding: 0.35rem 0.8rem; border-radius: 999px; border: 1px solid var(--line-strong); }
   .ba-l { left: 1.4rem; } .ba-r { right: 1.4rem; }
 
   /* REVIEWS */
@@ -452,8 +452,6 @@ const experience = [
   .info :global(svg) { color: var(--gold); flex: none; margin-top: 4px; }
   .info strong { color: var(--ivory); font-weight: 600; }
   .info a { text-decoration: none; }
-  .near { font-size: 0.92rem; color: var(--muted); }
-  .near a { color: var(--gold-300); }
   .map-col { height: 100%; min-height: 420px; }
 </style>
 

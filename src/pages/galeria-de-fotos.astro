@@ -17,7 +17,7 @@ const gallerySchema = {
   '@context': 'https://schema.org',
   '@type': 'ImageGallery',
   '@id': abs('/galeria-de-fotos/#galeria'),
-  name: 'Galeria de fotos e vídeos da Over Barber Conceito, barbearia no Meireles',
+  name: 'Galeria de fotos e vídeos da Over Barber Conceito',
   about: { '@id': BUSINESS_ID },
   image: photos.map((p) => ({ '@type': 'ImageObject', contentUrl: abs(p.big), caption: p.alt })),
 };
@@ -33,14 +33,14 @@ const videoSchema = galleryVideos.map((v) => ({
 }));
 ---
 <Base
-  title="Galeria de Fotos da Barbearia no Meireles | Over Barber"
-  description="Fotos e vídeos da Over Barber Conceito, barbearia no Meireles, em Fortaleza: cortes, barbas na navalha, antes e depois, Dia do Noivo e o ambiente."
+  title="Galeria de Fotos e Vídeos | Over Barber Conceito"
+  description="Fotos e vídeos da Over Barber Conceito, em Fortaleza: cortes, barbas na navalha, antes e depois, Dia do Noivo e o ambiente da barbearia."
   breadcrumbs={crumbs}
   schema={[gallerySchema, ...videoSchema]}
 >
   <PageHero
     eyebrow="Galeria de fotos"
-    title="A barbearia no Meireles <em>em fotos e vídeos.</em>"
+    title="Cuidado e atenção <em>nos detalhes.</em>"
     lead="Cortes, barbas, antes e depois, Dia do Noivo e o dia a dia da Over Barber Conceito, na Av. Dom Luís. Todas as imagens são de clientes que autorizaram o uso."
     crumbs={crumbs}
   >
@@ -130,7 +130,7 @@ const videoSchema = galleryVideos.map((v) => ({
 
 <style>
   .jump { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.8rem; }
-  .jump a { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1rem; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 0.85rem; text-decoration: none; color: var(--cream); }
+  .jump a { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1rem; border: 1px solid var(--line-strong); border-radius: 999px; font-size: var(--fs-sm); text-decoration: none; color: var(--cream); }
   .jump a:hover { border-color: var(--gold); color: var(--gold-300); }
   .jump :global(svg) { color: var(--gold); }
   .sec { margin-bottom: 2.5rem; }
@@ -148,7 +148,7 @@ const videoSchema = galleryVideos.map((v) => ({
   .vid-btn:hover img { transform: scale(1.04); opacity: 1; }
   .play { position: absolute; inset: 0; margin: auto; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: rgba(10, 16, 25, 0.6); border: 1px solid var(--gold); color: var(--gold-300); backdrop-filter: blur(4px); }
   .vid h3 { font-size: 1.35rem; margin: 0.8rem 0 0.2rem; }
-  .vid p { font-size: 0.88rem; color: var(--muted); margin: 0; }
+  .vid p { font-size: var(--fs-sm); color: var(--muted); margin: 0; }
   .lb { padding: 0; border: 0; background: transparent; max-width: 94vw; max-height: 92vh; overflow: visible; }
   .lb::backdrop { background: rgba(5, 8, 13, 0.92); backdrop-filter: blur(6px); }
   .lb img, .lb video { display: block; max-width: 94vw; max-height: 88vh; width: auto; height: auto; border-radius: 12px; background: #000; }

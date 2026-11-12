@@ -43,6 +43,6 @@ npm run build    # gera /dist (pronto para Netlify, Vercel, Cloudflare Pages, Ho
 
 - Título/descrição únicos por página, canonical, Open Graph/Twitter, geo-tags.
 - JSON-LD: `BarberShop` (NAP, geo, horário, avaliação 5,0/55, catálogo de serviços com preços, ReserveAction), `WebSite`, `BreadcrumbList`, `Service`, `FAQPage`, `BlogPosting`, `OfferCatalog`.
-- Páginas por serviço (8), páginas locais (Aldeota, Varjota), blog com 4 artigos, FAQ, galeria, avaliações.
+- Páginas por serviço (8), blog com 4 artigos, FAQ, galeria, avaliações.
 - `sitemap-index.xml`, `robots.txt`, `llms.txt`, manifest e favicons.
 - LGPD: banner de cookies com categorias, Google Consent Mode v2 (negado por padrão), mapa carregado só com clique, Política de Privacidade, Política de Cookies e Termos de Uso.

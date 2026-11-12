@@ -12,12 +12,12 @@ const svcFaq = services.flatMap((s) => s.faq.map((f) => ({ ...f, svc: s })));
 const all = [...faq, ...svcFaq.map(({ q, a }) => ({ q, a }))];
 ---
 <Base
-  title="Perguntas Frequentes | Barbearia no Meireles, Over Barber"
+  title="Perguntas Frequentes | Over Barber Conceito"
   description="Endereço, horário, valet, preços, agendamento, Dia do Noivo, corte infantil, camuflagem, barboterapia e mais: tire suas dúvidas sobre a Over Barber Conceito."
   breadcrumbs={crumbs}
   schema={[faqSchema(all)]}
 >
-  <PageHero eyebrow="Ajuda" title="Perguntas sobre a <em>barbearia no Meireles</em>" lead="Tudo o que você precisa saber antes da sua visita. Não achou sua dúvida? Chame a gente no WhatsApp." crumbs={crumbs} image="tesouras-e-pomadas" imageAlt="Tesouras e pomadas na bancada" />
+  <PageHero eyebrow="Ajuda" title="Perguntas <em>frequentes</em>" lead="Tudo o que você precisa saber antes da sua visita. Não achou sua dúvida? Chame a gente no WhatsApp." crumbs={crumbs} image="tesouras-e-pomadas" imageAlt="Tesouras e pomadas na bancada" />
 
   <section class="section">
     <div class="narrow">

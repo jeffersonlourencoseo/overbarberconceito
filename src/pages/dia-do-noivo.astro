@@ -39,7 +39,7 @@ const offers = groomPackages.map((g) => ({
 }));
 ---
 <Base
-  title="Dia do Noivo na Barbearia no Meireles | Over Barber"
+  title="Dia do Noivo na Barbearia em Fortaleza | Over Barber"
   description="Dia do Noivo na Over Barber Conceito, no Meireles: corte, barba e experiência exclusiva para o noivo e até 8 convidados. Pacotes a partir de R$ 1.999."
   image={new URL(og.src, Astro.site).href}
   imageAlt="Noivo de terno azul ajustando a abotoadura no Dia do Noivo"
@@ -48,7 +48,7 @@ const offers = groomPackages.map((g) => ({
 >
   <PageHero
     eyebrow="Casamento · Fortaleza"
-    title="Dia do Noivo <em>na barbearia no Meireles.</em>"
+    title="Dia do Noivo: <em>chegue ao altar impecável.</em>"
     lead="Uma manhã exclusiva na Over Barber Conceito para o noivo e quem ele escolher — corte, barba, cuidados e um brinde antes do grande momento."
     image="dia-do-noivo"
     imageAlt="Sapatos, perfume, relógio e convite de casamento preparados para o Dia do Noivo"
@@ -76,6 +76,8 @@ const offers = groomPackages.map((g) => ({
               <p class="guests"><Icon name="heart" size={16} /> Noivo + {g.guests} convidados</p>
               <p class="price">{brl(g.price)}</p>
               <p class="muted">{g.description}</p>
+              <p class="incl-t">O que inclui</p>
+              <ul class="incl">{g.items.map((x) => <li>{x}</li>)}</ul>
               <a class:list={['btn', g.featured ? 'btn-gold' : 'btn-ghost']} href={site.whatsappMsg(`Olá! Tenho interesse no Dia do Noivo — ${g.name} (${brl(g.price)}).`)} target="_blank" rel="noopener">Reservar {g.name}</a>
             </div>
           </article>
@@ -111,7 +113,7 @@ const offers = groomPackages.map((g) => ({
         </ol>
         <a class="link-arrow" href="/blog/dia-do-noivo-na-barbearia-guia-completo/">Leia o guia completo do Dia do Noivo</a>
       </div>
-      <BrandPanel kicker="Dia do Noivo" title="O seu <em>grande dia</em>" lines={["Noivo + até 8 convidados", "Na Over, barbearia no Meireles"]} facts={[{ t: "Essence", v: "R$ 1.999" }, { t: "Select", v: "R$ 2.499" }, { t: "Privilege", v: "R$ 2.999" }]} />
+      <BrandPanel kicker="Dia do Noivo" title="O seu <em>grande dia</em>" lines={["Noivo + até 8 convidados", "Corte, barba, manicure, comfort food e bebida"]} facts={[{ t: "Essence", v: "R$ 1.999" }, { t: "Select", v: "R$ 2.499" }, { t: "Privilege", v: "R$ 2.999" }]} />
     </div>
   </section>
 
@@ -135,7 +137,7 @@ const offers = groomPackages.map((g) => ({
   .tier.no-img { border-top: 2px solid var(--gold); background: linear-gradient(170deg, var(--navy-800), var(--navy-900) 55%); }
   .tier-body { padding: 1.8rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; }
   .tier h3 { font-size: 2.1rem; margin: 0.6rem 0 0; }
-  .guests { display: flex; gap: 0.5rem; align-items: center; color: var(--gold-300); font-size: 0.9rem; margin: 0; }
+  .guests { display: flex; gap: 0.5rem; align-items: center; color: var(--gold-300); font-size: var(--fs-sm); margin: 0; }
   .price { font-family: var(--font-display); font-size: 3rem; color: var(--ivory); margin: 0.8rem 0 0.4rem; line-height: 1; }
   .tier .btn { margin-top: 0.8rem; }
   .rit { display: grid; gap: 2.5rem 2rem; margin-top: 3rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
@@ -145,5 +147,5 @@ const offers = groomPackages.map((g) => ({
   .check { padding-left: 1.2rem; display: grid; gap: 0.9rem; margin: 1.5rem 0 2rem; color: var(--muted); }
   .check strong { color: var(--ivory); }
   .ess :global(img) { object-position: center 0%; }
-  .check li::marker { color: var(--gold); font-weight: 700; }
+  .check li::marker { color: var(--gold); font-weight: 600; }
 </style>

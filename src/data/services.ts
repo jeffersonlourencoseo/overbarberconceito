@@ -1,5 +1,5 @@
 // Preços conforme a agenda oficial (BarbSuite) — atualize aqui e o site inteiro muda.
-export type Item = { name: string; price: number; note?: string };
+export type Item = { name: string; price: number; desc?: string; note?: string };
 export type Service = {
   slug: string;
   title: string;          // H1
@@ -22,7 +22,7 @@ export const brl = (n: number) =>
 export const services: Service[] = [
   {
     slug: 'corte-masculino',
-    title: 'Corte masculino no Meireles',
+    title: 'Corte masculino',
     short: 'Corte masculino',
     seoTitle: 'Corte Masculino no Meireles, Fortaleza | Over Barber',
     seoDescription:
@@ -34,12 +34,12 @@ export const services: Service[] = [
       'Na Over Barber Conceito, no Meireles, o corte masculino é feito sem pressa, com acabamento na navalha e finalização com produto profissional. Você chega pelo valet gratuito, toma um café ou uma cerveja gelada e sai pronto para a semana.',
     ],
     items: [
-      { name: 'Corte adulto', price: 80 },
-      { name: 'Cabelo e barba', price: 150 },
-      { name: 'Pezinho de cabelo (acabamento)', price: 40 },
-      { name: 'Penteado', price: 55 },
-      { name: 'Raspar careca na máquina', price: 50 },
-      { name: 'Raspar careca na navalha', price: 70 },
+      { name: 'Corte adulto', price: 80, desc: 'Corte masculino na tesoura e na máquina, pensado para o formato do seu rosto, com acabamento e finalização.' },
+      { name: 'Cabelo e barba', price: 150, desc: 'Corte completo e barba desenhada na navalha, no mesmo atendimento.' },
+      { name: 'Pezinho de cabelo (acabamento)', price: 40, desc: 'Só o acabamento: contorno da nuca, das laterais e das costeletas, para manter o corte em dia entre uma visita e outra.' },
+      { name: 'Penteado', price: 55, desc: 'Finalização com secador e produto para um evento ou ocasião especial, sem cortar.' },
+      { name: 'Raspar careca na máquina', price: 50, desc: 'Cabeça raspada por igual na máquina, com acabamento no contorno.' },
+      { name: 'Raspar careca na navalha', price: 70, desc: 'Raspagem rente na navalha, para um acabamento liso.' },
     ],
     benefits: [
       'Consultoria de visagismo antes do corte',
@@ -62,9 +62,9 @@ export const services: Service[] = [
   },
   {
     slug: 'barba-e-barboterapia',
-    title: 'Barba e barboterapia no Meireles',
+    title: 'Barba e barboterapia',
     short: 'Barba & barboterapia',
-    seoTitle: 'Barba na Navalha e Barboterapia no Meireles | Over Barber',
+    seoTitle: 'Barba na Navalha e Barboterapia em Fortaleza | Over Barber',
     seoDescription:
       'Barba desenhada na navalha com toalha quente e barboterapia completa no Meireles, Fortaleza. Barba R$ 80, barboterapia R$ 100. Agende online.',
     keyword: 'barboterapia fortaleza',
@@ -74,10 +74,10 @@ export const services: Service[] = [
       'A barboterapia é o cuidado completo: mais tempo de cadeira, vapor, toalhas quentes, esfoliação, massagem e finalização com óleos e balm. É para quem quer sair renovado, e não só com a barba aparada.',
     ],
     items: [
-      { name: 'Barba', price: 80 },
-      { name: 'Barboterapia', price: 100 },
-      { name: 'Cabelo e barba', price: 150 },
-      { name: 'Camuflagem de barba', price: 80 },
+      { name: 'Barba', price: 80, desc: 'Barba aparada e desenhada, com contorno feito na navalha.' },
+      { name: 'Barboterapia', price: 100, desc: 'Barba com ritual de toalha quente, vapor e massagem, que amacia os fios e relaxa o rosto.' },
+      { name: 'Cabelo e barba', price: 150, desc: 'Corte completo e barba desenhada na navalha, no mesmo atendimento.' },
+      { name: 'Camuflagem de barba', price: 80, desc: 'Disfarça os fios brancos da barba com aspecto natural.' },
     ],
     benefits: [
       'Desenho personalizado pelo formato do rosto',
@@ -99,9 +99,9 @@ export const services: Service[] = [
   },
   {
     slug: 'camuflagem-de-fios-brancos',
-    title: 'Camuflagem de fios brancos no Meireles',
+    title: 'Camuflagem de fios brancos',
     short: 'Camuflagem de fios',
-    seoTitle: 'Camuflagem de Fios Brancos no Meireles | Over Barber',
+    seoTitle: 'Camuflagem de Fios Brancos em Fortaleza | Over Barber',
     seoDescription:
       'Camuflagem de fios brancos no cabelo, barba e sobrancelha com aspecto natural, sem "cara de tinta". No Meireles, Fortaleza, a partir de R$ 40.',
     keyword: 'camuflagem de barba fortaleza',
@@ -111,9 +111,9 @@ export const services: Service[] = [
       'Dá para fazer no cabelo, na barba e na sobrancelha, junto com o corte ou a barba, no mesmo horário.',
     ],
     items: [
-      { name: 'Camuflagem de cabelo', price: 100 },
-      { name: 'Camuflagem de barba', price: 80 },
-      { name: 'Camuflagem de sobrancelha', price: 40 },
+      { name: 'Camuflagem de cabelo', price: 100, desc: 'Disfarça os fios brancos do cabelo com aspecto natural, sem cara de tinta.' },
+      { name: 'Camuflagem de barba', price: 80, desc: 'Disfarça os fios brancos da barba com aspecto natural.' },
+      { name: 'Camuflagem de sobrancelha', price: 40, desc: 'Uniformiza os fios brancos da sobrancelha.' },
     ],
     benefits: [
       'Resultado natural, sem efeito "tinta"',
@@ -129,9 +129,9 @@ export const services: Service[] = [
   },
   {
     slug: 'corte-infantil',
-    title: 'Corte infantil no Meireles',
+    title: 'Corte infantil',
     short: 'Corte infantil',
-    seoTitle: 'Corte Infantil no Meireles, Fortaleza | Over Barber',
+    seoTitle: 'Corte Infantil em Fortaleza | Over Barber Conceito',
     seoDescription:
       'Corte infantil com paciência, no tempo da criança, em barbearia premium no Meireles. R$ 80, valet gratuito e manicure para os pais no mesmo horário.',
     keyword: 'corte infantil fortaleza',
@@ -141,8 +141,8 @@ export const services: Service[] = [
       'Enquanto seu filho corta, você pode aproveitar para fazer a barba ou as unhas com nossas manicures, no mesmo horário. E com o valet gratuito, chegar com criança na Av. Dom Luís fica muito mais fácil.',
     ],
     items: [
-      { name: 'Corte infantil', price: 80 },
-      { name: 'Pezinho de cabelo', price: 40 },
+      { name: 'Corte infantil', price: 80, desc: 'Corte para crianças, feito com paciência e no tempo delas, do jeito que a família pedir.' },
+      { name: 'Pezinho de cabelo', price: 40, desc: 'Acabamento da nuca e das laterais entre um corte e outro.' },
     ],
     benefits: [
       'Barbeiros pacientes e acostumados com crianças',
@@ -158,9 +158,9 @@ export const services: Service[] = [
   },
   {
     slug: 'manicure-e-pedicure',
-    title: 'Manicure e pedicure masculina no Meireles',
+    title: 'Manicure e pedicure masculina',
     short: 'Manicure & pedicure',
-    seoTitle: 'Barbearia com Manicure no Meireles, Fortaleza | Over Barber',
+    seoTitle: 'Barbearia com Manicure e Pedicure em Fortaleza | Over Barber',
     seoDescription:
       'Manicure e pedicure masculina na barbearia, no mesmo horário do corte. Mão R$ 39, pé R$ 45, pé e mão R$ 80. Meireles, Fortaleza.',
     keyword: 'barbearia com manicure fortaleza',
@@ -170,11 +170,11 @@ export const services: Service[] = [
       'Unhas limpas, cutículas tratadas e acabamento natural — sem esmalte, a não ser que você queira. Um detalhe que ninguém comenta, mas todo mundo repara.',
     ],
     items: [
-      { name: 'Mão (manicure)', price: 39 },
-      { name: 'Pé (pedicure)', price: 45 },
-      { name: 'Pé e mão', price: 80 },
-      { name: 'Plástica dos pés', price: 120 },
-      { name: 'Ajuste de polimento (pé/mão)', price: 8 },
+      { name: 'Mão (manicure)', price: 39, desc: 'Cutícula, lixa e acabamento das unhas das mãos.' },
+      { name: 'Pé (pedicure)', price: 45, desc: 'Cutícula, lixa e acabamento das unhas dos pés.' },
+      { name: 'Pé e mão', price: 80, desc: 'Manicure e pedicure no mesmo atendimento.' },
+      { name: 'Plástica dos pés', price: 120, desc: 'Tratamento completo dos pés: esfoliação, remoção de calosidades e hidratação.' },
+      { name: 'Ajuste de polimento (pé/mão)', price: 8, desc: 'Retoque rápido no brilho e no acabamento das unhas.' },
     ],
     benefits: [
       'Feito no mesmo horário do corte ou da barba',
@@ -190,9 +190,9 @@ export const services: Service[] = [
   },
   {
     slug: 'tratamentos-capilares',
-    title: 'Tratamentos capilares no Meireles',
+    title: 'Tratamentos capilares e ozonioterapia',
     short: 'Tratamentos capilares',
-    seoTitle: 'Hidratação com Ozônio no Meireles, Fortaleza | Over Barber',
+    seoTitle: 'Hidratação Capilar com Ozônio em Fortaleza | Over Barber',
     seoDescription:
       'Hidratação capilar com ozônio, lavagem anticaspa e spa capilar para homens no Meireles, Fortaleza. A partir de R$ 50. Agende online.',
     keyword: 'tratamento capilar masculino fortaleza',
@@ -202,9 +202,9 @@ export const services: Service[] = [
       'Para caspa e descamação, a lavagem anticaspa usa produtos específicos e massagem no couro cabeludo. Você pode adicionar qualquer tratamento ao seu atendimento ou escolher um dos pacotes Over, que já incluem o cuidado.',
     ],
     items: [
-      { name: 'Hidratação com ozônio', price: 60 },
-      { name: 'Lavagem anticaspa', price: 50 },
-      { name: 'Spa', price: 69 },
+      { name: 'Hidratação com ozônio', price: 60, desc: 'Hidratação dos fios com ozonioterapia, que também ajuda a higienizar o couro cabeludo.' },
+      { name: 'Lavagem anticaspa', price: 50, desc: 'Lavagem com produto específico para controlar a caspa e a oleosidade.' },
+      { name: 'Spa', price: 69, desc: 'Momento de cuidado e relaxamento para o cabelo e o couro cabeludo.' },
     ],
     benefits: [
       'Ozonioterapia: ação higienizante e revitalizante',
@@ -220,9 +220,9 @@ export const services: Service[] = [
   },
   {
     slug: 'coloracao-e-luzes',
-    title: 'Coloração, luzes e platinado no Meireles',
+    title: 'Coloração, luzes e platinado',
     short: 'Coloração & luzes',
-    seoTitle: 'Luzes e Coloração Masculina no Meireles | Over Barber',
+    seoTitle: 'Luzes, Platinado e Coloração Masculina | Over Barber',
     seoDescription:
       'Coloração masculina, luzes e platinado com técnica profissional no Meireles, Fortaleza. Coloração R$ 130, luzes R$ 300, platinado R$ 350.',
     keyword: 'platinado masculino fortaleza',
@@ -232,12 +232,12 @@ export const services: Service[] = [
       'Antes de qualquer química, avaliamos o seu cabelo e indicamos o melhor caminho para chegar ao resultado com segurança.',
     ],
     items: [
-      { name: 'Coloração', price: 130 },
-      { name: 'Cover', price: 120 },
-      { name: 'Luzes', price: 300 },
-      { name: 'Platinado', price: 350 },
-      { name: 'Inteligente — topo', price: 160 },
-      { name: 'Inteligente — cabelo completo', price: 200 },
+      { name: 'Coloração', price: 130, desc: 'Cor uniforme em todo o cabelo, escolhida com você para ficar natural.' },
+      { name: 'Cover', price: 120, desc: 'Cobertura com cor para disfarçar os fios brancos ou renovar o tom.' },
+      { name: 'Luzes', price: 300, desc: 'Mechas mais claras pelo cabelo, que dão contraste e movimento.' },
+      { name: 'Platinado', price: 350, desc: 'Descoloração completa até o loiro platinado, com tonalização.' },
+      { name: 'Inteligente — topo', price: 160, desc: 'Escova inteligente só na parte de cima: reduz volume e frizz e alinha os fios.' },
+      { name: 'Inteligente — cabelo completo', price: 200, desc: 'Escova inteligente em todo o cabelo: reduz volume e frizz e alinha os fios.' },
     ],
     benefits: [
       'Avaliação do fio antes da química',
@@ -253,9 +253,9 @@ export const services: Service[] = [
   },
   {
     slug: 'estetica-masculina',
-    title: 'Estética masculina no Meireles',
+    title: 'Limpeza facial, sobrancelha e estética masculina',
     short: 'Estética masculina',
-    seoTitle: 'Limpeza Facial e Sobrancelha no Meireles | Over Barber',
+    seoTitle: 'Limpeza Facial e Sobrancelha Masculina | Over Barber',
     seoDescription:
       'Limpeza de pele masculina (R$ 50), sobrancelha na navalha (R$ 30) e depilação de nariz e orelha na cera. Barbearia premium no Meireles, Fortaleza.',
     keyword: 'sobrancelha masculina fortaleza',
@@ -265,10 +265,10 @@ export const services: Service[] = [
       'Sobrancelha bem feita muda o rosto sem ninguém perceber o motivo. Aqui ela é feita na navalha, de forma natural: só tiramos o excesso e mantemos o desenho do seu rosto.',
     ],
     items: [
-      { name: 'Limpeza facial', price: 50 },
-      { name: 'Sobrancelha na navalha', price: 30 },
-      { name: 'Depilação de nariz (cera)', price: 30 },
-      { name: 'Depilação de orelha (cera)', price: 20 },
+      { name: 'Limpeza facial', price: 50, desc: 'Limpeza de pele que remove impurezas e o excesso de oleosidade do rosto.' },
+      { name: 'Sobrancelha na navalha', price: 30, desc: 'Retirada só dos excessos na navalha, sem mudar o desenho natural.' },
+      { name: 'Depilação de nariz (cera)', price: 30, desc: 'Remoção dos pelos do nariz com cera.' },
+      { name: 'Depilação de orelha (cera)', price: 20, desc: 'Remoção dos pelos da orelha com cera.' },
     ],
     benefits: [
       'Resultado natural, sem "sobrancelha feita"',
@@ -284,43 +284,48 @@ export const services: Service[] = [
   },
 ];
 
-export const packages = [
+export const packages: { slug: string; name: string; includes: string; price: number; badge?: string; description: string; items: string[]; highlight?: boolean }[] = [
   {
     slug: 'over-first-experience',
     name: 'Over First Experience',
-    includes: 'Cabelo + barba',
+    includes: 'Corte + barba na primeira visita',
     price: 135,
     badge: 'Primeira visita',
-    description: 'A condição exclusiva para quem vem pela primeira vez: corte + barba com café de cortesia e valet gratuito.',
+    description: 'Condição exclusiva para quem vem à Over pela primeira vez: corte e barba com barbeiros experientes.',
+    items: ['Corte', 'Barba', 'Café de cortesia', 'Valet gratuito'],
     highlight: true,
   },
   {
     slug: 'over-essence',
     name: 'Over Essence',
-    includes: 'Corte, barba e ozonioterapia',
+    includes: 'O cuidado essencial',
     price: 197,
-    description: 'O combo completo com o tratamento de ozônio para o couro cabeludo e os fios.',
+    description: 'A essência da experiência Over: os cuidados fundamentais reunidos em uma visita, para o homem que valoriza o cuidado essencial.',
+    items: ['Corte', 'Barba', 'Hidratação capilar', 'Ozonioterapia', 'Massagem'],
   },
   {
     slug: 'over-select',
     name: 'Over Select',
-    includes: 'Cabelo, barba e unhas',
+    includes: 'O cuidado completo',
     price: 267,
-    description: 'Cabelo, barba e manicure no mesmo horário. Sai pronto da cabeça aos pés.',
+    description: 'Uma seleção ampliada de cuidados para quem quer atenção a cada detalhe, do cabelo às unhas.',
+    items: ['Corte', 'Barba', 'Detox capilar', 'Hidratação capilar', 'Hidratação de barba', 'Manicure ou pedicure', 'Bebida de boas-vindas'],
   },
   {
     slug: 'over-privilege',
     name: 'Over Privilege',
-    includes: 'Corte e tratamento dos fios',
+    includes: 'Transformação dos fios',
     price: 297,
-    description: 'A experiência premium de cuidado capilar: corte com tratamento completo dos fios.',
+    description: 'Uma experiência voltada à transformação dos fios, com tempo e cuidado dedicados ao resultado, para quem quer renovar o visual.',
+    items: ['Corte', 'Selagem ou escova inteligente', 'Hidratação'],
   },
   {
     slug: 'open-barber',
     name: 'Open Barber',
-    includes: 'Experiência exclusiva',
+    includes: 'Experiência sob medida',
     price: 500,
-    description: 'Nossa experiência mais completa. Fale com a equipe para montar o seu atendimento.',
+    description: 'A experiência mais completa da Over, montada com a equipe de acordo com o que você quer fazer.',
+    items: ['Atendimento personalizado', 'Serviços combinados com a equipe'],
   },
 ];
 
@@ -330,14 +335,16 @@ export const groomPackages = [
     name: 'Noivo Essence',
     guests: 4,
     price: 1999,
-    description: 'A experiência essencial para o noivo compartilhar a preparação com o seu círculo mais próximo.',
+    description: 'Para o noivo e os 4 amigos mais próximos se prepararem juntos para o grande dia.',
+    items: ['Corte', 'Barba', 'Manicure', 'Comfort food', 'Bebida'],
   },
   {
     slug: 'dia-do-noivo-select',
     name: 'Noivo Select',
     guests: 6,
     price: 2499,
-    description: 'Uma experiência ampliada, criada para o noivo e um grupo selecionado de convidados.',
+    description: 'Para o noivo e 6 convidados, como padrinhos, pai e irmãos, viverem a preparação lado a lado.',
+    items: ['Corte', 'Barba', 'Manicure', 'Comfort food', 'Bebida'],
     featured: true,
   },
   {
@@ -345,7 +352,8 @@ export const groomPackages = [
     name: 'Noivo Privilege',
     guests: 8,
     price: 2999,
-    description: 'A experiência mais completa e exclusiva para celebrar a preparação do grande dia.',
+    description: 'A experiência mais completa, para o noivo e 8 convidados celebrarem juntos a preparação do grande dia.',
+    items: ['Corte', 'Barba', 'Manicure', 'Comfort food', 'Bebida'],
   },
 ];
 

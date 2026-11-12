@@ -54,7 +54,7 @@ export const site = {
   rating: { value: '5.0', count: 55 },
   // IDs de medição — só carregam após consentimento no banner de cookies (LGPD).
   analytics: { ga4: '', metaPixel: '' },
-  areaServed: ['Meireles', 'Aldeota', 'Varjota', 'Mucuripe', 'Praia de Iracema', 'Dionísio Torres', 'Cocó', 'Papicu', 'Fortaleza'],
+  areaServed: ['Meireles', 'Fortaleza'],
   amenities: [
     'Valet gratuito',
     'Café e cappuccino de cortesia',

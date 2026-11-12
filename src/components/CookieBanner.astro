@@ -95,15 +95,15 @@ const { ga4, metaPixel } = site.analytics;
   }
   .cookie[hidden], .cookie [hidden] { display: none; }
   .t { font-family: var(--font-display); font-size: 1.45rem; color: var(--ivory); margin: 0 0 0.4rem; line-height: 1.2; }
-  .d { font-size: 0.88rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+  .d { font-size: var(--fs-sm); color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
   .d a { color: var(--gold-300); }
   .b { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
-  .b .btn { min-height: 44px; padding: 0.55rem 1.1rem; font-size: 0.7rem; }
-  .lnk { background: none; border: 0; color: var(--cream); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; font-size: 0.85rem; padding: 0.5rem; }
+  .b .btn { min-height: 44px; padding: 0.55rem 1.1rem; font-size: var(--fs-label); }
+  .lnk { background: none; border: 0; color: var(--cream); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; font-size: var(--fs-sm); padding: 0.5rem; }
   .opt { display: flex; gap: 0.8rem; align-items: flex-start; padding: 0.8rem 0; border-bottom: 1px solid var(--line); cursor: pointer; }
   .opt input { margin-top: 0.3rem; accent-color: var(--gold); width: 18px; height: 18px; flex: none; }
-  .opt span { display: grid; font-size: 0.9rem; }
-  .opt small { color: var(--muted); font-size: 0.8rem; line-height: 1.5; }
+  .opt span { display: grid; font-size: var(--fs-sm); }
+  .opt small { color: var(--muted); font-size: var(--fs-xs); line-height: 1.5; }
   .cookie-prefs .b { margin-top: 1rem; }
   @keyframes up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
   @media (max-width: 520px) { .cookie { left: 10px; right: 10px; bottom: 10px; width: auto; } }

@@ -9,7 +9,7 @@ const year = new Date().getFullYear();
     <div class="top">
       <div class="col brand-col">
         <a href="/" aria-label="Over Barber Conceito — início"><img src="/brand/logo-over-barber-conceito.svg" width="1975" height="889" alt="" class="logo" loading="lazy" decoding="async" /></a>
-        <p class="muted">{site.slogan} Barbearia premium no Meireles, entre a Aldeota e a Varjota, em Fortaleza.</p>
+        <p class="muted">{site.slogan} Barbearia premium no Meireles, em Fortaleza.</p>
         <div class="rating">
           <Icon name="google" size={22} />
           <div>
@@ -36,8 +36,6 @@ const year = new Date().getFullYear();
           <li><a href="/galeria-de-fotos/">Galeria de fotos</a></li>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/perguntas-frequentes/">Perguntas frequentes</a></li>
-          <li><a href="/barbearia-aldeota/">Perto da Aldeota</a></li>
-          <li><a href="/barbearia-varjota/">Perto da Varjota</a></li>
           <li><a href="/contato/">Contato</a></li>
         </ul>
       </div>
@@ -76,12 +74,12 @@ const year = new Date().getFullYear();
 </a>
 
 <style>
-  .footer { position: relative; background: var(--navy-900); border-top: 1px solid var(--line); padding: clamp(3.5rem, 7vw, 5.5rem) 0 2rem; font-size: 0.95rem; }
+  .footer { position: relative; background: var(--navy-900); border-top: 1px solid var(--line); padding: clamp(3.5rem, 7vw, 5.5rem) 0 2rem; font-size: var(--fs-sm); }
   .top { display: grid; gap: 2.5rem; grid-template-columns: 1fr; }
   @media (min-width: 720px) { .top { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 1080px) { .top { grid-template-columns: 1.4fr 1fr 1fr 1.3fr; } }
   .logo { height: 70px; width: auto; margin-bottom: 1.2rem; }
-  .h { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-300); margin-bottom: 1.1rem; }
+  .h { font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-300); margin-bottom: 1.1rem; }
   ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
   a { text-decoration: none; color: rgba(244, 230, 210, 0.8); }
   a:hover { color: var(--gold-300); }
@@ -95,10 +93,10 @@ const year = new Date().getFullYear();
   .social { display: flex; gap: 0.6rem; margin-top: 1.4rem; }
   .social a { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; transition: border-color 0.3s, color 0.3s; }
   .social a:hover { border-color: var(--gold); }
-  .bottom { margin-top: 3.5rem; padding-top: 1.6rem; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; align-items: center; color: var(--muted); font-size: 0.82rem; }
+  .bottom { margin-top: 3.5rem; padding-top: 1.6rem; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; align-items: center; color: var(--muted); font-size: var(--fs-xs); }
   .bottom p { margin: 0; }
   .bottom ul { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
-  .bottom a, .bottom button { color: var(--muted); font-size: 0.82rem; }
+  .bottom a, .bottom button { color: var(--muted); font-size: var(--fs-xs); }
   .bottom button { background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
   .bottom button:hover { color: var(--gold-300); }
 
@@ -109,7 +107,7 @@ const year = new Date().getFullYear();
   }
   .wa-float:hover { transform: scale(1.07); color: #fff; }
   .wa-float::before { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid #1fae5b; animation: pulse 2.6s infinite; }
-  .wa-tip { position: absolute; right: 72px; white-space: nowrap; background: var(--ivory); color: var(--navy-900); font-size: 0.8rem; font-weight: 700; padding: 0.45rem 0.8rem; border-radius: 8px; opacity: 0; transform: translateX(8px); transition: 0.3s var(--ease); pointer-events: none; }
+  .wa-tip { position: absolute; right: 72px; white-space: nowrap; background: var(--ivory); color: var(--navy-900); font-size: var(--fs-xs); font-weight: 600; padding: 0.45rem 0.8rem; border-radius: 8px; opacity: 0; transform: translateX(8px); transition: 0.3s var(--ease); pointer-events: none; }
   .wa-float:hover .wa-tip { opacity: 1; transform: none; }
   @keyframes pulse { 0% { transform: scale(1); opacity: 0.7; } 80%, 100% { transform: scale(1.55); opacity: 0; } }
 </style>

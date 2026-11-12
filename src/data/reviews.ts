@@ -26,5 +26,4 @@ export const reviews: Review[] = [
   { name: 'Josy Ferraz', when: 'há 11 meses', service: 'Corte, barba e coloração', text: 'Indiquei para meu namorado, que amou o trabalho de sempre. Com o profissional Avelino não troca por nada.' },
   { name: 'Renan Braga', guide: true, when: 'há 10 meses', text: 'Adorei o atendimento. Avelino acertou demais em meu corte. Recomendo muito!' },
   { name: 'Paulo Rodrigo', when: 'recente', text: 'Lugar maravilhoso! Profissionais de altíssima qualidade!' },
-  { name: 'Tiago Madeira', when: 'há 1 ano', text: 'Perfect. Melhor barbearia da região da Aldeota.' },
 ];

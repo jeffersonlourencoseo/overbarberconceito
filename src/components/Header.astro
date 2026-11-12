@@ -58,14 +58,14 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   .logo { height: 46px; width: auto; }
   .nav ul { display: flex; gap: clamp(1rem, 1.8vw, 1.9rem); list-style: none; margin: 0; padding: 0; }
   .nav a {
-    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
     text-decoration: none; color: rgba(244, 230, 210, 0.82); position: relative; padding-block: 0.4rem;
   }
   .nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--gold); transform: scaleX(0); transition: transform 0.4s var(--ease); }
   .nav a:hover, .nav a[aria-current='page'] { color: var(--gold-300); }
   .nav a:hover::after, .nav a[aria-current='page']::after { transform: scaleX(1); }
   .actions { display: flex; align-items: center; gap: 0.6rem; }
-  .btn-sm { min-height: 44px; padding: 0.6rem 1.15rem; font-size: 0.72rem; }
+  .btn-sm { min-height: 44px; padding: 0.6rem 1.15rem; font-size: var(--fs-label); }
   .burger { display: none; background: none; border: 1px solid var(--line); border-radius: 50%; width: 46px; height: 46px; place-items: center; cursor: pointer; color: var(--cream); }
   @media (max-width: 1080px) {
     .nav { display: none; }
@@ -86,7 +86,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   .mobile li a { display: block; padding: 1rem 0; font-family: var(--font-display); font-size: 1.9rem; text-decoration: none; color: var(--ivory); }
   .mobile li a[aria-current='page'] { color: var(--gold-300); }
   .mobile-cta { display: grid; gap: 0.75rem; }
-  .mobile-info { display: flex; gap: 0.5rem; align-items: center; color: var(--muted); font-size: 0.9rem; margin: 0.5rem 0 0; }
+  .mobile-info { display: flex; gap: 0.5rem; align-items: center; color: var(--muted); font-size: var(--fs-sm); margin: 0.5rem 0 0; }
   @keyframes slideIn { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: none; } }
 </style>
 

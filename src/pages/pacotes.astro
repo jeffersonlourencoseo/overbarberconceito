@@ -26,14 +26,14 @@ const offers = {
 };
 ---
 <Base
-  title="Pacotes da Barbearia no Meireles | Over Barber Conceito"
+  title="Pacotes de Corte, Barba e Cuidados | Over Barber Conceito"
   description="Pacotes Over: First (corte + barba R$ 135), Essence com ozonioterapia (R$ 197), Select com unhas (R$ 267) e Privilege (R$ 297). Meireles, Fortaleza."
   breadcrumbs={crumbs}
   schema={[offers, faqSchema(pkFaq)]}
 >
   <PageHero
     eyebrow="Pacotes Over"
-    title="Pacotes da barbearia <em>no Meireles.</em>"
+    title="Experiências <em>completas</em>, num só horário."
     lead="Combos criados para quem quer sair pronto: cabelo, barba, tratamento capilar e unhas, com a hospitalidade Over e valet gratuito."
     image="barba-e-cuidados-masculinos"
     imageAlt="Composição com barba sendo feita, ferramentas de barbeiro e cliente relaxando"
@@ -50,6 +50,8 @@ const offers = {
             <p class="inc">{p.includes}</p>
             <p class="price"><span>R$</span>{p.price}</p>
             <p class="desc">{p.description}</p>
+            <p class="incl-t">O que inclui</p>
+            <ul class="incl">{p.items.map((x) => <li>{x}</li>)}</ul>
             <a class:list={['btn', p.highlight ? 'btn-gold' : 'btn-ghost']} href={site.whatsappMsg(`Olá! Quero agendar o pacote ${p.name} (${brl(p.price)}).`)} target="_blank" rel="noopener"><Icon name="whatsapp" /> Reservar</a>
           </article>
         ))}
@@ -65,7 +67,7 @@ const offers = {
         <h2>Pacotes <span class="script" style="font-size:1.2em">Dia do Noivo</span></h2>
         <ul class="price-list">
           {groomPackages.map((g) => (
-            <li><span class="name"><strong>{g.name}</strong> — noivo + {g.guests} convidados</span><span class="dots" /><span class="price">{brl(g.price)}</span></li>
+            <li><span class="name"><strong>{g.name}</strong> · noivo + {g.guests} convidados</span><span class="dots" /><span class="price">{brl(g.price)}</span><span class="d">{g.items.join(' · ')}</span></li>
           ))}
         </ul>
         <a class="btn btn-gold" href="/dia-do-noivo/" style="margin-top:1.6rem">Conhecer o Dia do Noivo</a>
@@ -90,7 +92,7 @@ const offers = {
   .pk.hl { border-color: var(--line-strong); background: radial-gradient(ellipse at 100% 0%, rgba(180, 139, 66, 0.3), transparent 60%), linear-gradient(160deg, var(--navy-700), var(--navy-900)); }
   .tag.ghost { opacity: 0.7; }
   .pk h2 { font-size: 2.3rem; margin: 1rem 0 0.2rem; }
-  .inc { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-300); margin: 0; }
+  .inc { font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-300); margin: 0; }
   .price { font-family: var(--font-display); font-size: 4rem; line-height: 1; color: var(--ivory); margin: 1.2rem 0 0.8rem; }
   .price span { font-size: 0.4em; vertical-align: super; color: var(--gold-300); margin-right: 0.15em; }
   .desc { color: var(--muted); flex: 1; }
