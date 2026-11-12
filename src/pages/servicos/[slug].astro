@@ -9,15 +9,17 @@ import ReviewCard from '../../components/ReviewCard.astro';
 import { services, getService, brl } from '../../data/services';
 import { reviews } from '../../data/reviews';
 import { site } from '../../data/site';
-import { img } from '../../data/images';
+import { photo } from '../../data/images';
 import { faqSchema, serviceSchema } from '../../lib/schema';
 
 export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug } }));
 }
 const s = getService(Astro.params.slug!);
-const og = await getImage({ src: img(s.image), width: 1200, height: 630, fit: 'cover', format: 'jpg' });
-const ogUrl = new URL(og.src, Astro.site).href;
+const ph = photo('servicos', s.slug);
+const alt = `${s.short} na Over Barber Conceito, barbearia no Meireles`;
+const og = ph ? await getImage({ src: ph, width: 1200, height: 630, fit: 'cover', format: 'jpg' }) : undefined;
+const ogUrl = new URL(og ? og.src : '/og-over-barber-conceito.jpg', Astro.site).href;
 const crumbs = [
   { name: 'Início', href: '/' },
   { name: 'Serviços', href: '/servicos/' },
@@ -41,11 +43,11 @@ const rv = reviews.filter((r) => kw[s.slug].test(`${r.service ?? ''} ${r.text}`)
   title={s.seoTitle}
   description={s.seoDescription}
   image={ogUrl}
-  imageAlt={s.imageAlt}
+  imageAlt={alt}
   breadcrumbs={crumbs}
   schema={[serviceSchema(s, ogUrl), faqSchema(s.faq)]}
 >
-  <PageHero eyebrow="Serviços · Over Barber Conceito" title={s.title} lead={s.excerpt} image={s.image} imageAlt={s.imageAlt} crumbs={crumbs}>
+  <PageHero eyebrow="Serviços · Over Barber Conceito" title={s.title} lead={s.excerpt} image={ph} imageAlt={alt} crumbs={crumbs}>
     <div class="btn-row" style="margin-top:2rem">
       <a class="btn btn-gold" href={site.booking} target="_blank" rel="noopener" data-track={`agendar_${s.slug}`}><Icon name="calendar" /> Agendar {s.short.toLowerCase()}</a>
       <a class="btn btn-ghost" href={site.whatsappMsg(`Olá! Gostaria de agendar: ${s.short}.`)} target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp</a>
@@ -67,7 +69,7 @@ const rv = reviews.filter((r) => kw[s.slug].test(`${r.service ?? ''} ${r.text}`)
         <h3>Tabela de preços</h3>
         <ul class="price-list">
           {s.items.map((i) => (
-            <li><span class="name">{i.name}</span>{i.duration && <span class="dur">{i.duration}</span>}<span class="dots" /><span class="price">{brl(i.price)}</span></li>
+            <li><span class="name">{i.name}</span><span class="dots" /><span class="price">{brl(i.price)}</span></li>
           ))}
         </ul>
         <p class="note">Primeira vez na Over? <a href="/pacotes/">Corte + barba por R$ 135</a> na Over First Experience.</p>
@@ -120,8 +122,8 @@ const rv = reviews.filter((r) => kw[s.slug].test(`${r.service ?? ''} ${r.text}`)
       <p class="eyebrow">Combine com</p>
       <div class="rel">
         {related.map((r) => (
-          <a href={`/servicos/${r.slug}/`} class="rel-card">
-            <Image src={img(r.image)} alt={r.imageAlt} widths={[240, 400]} sizes="(min-width: 900px) 140px, 30vw" />
+          <a href={`/servicos/${r.slug}/`} class:list={['rel-card', { 'no-img': !photo('servicos', r.slug) }]}>
+            {photo('servicos', r.slug) && <Image src={photo('servicos', r.slug)!} alt="" widths={[120, 200]} sizes="90px" />}
             <span><strong>{r.short}</strong><small>{r.excerpt}</small></span>
             <Icon name="arrow" />
           </a>
@@ -152,6 +154,7 @@ const rv = reviews.filter((r) => kw[s.slug].test(`${r.service ?? ''} ${r.text}`)
   .rel-card { display: grid; grid-template-columns: 90px 1fr auto; gap: 1rem; align-items: center; padding: 0.8rem; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; transition: border-color 0.3s; }
   .rel-card:hover { border-color: var(--line-strong); color: inherit; }
   .rel-card :global(img) { width: 90px; height: 90px; object-fit: cover; border-radius: 10px; }
+  .rel-card.no-img { grid-template-columns: 1fr auto; padding: 1.1rem 1.3rem; }
   .rel-card span { display: grid; line-height: 1.4; }
   .rel-card strong { font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; color: var(--ivory); }
   .rel-card small { color: var(--muted); font-size: 0.85rem; }

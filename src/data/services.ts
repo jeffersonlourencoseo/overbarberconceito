@@ -1,5 +1,5 @@
 // Preços conforme a agenda oficial (BarbSuite) — atualize aqui e o site inteiro muda.
-export type Item = { name: string; price: number; duration?: string; note?: string };
+export type Item = { name: string; price: number; note?: string };
 export type Service = {
   slug: string;
   title: string;          // H1
@@ -7,8 +7,6 @@ export type Service = {
   seoTitle: string;
   seoDescription: string;
   keyword: string;
-  image: string;          // nome do arquivo em src/assets/img
-  imageAlt: string;
   excerpt: string;
   intro: string[];
   items: Item[];
@@ -30,16 +28,14 @@ export const services: Service[] = [
     seoDescription:
       'Corte masculino na tesoura ou máquina com visagismo, no Meireles (Av. Dom Luís, 655). Corte a partir de R$ 80, valet gratuito e agendamento online.',
     keyword: 'corte masculino fortaleza',
-    image: 'corte-cabelo-masculino-salao',
-    imageAlt: 'Cliente da Over Barber Conceito com corte masculino finalizado no salão do Meireles',
     excerpt: 'Tesoura, máquina e visagismo: o corte pensado para o formato do seu rosto.',
     intro: [
       'Antes de pegar na tesoura, o barbeiro conversa com você. Formato do rosto, tipo de fio, rotina e o estilo que você quer passar — é isso que define o corte. Social na tesoura, degradê, old money, texturizado ou clássico: o resultado é um visual que funciona no espelho do dia a dia, não só na saída da barbearia.',
       'Na Over Barber Conceito, no Meireles, o corte masculino é feito sem pressa, com acabamento na navalha e finalização com produto profissional. Você chega pelo valet gratuito, toma um café ou uma cerveja gelada e sai pronto para a semana.',
     ],
     items: [
-      { name: 'Corte adulto', price: 80, duration: '25 min' },
-      { name: 'Cabelo e barba', price: 150, duration: '50 min' },
+      { name: 'Corte adulto', price: 80 },
+      { name: 'Cabelo e barba', price: 150 },
       { name: 'Pezinho de cabelo (acabamento)', price: 40 },
       { name: 'Penteado', price: 55 },
       { name: 'Raspar careca na máquina', price: 50 },
@@ -58,7 +54,7 @@ export const services: Service[] = [
       { t: 'Finalização', d: 'Produto certo para o seu cabelo e dicas para repetir o resultado em casa.' },
     ],
     faq: [
-      { q: 'Quanto custa o corte masculino na Over Barber Conceito?', a: 'O corte adulto custa R$ 80 e leva cerca de 25 minutos. O combo cabelo e barba sai por R$ 150. Na primeira visita, a Over First Experience oferece corte + barba por R$ 135.' },
+      { q: 'Quanto custa o corte masculino na Over Barber Conceito?', a: 'O corte adulto custa R$ 80. O combo cabelo e barba sai por R$ 150. Na primeira visita, a Over First Experience oferece corte + barba por R$ 135.' },
       { q: 'De quanto em quanto tempo devo cortar o cabelo?', a: 'Para cortes curtos e degradês, o ideal é voltar a cada 3 ou 4 semanas. Entre um corte e outro, o pezinho (R$ 40) mantém nuca e contornos alinhados.' },
       { q: 'Vocês fazem corte na tesoura?', a: 'Sim. O corte na tesoura é uma das especialidades da casa e é muito procurado para estilos sociais, old money e cabelos mais longos.' },
     ],
@@ -72,18 +68,16 @@ export const services: Service[] = [
     seoDescription:
       'Barba desenhada na navalha com toalha quente e barboterapia completa no Meireles, Fortaleza. Barba R$ 80, barboterapia R$ 100. Agende online.',
     keyword: 'barboterapia fortaleza',
-    image: 'barba-na-navalha-detalhes',
-    imageAlt: 'Barbeiro fazendo barba na navalha com luvas pretas na Over Barber Conceito',
     excerpt: 'Toalha quente, navalha e o desenho certo para o seu rosto.',
     intro: [
       'Barba bem feita muda o rosto. Na Over Barber Conceito, ela é desenhada respeitando o seu formato de rosto e a sua densidade de fios, com toalha quente, navalha e produtos que hidratam a pele e o fio.',
       'A barboterapia é o cuidado completo: mais tempo de cadeira, vapor, toalhas quentes, esfoliação, massagem e finalização com óleos e balm. É para quem quer sair renovado, e não só com a barba aparada.',
     ],
     items: [
-      { name: 'Barba', price: 80, duration: '25 min' },
+      { name: 'Barba', price: 80 },
       { name: 'Barboterapia', price: 100 },
-      { name: 'Cabelo e barba', price: 150, duration: '50 min' },
-      { name: 'Camuflagem de barba', price: 80, duration: '30 min' },
+      { name: 'Cabelo e barba', price: 150 },
+      { name: 'Camuflagem de barba', price: 80 },
     ],
     benefits: [
       'Desenho personalizado pelo formato do rosto',
@@ -111,17 +105,15 @@ export const services: Service[] = [
     seoDescription:
       'Camuflagem de fios brancos no cabelo, barba e sobrancelha com aspecto natural, sem "cara de tinta". No Meireles, Fortaleza, a partir de R$ 40.',
     keyword: 'camuflagem de barba fortaleza',
-    image: 'cliente-corte-masculino-perfil',
-    imageAlt: 'Cliente com cabelo e barba alinhados após camuflagem natural na Over Barber Conceito',
     excerpt: 'Disfarça o branco mantendo o aspecto natural, no tom que parece o seu.',
     intro: [
       'Fios brancos aparecendo e você quer disfarçar sem ficar com cara de tinta? A camuflagem reduz a aparência do branco mantendo o aspecto natural, no tom que parece o seu — ninguém percebe que foi feito, só percebe que você parece mais descansado.',
-      'Dá para fazer no cabelo, na barba e na sobrancelha, junto com o corte ou a barba, no mesmo horário. Leva cerca de 30 minutos.',
+      'Dá para fazer no cabelo, na barba e na sobrancelha, junto com o corte ou a barba, no mesmo horário.',
     ],
     items: [
-      { name: 'Camuflagem de cabelo', price: 100, duration: '30 min' },
-      { name: 'Camuflagem de barba', price: 80, duration: '30 min' },
-      { name: 'Camuflagem de sobrancelha', price: 40, duration: '30 min' },
+      { name: 'Camuflagem de cabelo', price: 100 },
+      { name: 'Camuflagem de barba', price: 80 },
+      { name: 'Camuflagem de sobrancelha', price: 40 },
     ],
     benefits: [
       'Resultado natural, sem efeito "tinta"',
@@ -143,15 +135,13 @@ export const services: Service[] = [
     seoDescription:
       'Corte infantil com paciência, no tempo da criança, em barbearia premium no Meireles. R$ 80, valet gratuito e manicure para os pais no mesmo horário.',
     keyword: 'corte infantil fortaleza',
-    image: 'cliente-cadeira-barbearia',
-    imageAlt: 'Ambiente acolhedor da Over Barber Conceito para corte infantil e de adultos',
     excerpt: 'Paciência, carinho e um corte que deixa pais e filhos satisfeitos.',
     intro: [
       'Criança precisa de um tempo diferente na cadeira. Aqui o corte infantil é feito com a mesma atenção do corte adulto, com paciência e conversa, para o pequeno sair feliz — e a família também.',
       'Enquanto seu filho corta, você pode aproveitar para fazer a barba ou as unhas com nossas manicures, no mesmo horário. E com o valet gratuito, chegar com criança na Av. Dom Luís fica muito mais fácil.',
     ],
     items: [
-      { name: 'Corte infantil', price: 80, duration: '25 min' },
+      { name: 'Corte infantil', price: 80 },
       { name: 'Pezinho de cabelo', price: 40 },
     ],
     benefits: [
@@ -174,8 +164,6 @@ export const services: Service[] = [
     seoDescription:
       'Manicure e pedicure masculina na barbearia, no mesmo horário do corte. Mão R$ 39, pé R$ 45, pé e mão R$ 80. Meireles, Fortaleza.',
     keyword: 'barbearia com manicure fortaleza',
-    image: 'cliente-satisfeito-over-barber',
-    imageAlt: 'Cliente sorrindo após atendimento completo de corte, barba e manicure',
     excerpt: 'Corte, barba e unhas resolvidos numa visita só.',
     intro: [
       'Cuidar das unhas também é parte do visual. Na Over Barber Conceito você corta o cabelo, faz a barba e resolve manicure e pedicure no mesmo horário, sem ter que ir a outro lugar.',
@@ -208,16 +196,14 @@ export const services: Service[] = [
     seoDescription:
       'Hidratação capilar com ozônio, lavagem anticaspa e spa capilar para homens no Meireles, Fortaleza. A partir de R$ 50. Agende online.',
     keyword: 'tratamento capilar masculino fortaleza',
-    image: 'lavagem-capilar',
-    imageAlt: 'Cliente recebendo lavagem e tratamento capilar no lavatório da Over Barber Conceito',
     excerpt: 'Ozônio, hidratação e cuidado com o couro cabeludo.',
     intro: [
       'Cuidar do fio vai além do corte. A hidratação com ozônio é feita depois do corte, com calma: ajuda a higienizar o couro cabeludo, controlar a oleosidade e deixar o fio mais forte e com brilho.',
       'Para caspa e descamação, a lavagem anticaspa usa produtos específicos e massagem no couro cabeludo. Você pode adicionar qualquer tratamento ao seu atendimento ou escolher um dos pacotes Over, que já incluem o cuidado.',
     ],
     items: [
-      { name: 'Hidratação com ozônio', price: 60, duration: '25 min' },
-      { name: 'Lavagem anticaspa', price: 50, duration: '25 min' },
+      { name: 'Hidratação com ozônio', price: 60 },
+      { name: 'Lavagem anticaspa', price: 50 },
       { name: 'Spa', price: 69 },
     ],
     benefits: [
@@ -240,8 +226,6 @@ export const services: Service[] = [
     seoDescription:
       'Coloração masculina, luzes e platinado com técnica profissional no Meireles, Fortaleza. Coloração R$ 130, luzes R$ 300, platinado R$ 350.',
     keyword: 'platinado masculino fortaleza',
-    image: 'corte-masculino-texturizado',
-    imageAlt: 'Cliente com corte masculino texturizado e cor uniforme na Over Barber Conceito',
     excerpt: 'Química feita por quem entende de cabelo masculino.',
     intro: [
       'Quer mudar o visual de verdade? Coloração, luzes e platinado são feitos com técnica profissional, produtos de qualidade e cuidado com a saúde do fio — do tom discreto ao platinado total.',
@@ -275,16 +259,14 @@ export const services: Service[] = [
     seoDescription:
       'Limpeza de pele masculina (R$ 50), sobrancelha na navalha (R$ 30) e depilação de nariz e orelha na cera. Barbearia premium no Meireles, Fortaleza.',
     keyword: 'sobrancelha masculina fortaleza',
-    image: 'barboterapia-relaxamento',
-    imageAlt: 'Cliente relaxando na cadeira durante cuidado facial na Over Barber Conceito',
     excerpt: 'Pele limpa, sobrancelha natural e os detalhes que fazem diferença.',
     intro: [
       'Pele também precisa de manutenção. A limpeza facial masculina tira a oleosidade e as impurezas, deixa o rosto descansado e ainda ajuda a barba a ficar mais bem tratada. É um cuidado rápido que dá para encaixar no mesmo horário do corte.',
-      'Sobrancelha bem feita muda o rosto sem ninguém perceber o motivo. Aqui ela é feita na navalha, de forma natural: só tiramos o excesso e mantemos o desenho do seu rosto. Leva cerca de 10 minutos.',
+      'Sobrancelha bem feita muda o rosto sem ninguém perceber o motivo. Aqui ela é feita na navalha, de forma natural: só tiramos o excesso e mantemos o desenho do seu rosto.',
     ],
     items: [
       { name: 'Limpeza facial', price: 50 },
-      { name: 'Sobrancelha na navalha', price: 30, duration: '10 min' },
+      { name: 'Sobrancelha na navalha', price: 30 },
       { name: 'Depilação de nariz (cera)', price: 30 },
       { name: 'Depilação de orelha (cera)', price: 20 },
     ],
@@ -348,7 +330,6 @@ export const groomPackages = [
     name: 'Noivo Essence',
     guests: 4,
     price: 1999,
-    image: 'dia-do-noivo-essence',
     description: 'A experiência essencial para o noivo compartilhar a preparação com o seu círculo mais próximo.',
   },
   {
@@ -356,7 +337,6 @@ export const groomPackages = [
     name: 'Noivo Select',
     guests: 6,
     price: 2499,
-    image: 'dia-do-noivo-select',
     description: 'Uma experiência ampliada, criada para o noivo e um grupo selecionado de convidados.',
     featured: true,
   },
@@ -365,7 +345,6 @@ export const groomPackages = [
     name: 'Noivo Privilege',
     guests: 8,
     price: 2999,
-    image: 'dia-do-noivo-privilege',
     description: 'A experiência mais completa e exclusiva para celebrar a preparação do grande dia.',
   },
 ];

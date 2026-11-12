@@ -1,0 +1,7 @@
+FOTOS DOS CARDS DO DIA DO NOIVO (página /dia-do-noivo/)
+Nome exato do arquivo (.jpg, .jpeg, .png ou .webp). Sem foto, o card aparece só com texto.
+Evite imagens com preço escrito na arte.
+
+dia-do-noivo-essence.jpg
+dia-do-noivo-select.jpg
+dia-do-noivo-privilege.jpg

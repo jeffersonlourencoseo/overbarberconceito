@@ -6,7 +6,7 @@ import Icon from '../../components/Icon.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { services, packages, brl } from '../../data/services';
 import { site } from '../../data/site';
-import { img } from '../../data/images';
+import { photo } from '../../data/images';
 import { abs } from '../../lib/schema';
 
 const crumbs = [{ name: 'Início', href: '/' }, { name: 'Serviços', href: '/servicos/' }];
@@ -39,16 +39,18 @@ const itemList = {
   <section class="section">
     <div class="container list">
       {services.map((s, i) => (
-        <article id={s.slug} class:list={['row reveal', { alt: i % 2 }]}>
-          <a href={`/servicos/${s.slug}/`} class="media media--frame row-img" tabindex="-1" aria-hidden="true">
-            <Image src={img(s.image)} alt={s.imageAlt} widths={[400, 700]} sizes="(min-width: 900px) 34vw, 92vw" />
-          </a>
+        <article id={s.slug} class:list={['row reveal', { alt: i % 2, 'no-img': !photo('servicos', s.slug) }]}>
+          {photo('servicos', s.slug) && (
+            <a href={`/servicos/${s.slug}/`} class="media media--frame row-img" tabindex="-1" aria-hidden="true">
+              <Image src={photo('servicos', s.slug)!} alt="" widths={[360, 560, 760]} sizes="(min-width: 900px) 34vw, 92vw" />
+            </a>
+          )}
           <div class="row-body">
             <h2><a href={`/servicos/${s.slug}/`}>{s.short}</a></h2>
             <p class="muted">{s.excerpt}</p>
             <ul class="price-list">
               {s.items.map((it) => (
-                <li><span class="name">{it.name}</span>{it.duration && <span class="dur">{it.duration}</span>}<span class="dots" /><span class="price">{brl(it.price)}</span></li>
+                <li><span class="name">{it.name}</span><span class="dots" /><span class="price">{brl(it.price)}</span></li>
               ))}
             </ul>
             <a class="link-arrow" href={`/servicos/${s.slug}/`}>Saiba mais sobre {s.short.toLowerCase()}</a>
@@ -82,9 +84,11 @@ const itemList = {
   .jump a { font-size: 0.78rem; font-weight: 600; text-decoration: none; padding: 0.5rem 0.95rem; border: 1px solid var(--line); border-radius: 999px; background: rgba(10, 16, 25, 0.5); transition: border-color 0.3s; }
   .jump a:hover { border-color: var(--gold); }
   .list { display: grid; gap: clamp(3.5rem, 8vw, 6rem); }
+  .list:has(.row.no-img) { gap: 1.4rem; }
   .row { display: grid; gap: clamp(1.5rem, 5vw, 4rem); align-items: center; }
   @media (min-width: 900px) { .row { grid-template-columns: 0.85fr 1fr; } .row.alt .row-img { order: 2; } }
   .row-img { aspect-ratio: 4 / 3.6; }
+  .row.no-img { grid-template-columns: 1fr; max-width: 860px; margin-inline: auto; width: 100%; padding: clamp(1.8rem, 4vw, 2.8rem); border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(160deg, var(--navy-800), var(--navy-900) 65%); }
   .row h2 { font-size: clamp(2rem, 3.6vw, 2.8rem); margin-bottom: 0.2rem; }
   .row h2 a { text-decoration: none; color: inherit; }
   .row h2 a:hover { color: var(--gold-300); }

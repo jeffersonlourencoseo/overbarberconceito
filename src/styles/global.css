@@ -1,4 +1,4 @@
-@import '@fontsource-variable/manrope';
+@import '@fontsource-variable/jost';
 @import '@fontsource/cormorant-garamond/500.css';
 @import '@fontsource/cormorant-garamond/600.css';
 @import '@fontsource/cormorant-garamond/500-italic.css';
@@ -26,7 +26,7 @@
 
   --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
   --font-script: 'Pinyon Script', cursive;
-  --font-body: 'Manrope Variable', 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Jost Variable', 'Jost', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --radius: 18px;
   --radius-sm: 10px;
@@ -110,7 +110,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 em.accent { font-style: italic; color: var(--gold-300); }
 .section--ivory em.accent { color: var(--gold); }
 
-.lead { font-size: clamp(1.08rem, 1.5vw, 1.25rem); color: var(--muted); max-width: 62ch; line-height: 1.75; }
+.lead { font-size: clamp(1.1rem, 1.5vw, 1.28rem); font-weight: 350; letter-spacing: 0.005em; color: var(--muted); max-width: 62ch; line-height: 1.75; }
 .center .lead { margin-inline: auto; }
 .muted { color: var(--muted); }
 
@@ -174,7 +174,6 @@ em.accent { font-style: italic; color: var(--gold-300); }
 .price-list li { display: flex; align-items: baseline; gap: 0.75rem; padding: 0.95rem 0; border-bottom: 1px solid var(--line); }
 .section--ivory .price-list li { border-color: rgba(20, 27, 38, 0.1); }
 .price-list .name { font-weight: 500; }
-.price-list .dur { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
 .price-list .dots { flex: 1; border-bottom: 1px dotted rgba(180, 139, 66, 0.4); transform: translateY(-4px); min-width: 1rem; }
 .price-list .price { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; color: var(--gold-300); white-space: nowrap; }
 .section--ivory .price-list .price { color: var(--gold); }

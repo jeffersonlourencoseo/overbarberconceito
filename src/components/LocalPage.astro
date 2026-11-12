@@ -10,7 +10,7 @@ import CtaBand from './CtaBand.astro';
 import { site } from '../data/site';
 import { services, brl } from '../data/services';
 import { reviews } from '../data/reviews';
-import { img } from '../data/images';
+import { photo } from '../data/images';
 import { faqSchema } from '../lib/schema';
 
 interface Props {
@@ -57,7 +57,7 @@ const rv = reviews.filter((r) => p.reviewNames.includes(r.name));
       <div class="svc">
         {services.map((s) => (
           <a href={`/servicos/${s.slug}/`} class="s reveal">
-            <Image src={img(s.image)} alt={s.imageAlt} widths={[200, 320]} sizes="96px" />
+            {photo('servicos', s.slug) && <Image src={photo('servicos', s.slug)!} alt="" widths={[100, 160]} sizes="72px" />}
             <span><strong>{s.short}</strong><small>{s.items[0].name} · {brl(s.items[0].price)}</small></span>
           </a>
         ))}
@@ -93,7 +93,7 @@ const rv = reviews.filter((r) => p.reviewNames.includes(r.name));
   .s { display: flex; gap: 1rem; align-items: center; padding: 0.7rem; background: #fff; border-radius: var(--radius-sm); border: 1px solid rgba(20, 27, 38, 0.08); text-decoration: none; color: var(--ink); transition: border-color 0.3s; }
   .s:hover { border-color: var(--gold); color: var(--ink); }
   .s :global(img) { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; flex: none; }
-  .s span { display: grid; line-height: 1.35; }
+  .s span { display: grid; line-height: 1.35; padding: 0.3rem 0.4rem; border-left: 2px solid var(--gold); padding-left: 0.9rem; }
   .s strong { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--navy-900); }
   .s small { color: var(--muted-dark); }
 </style>

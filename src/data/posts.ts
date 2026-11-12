@@ -5,8 +5,6 @@ export type Post = {
   seoTitle: string;
   description: string;
   date: string; // ISO
-  image: string;
-  imageAlt: string;
   readTime: string;
   tags: string[];
   body: string;
@@ -20,8 +18,6 @@ export const posts: Post[] = [
     description:
       'Quando agendar, quantos convidados levar, o que fazer no cabelo, na barba e na pele. Tudo sobre o Dia do Noivo na barbearia, com pacotes e preços.',
     date: '2026-11-10',
-    image: 'dia-do-noivo',
-    imageAlt: 'Sapatos, perfume e convite de casamento preparados para o Dia do Noivo',
     readTime: '6 min',
     tags: ['Dia do Noivo', 'Casamento'],
     body: `
@@ -65,8 +61,6 @@ export const posts: Post[] = [
     description:
       'Entenda a diferença entre camuflagem e coloração, quanto tempo dura, se fica natural e quanto custa a camuflagem de cabelo e barba em Fortaleza.',
     date: '2026-11-03',
-    image: 'cliente-corte-masculino-perfil',
-    imageAlt: 'Homem de perfil com cabelo e barba alinhados após camuflagem natural',
     readTime: '5 min',
     tags: ['Camuflagem', 'Cabelo', 'Barba'],
     body: `
@@ -83,7 +77,7 @@ export const posts: Post[] = [
 <h2>Quanto tempo dura?</h2>
 <p>Em média de <strong>3 a 4 semanas</strong>. Como sai aos poucos, não há aquele efeito de raiz marcada — e dá para refazer junto com o corte.</p>
 <h2>Quanto custa em Fortaleza?</h2>
-<p>Na Over Barber Conceito, no Meireles: camuflagem de cabelo R$ 100, de barba R$ 80 e de sobrancelha R$ 40, cerca de 30 minutos cada, no mesmo horário do corte ou da barba.</p>
+<p>Na Over Barber Conceito, no Meireles: camuflagem de cabelo R$ 100, de barba R$ 80 e de sobrancelha R$ 40, no mesmo horário do corte ou da barba.</p>
 <p><a href="/servicos/camuflagem-de-fios-brancos/">Veja detalhes do serviço de camuflagem</a>.</p>
 `,
   },
@@ -94,8 +88,6 @@ export const posts: Post[] = [
     description:
       'Barboterapia é o ritual completo de cuidado com a barba: vapor, toalhas quentes, navalha, massagem e hidratação. Veja os benefícios e quando fazer.',
     date: '2026-10-27',
-    image: 'barba-na-navalha-detalhes',
-    imageAlt: 'Barbeiro desenhando a barba do cliente com navalha',
     readTime: '4 min',
     tags: ['Barba', 'Barboterapia'],
     body: `
@@ -128,8 +120,6 @@ export const posts: Post[] = [
     description:
       'Degradê, social, médio ou longo: veja a frequência ideal de corte para cada estilo e como o pezinho ajuda a manter o visual entre um corte e outro.',
     date: '2026-10-20',
-    image: 'acabamento-barba-maquina',
-    imageAlt: 'Acabamento com máquina na nuca durante corte masculino',
     readTime: '4 min',
     tags: ['Corte masculino', 'Dicas'],
     body: `

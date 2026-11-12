@@ -8,7 +8,7 @@ const SITE = 'https://www.overbarberconceito.com.br';
 export default defineConfig({
   site: SITE,
   trailingSlash: 'always',
-  build: { format: 'directory', inlineStylesheets: 'auto' },
+  build: { format: 'directory', inlineStylesheets: 'always' },
   compressHTML: true,
   image: { responsiveStyles: true },
   integrations: [
