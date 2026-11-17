@@ -1,0 +1,33 @@
+---
+// Aviso de site em teste (apresentação ao cliente). Para remover: apague <TestNotice /> da home.
+---
+<dialog class="tn" data-test-notice aria-labelledby="tn-t" aria-describedby="tn-d">
+  <img src="/brand/emblema-over-barber.svg" width="332" height="312" alt="" class="tn-emb" decoding="async" />
+  <p class="tn-k">Versão de demonstração</p>
+  <p class="tn-t" id="tn-t">Este é um site em teste</p>
+  <p class="tn-d" id="tn-d">Você está vendo uma prévia do novo site da Over Barber Conceito, ainda em desenvolvimento. Textos, preços e imagens podem mudar antes da versão final.</p>
+  <button type="button" class="btn btn-gold" data-test-close>Entendi, ver o site</button>
+</dialog>
+
+<script>
+  const dlg = document.querySelector('[data-test-notice]') as HTMLDialogElement | null;
+  if (dlg) {
+    let seen = false;
+    try { seen = sessionStorage.getItem('ovb-test-notice') === '1'; } catch (e) {}
+    if (!seen) dlg.showModal();
+    const close = () => { try { sessionStorage.setItem('ovb-test-notice', '1'); } catch (e) {} dlg.close(); };
+    dlg.querySelector('[data-test-close]')?.addEventListener('click', close);
+    dlg.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) close(); });
+  }
+</script>
+
+<style>
+  .tn { width: min(460px, calc(100% - 32px)); padding: 2.6rem 2rem 2.2rem; border: 1px solid var(--line-strong); border-radius: calc(var(--radius) + 6px); background: radial-gradient(ellipse at 50% 0%, rgba(180, 139, 66, 0.2), transparent 65%), var(--navy-900); color: var(--cream); text-align: center; }
+  .tn[open] { display: grid; justify-items: center; }
+  .tn::backdrop { background: rgba(5, 8, 13, 0.82); backdrop-filter: blur(6px); }
+  .tn-emb { width: 56px; margin-bottom: 1.2rem; }
+  .tn-k { margin: 0 0 0.6rem; font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-300); }
+  .tn-t { margin: 0 0 0.8rem; font-family: var(--font-display); font-size: clamp(1.9rem, 5vw, 2.4rem); line-height: 1.1; color: var(--ivory); }
+  .tn-d { margin: 0 0 1.8rem; font-size: var(--fs-sm); line-height: 1.7; color: var(--muted); }
+</style>

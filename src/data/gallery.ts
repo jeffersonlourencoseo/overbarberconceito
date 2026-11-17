@@ -12,13 +12,7 @@ const captions: Record<string, string> = {
   'equipe-e-detalhes-over': 'Equipe, toalha quente e detalhes do atendimento na Over Barber Conceito',
   'barba-na-navalha-detalhes': 'Barba desenhada na navalha com cuidado nos detalhes',
   'antes-e-depois-corte-oculos': 'Antes e depois de corte masculino na Over Barber Conceito, em Fortaleza',
-  'sua-melhor-versao-corte': 'Barbeiro finalizando corte masculino: sua melhor versão começa aqui',
   'antes-e-depois-corte-masculino': 'Antes e depois de corte masculino com volume na Over Barber Conceito',
-  'dia-do-noivo-preparacao': 'Sapatos, perfume e convite preparados para o Dia do Noivo na Over',
-  'dia-do-noivo-privilege': 'Noivo de terno ajustando a abotoadura no pacote Noivo Privilege',
-  'dia-do-noivo-select': 'Noivo sorridente no pacote Noivo Select da Over Barber Conceito',
-  'dia-do-noivo-essence': 'Noivo amarrando o sapato no pacote Noivo Essence',
-  'over-first-experience': 'Over First Experience: corte e barba na primeira visita à Over',
 };
 
 export const galleryPhotos = Object.entries(files)
