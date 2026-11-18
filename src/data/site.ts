@@ -53,7 +53,7 @@ export const site = {
   ],
   rating: { value: '5.0', count: 55 },
   // IDs de medição — só carregam após consentimento no banner de cookies (LGPD).
-  analytics: { ga4: '', metaPixel: '' },
+  analytics: { ga4: 'G-S161VW0GSE', metaPixel: '' },
   areaServed: ['Meireles', 'Fortaleza'],
   amenities: [
     'Valet gratuito',

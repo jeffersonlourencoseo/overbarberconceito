@@ -12,12 +12,12 @@ npm run build    # gera /dist (pronto para Netlify, Vercel, Cloudflare Pages, Ho
 
 ## Antes de publicar (checklist)
 
-1. **Domínio** — troque `https://www.overbarberconceito.com.br` em:
+1. **Domínio** (já configurado: `https://www.overbarberconceito.com.br`) — se precisar trocar, `https://www.overbarberconceito.com.br` em:
    - `astro.config.mjs` (`SITE`)
    - `src/data/site.ts` (`SITE_URL`)
    - `public/robots.txt` e `public/llms.txt`
 2. **CNPJ / razão social / e-mail** — preencha `cnpj`, `legalName` e `email` em `src/data/site.ts` (aparecem no rodapé e nas páginas legais).
-3. **Medição** — se for usar, coloque o ID do GA4 e/ou do Meta Pixel em `site.analytics` (`src/data/site.ts`). Eles só carregam depois do consentimento no banner de cookies.
+3. **Medição** — GA4 já configurado (`G-S161VW0GSE`). Meta Pixel, se for usar, vai em `site.analytics` (`src/data/site.ts`). Eles só carregam depois do consentimento no banner de cookies.
 4. **Google Search Console** — envie `https://SEU-DOMINIO/sitemap-index.xml`.
 5. **Perfil da Empresa no Google** — coloque o domínio novo no campo "Site" do GMN (hoje aponta para o BarbSuite).
 
