@@ -52,7 +52,7 @@ const offers = {
             <p class="desc">{p.description}</p>
             <p class="incl-t">O que inclui</p>
             <ul class="incl">{p.items.map((x) => <li>{x}</li>)}</ul>
-            <a class:list={['btn', p.highlight ? 'btn-gold' : 'btn-ghost']} href={site.whatsappMsg(`Olá! Quero agendar o pacote ${p.name} (${brl(p.price)}).`)} target="_blank" rel="noopener"><Icon name="whatsapp" /> Reservar</a>
+            <a class="btn btn-gold" href={site.whatsappMsg(`Olá! Quero agendar o pacote ${p.name} (${brl(p.price)}).`)} target="_blank" rel="noopener"><Icon name="whatsapp" /> Reservar</a>
           </article>
         ))}
       </div>
