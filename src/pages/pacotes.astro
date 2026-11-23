@@ -15,7 +15,7 @@ const crumbs = [{ name: 'Início', href: '/' }, { name: 'Pacotes', href: '/pacot
 const pkFaq = [
   { q: 'Quem pode usar a Over First Experience?', a: 'É exclusiva para quem vai à Over Barber Conceito pela primeira vez: corte + barba por R$ 135. Basta informar no agendamento ou pelo WhatsApp.' },
   { q: 'O que é a ozonioterapia do Over Essence?', a: 'É a hidratação capilar com ozônio, que higieniza o couro cabeludo, ajuda no controle da oleosidade e fortalece os fios. No Over Essence ela vem junto com corte e barba.' },
-  { q: 'Posso montar um pacote personalizado?', a: 'Sim. O Open Barber é a nossa experiência mais completa e pode ser montada com a equipe. Fale com a gente pelo WhatsApp.' },
+  { q: 'O que está incluso no Open Barber?', a: 'O Open Barber custa R$ 500 e reúne 10 serviços: no cabelo, corte, selagem, camuflagem e hidratação com ozonioterapia; na barba, barboterapia e camuflagem; no rosto, limpeza facial, sobrancelha e depilação nasal e auricular.' },
 ];
 const offers = {
   '@context': 'https://schema.org',
@@ -27,7 +27,7 @@ const offers = {
 ---
 <Base
   title="Pacotes de Corte, Barba e Cuidados | Over Barber Conceito"
-  description="Pacotes Over: First (corte + barba R$ 135), Essence com ozonioterapia (R$ 197), Select com unhas (R$ 267) e Privilege (R$ 297). Meireles, Fortaleza."
+  description="Pacotes Over: First (corte + barba R$ 135), Essence com ozonioterapia (R$ 197), Select com unhas (R$ 267), Privilege (R$ 297) e Open Barber com 10 serviços (R$ 500). Meireles, Fortaleza."
   breadcrumbs={crumbs}
   schema={[offers, faqSchema(pkFaq)]}
 >

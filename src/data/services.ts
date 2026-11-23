@@ -322,10 +322,15 @@ export const packages: { slug: string; name: string; includes: string; price: nu
   {
     slug: 'open-barber',
     name: 'Open Barber',
-    includes: 'Experiência sob medida',
+    includes: '10 serviços. Um valor único.',
     price: 500,
-    description: 'A experiência mais completa da Over, montada com a equipe de acordo com o que você quer fazer.',
-    items: ['Atendimento personalizado', 'Serviços combinados com a equipe'],
+    badge: 'Experiência completa',
+    description: 'Uma experiência completa de cuidado masculino: cabelo, barba e rosto em um único valor.',
+    items: [
+      'Cabelo: corte, selagem, camuflagem e hidratação com ozonioterapia',
+      'Barba: barboterapia e camuflagem',
+      'Rosto: limpeza facial, sobrancelha, depilação nasal e auricular',
+    ],
   },
 ];
 
