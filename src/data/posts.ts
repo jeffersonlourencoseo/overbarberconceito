@@ -12,6 +12,67 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: 'quanto-custa-corte-e-barba-em-fortaleza',
+    title: 'Quanto custa um corte e barba em Fortaleza?',
+    seoTitle: 'Quanto Custa Corte e Barba em Fortaleza? | Over Barber',
+    description:
+      'Na Over Barber Conceito, no Meireles, cabelo e barba custam R$ 150. Veja o preço de cada serviço, a condição da primeira visita e os pacotes.',
+    date: '2026-11-25',
+    readTime: '4 min',
+    tags: ['Preços', 'Corte masculino', 'Barba'],
+    body: `
+<p>Na Over Barber Conceito, barbearia no Meireles, <strong>cabelo e barba custam R$ 150</strong>. Na primeira visita, corte e barba saem por <strong>R$ 135</strong>. O valor muda de uma barbearia para outra, então os preços abaixo são os da nossa casa, não uma média da cidade.</p>
+<h2>Preço de corte, barba e do combo</h2>
+<ul>
+<li><strong>Corte adulto:</strong> R$ 80</li>
+<li><strong>Barba:</strong> R$ 80, aparada e desenhada, com contorno na navalha</li>
+<li><strong>Cabelo e barba:</strong> R$ 150, no mesmo atendimento</li>
+<li><strong>Barboterapia:</strong> R$ 100, com toalha quente, vapor e massagem</li>
+<li><strong>Pezinho de cabelo:</strong> R$ 40</li>
+<li><strong>Corte infantil:</strong> R$ 80</li>
+</ul>
+<p>Contratando o combo, você economiza R$ 10 em relação a corte e barba separados.</p>
+<h2>Quanto custa na primeira visita?</h2>
+<p>Quem vem pela primeira vez pode usar a <strong>Over First Experience</strong>: corte e barba por R$ 135, com café de cortesia e valet gratuito. É uma condição exclusiva para novos clientes.</p>
+<h2>Pacotes com mais cuidados</h2>
+<p>Se a ideia é resolver mais coisas em uma visita, há os pacotes:</p>
+<ul>
+<li><strong>Over Essence</strong> — R$ 197: corte, barba, hidratação capilar, ozonioterapia e massagem</li>
+<li><strong>Over Select</strong> — R$ 267: corte, barba, detox e hidratação capilar, hidratação de barba, manicure ou pedicure e bebida de boas-vindas</li>
+<li><strong>Open Barber</strong> — R$ 500: 10 serviços de cabelo, barba e rosto em um único valor</li>
+</ul>
+<p><a href="/pacotes/">Compare todos os pacotes</a>.</p>
+<h2>Serviços extras que mudam o valor</h2>
+<ul>
+<li>Sobrancelha na navalha: R$ 30</li>
+<li>Limpeza facial: R$ 50</li>
+<li>Camuflagem de barba: R$ 80</li>
+<li>Camuflagem de cabelo: R$ 100</li>
+<li>Hidratação com ozônio: R$ 60</li>
+</ul>
+<h2>O que olhar além do preço</h2>
+<p>Dois valores parecidos podem incluir coisas bem diferentes. Antes de agendar, vale conferir:</p>
+<ul>
+<li><strong>O que está incluído:</strong> na barba tradicional, o foco é aparar e desenhar; a <a href="/servicos/barba-e-barboterapia/">barboterapia</a> é um ritual mais longo.</li>
+<li><strong>Conversa antes do corte:</strong> no nosso <a href="/servicos/corte-masculino/">corte masculino</a>, o barbeiro avalia o formato do rosto, o tipo de fio e a sua rotina.</li>
+<li><strong>Estacionamento:</strong> aqui o valet é gratuito para clientes, na Av. Dom Luís.</li>
+<li><strong>Avaliações:</strong> leia o que outros clientes contam sobre o atendimento. <a href="/avaliacoes/">Veja as nossas</a>.</li>
+</ul>
+<h2>Perguntas frequentes</h2>
+<h3>Qual o valor de um corte de cabelo masculino?</h3>
+<p>Na Over Barber Conceito, o corte adulto custa R$ 80. Em outras barbearias o valor pode ser diferente.</p>
+<h3>Qual o valor para fazer a barba?</h3>
+<p>A barba custa R$ 80 e a barboterapia, R$ 100.</p>
+<h3>Qual é a melhor barbearia em Fortaleza?</h3>
+<p>Depende do que você procura: localização, estilo de atendimento, serviços e orçamento. Compare avaliações no Google, veja fotos de trabalhos e confira se a barbearia faz o serviço que você quer.</p>
+<h3>Como faço para agendar?</h3>
+<p>Pelo agendamento online, escolhendo serviço, barbeiro e horário, ou pelo WhatsApp (85) 98163-1677. Atendemos de segunda a sábado, das 9h às 19h.</p>
+<h3>Quais formas de pagamento são aceitas?</h3>
+<p>Consulte as opções com a nossa equipe no agendamento ou pelo WhatsApp.</p>
+<p><em>Preços consultados em novembro de 2026 e sujeitos a alteração. Confirme o valor no agendamento.</em></p>
+`,
+  },
+  {
     slug: 'dia-do-noivo-na-barbearia-guia-completo',
     title: 'Dia do Noivo na barbearia: guia completo para o grande dia em Fortaleza',
     seoTitle: 'Dia do Noivo na Barbearia: Guia Completo | Over Barber',
